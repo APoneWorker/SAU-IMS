@@ -37,12 +37,8 @@ public class BaseDao<T> {
         return getHibernateTemplate().loadAll(entityClass);
     }
 
-    public void save(T entity) {
+    public void add(T entity) {
         getHibernateTemplate().save(entity);
-    }
-
-    public void remove(T entity) {
-        getHibernateTemplate().delete(entity);
     }
 
     public void update(T entity) {
