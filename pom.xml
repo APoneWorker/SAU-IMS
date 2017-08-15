@@ -8,8 +8,10 @@
     <name>SAU_IMS Maven Webapp</name>
     <url>http://maven.apache.org</url>
 
-    <!--spring框架版本-->
+    <!--spring框架版本和编译环境-->
     <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <spring.version>4.3.10.RELEASE</spring.version>
     </properties>
 
@@ -112,9 +114,52 @@
         <dependency>
             <groupId>org.unitils</groupId>
             <artifactId>unitils-core</artifactId>
-            <version>3.4.2</version>
+            <version>3.4.6</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.unitils</groupId>
+            <artifactId>unitils-dbunit</artifactId>
+            <version>3.4.6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.unitils</groupId>
+            <artifactId>unitils-database</artifactId>
+            <version>3.4.6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.unitils</groupId>
+            <artifactId>unitils-easymock</artifactId>
+            <version>3.4.6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.unitils</groupId>
+            <artifactId>unitils-mock</artifactId>
+            <version>3.4.6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.unitils</groupId>
+            <artifactId>unitils-inject</artifactId>
+            <version>3.4.6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.unitils</groupId>
+            <artifactId>unitils-orm</artifactId>
+            <version>3.4.6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.unitils</groupId>
+            <artifactId>unitils-spring</artifactId>
+            <version>3.4.6</version>
+            <scope>test</scope>
+        </dependency>
+
 
         <!--依赖文件传输上传下载类库-->
         <dependency>
