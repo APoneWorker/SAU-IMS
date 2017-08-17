@@ -13,7 +13,8 @@ public class User extends BasePOJO {
     @Column(name = "user_id")
     private int userId;
 
-    private String username;
+    @Column(name = "username")
+    private String userName;
 
     private String password;
 
@@ -40,7 +41,7 @@ public class User extends BasePOJO {
     @Column(name = "user_state")
     private int userState;
 
-   // @ManyToMany(mappedBy = "likeList",cascade = CascadeType.ALL)
+    // @ManyToMany(mappedBy = "likeList",cascade = CascadeType.ALL)
     //private List<Club>
 
     public int getUserId() {
@@ -51,12 +52,12 @@ public class User extends BasePOJO {
         this.userId = userId;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {

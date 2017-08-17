@@ -65,7 +65,7 @@ public class BaseDao<T> {
         this.entityClass = entityClass;
     }
 
-    private HibernateTemplate getHibernateTemplate() {
+    public HibernateTemplate getHibernateTemplate() {
         return hibernateTemplate;
     }
 

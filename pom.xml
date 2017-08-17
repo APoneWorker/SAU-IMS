@@ -13,6 +13,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <spring.version>4.3.10.RELEASE</spring.version>
+        <unitils.version>3.4.6</unitils.version>
     </properties>
 
     <!--项目依赖jar包-->
@@ -112,54 +113,29 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.unitils</groupId>
-            <artifactId>unitils-core</artifactId>
-            <version>3.4.6</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.unitils</groupId>
-            <artifactId>unitils-dbunit</artifactId>
-            <version>3.4.6</version>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.8.3</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.unitils</groupId>
-            <artifactId>unitils-database</artifactId>
-            <version>3.4.6</version>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils-core</artifactId>
+            <version>1.8.3</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.unitils</groupId>
-            <artifactId>unitils-easymock</artifactId>
-            <version>3.4.6</version>
+            <groupId>dbunit</groupId>
+            <artifactId>dbunit</artifactId>
+            <version>2.1</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.unitils</groupId>
-            <artifactId>unitils-mock</artifactId>
-            <version>3.4.6</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.unitils</groupId>
-            <artifactId>unitils-inject</artifactId>
-            <version>3.4.6</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.unitils</groupId>
-            <artifactId>unitils-orm</artifactId>
-            <version>3.4.6</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.unitils</groupId>
-            <artifactId>unitils-spring</artifactId>
-            <version>3.4.6</version>
-            <scope>test</scope>
-        </dependency>
-
 
         <!--依赖文件传输上传下载类库-->
         <dependency>
