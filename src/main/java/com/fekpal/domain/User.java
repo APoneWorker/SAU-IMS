@@ -13,7 +13,7 @@ public class User extends BasePOJO {
     @Column(name = "user_id")
     private int userId;
 
-    @Column(name = "username")
+    @Column(name = "user_name")
     private String userName;
 
     private String password;

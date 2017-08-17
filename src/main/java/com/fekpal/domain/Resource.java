@@ -12,7 +12,8 @@ public class Resource extends BasePOJO {
     @Column(name = "resource_id")
     private int resourceId;
 
-    private String resource;
+    @Column(name = "resource_url")
+    private String resourceURL;
 
     private String description;
 
@@ -30,12 +31,12 @@ public class Resource extends BasePOJO {
         this.resourceId = resourceId;
     }
 
-    public String getResource() {
-        return resource;
+    public String getResourceURL() {
+        return resourceURL;
     }
 
-    public void setResource(String resource) {
-        this.resource = resource;
+    public void setResourceURL(String resource) {
+        this.resourceURL = resource;
     }
 
     public String getDescription() {

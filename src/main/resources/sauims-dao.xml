@@ -6,9 +6,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/p
-        http://www.springframework.org/schema/p/spring-p.xsd">
+        http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:component-scan base-package="com.fekpal.dao"/>
 
@@ -20,6 +18,11 @@
           p:username="${jdbc.username}"
           p:password="${jdbc.password}"/>
 
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate4.HibernateTransactionManager"
+          p:sessionFactory-ref="sessionFactory"
+          p:dataSource-ref="dataSource"/>
+
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="packagesToScan">
@@ -30,9 +33,7 @@
 
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.dialect">
-                    org.hibernate.dialect.MySQL5Dialect
-                </prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
             </props>
         </property>
