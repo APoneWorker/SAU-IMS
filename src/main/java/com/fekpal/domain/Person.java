@@ -1,22 +1,14 @@
 package com.fekpal.domain;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Entity
-@Table(name = "person_info")
 public class Person extends BasePOJO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "person_id")
     private int personId;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "real_name")
+
     private String realName;
 
     private String nickname;
@@ -33,10 +25,8 @@ public class Person extends BasePOJO {
 
     private String major;
 
-    @Column(name = "student_id")
     private String studentId;
 
-    @Column(name = "person_logo")
     private String personLogo;
 
     public int getPersonId() {

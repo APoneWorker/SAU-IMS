@@ -1,26 +1,15 @@
 package com.fekpal.domain;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "message_release")
 public class MessageRelease {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
-    @JoinTable(name = "message_id")
     private Message message;
 
-    @ManyToOne
-    @JoinTable(name = "user_id")
     private User user;
 
     private int avaliable;
 
-    @Column(name = "read_flag")
     private int readFlag;
 
     public int getId() {

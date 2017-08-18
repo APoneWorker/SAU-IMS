@@ -1,27 +1,17 @@
 package com.fekpal.domain;
 
-import javax.persistence.*;
-import java.util.List;
-
-@Entity
-@Table(name = "resource")
 public class Resource extends BasePOJO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "resource_id")
     private int resourceId;
 
-    @Column(name = "resource_url")
     private String resourceURL;
 
-    private String description;
+    private String resourceName;
 
-    @Column(name = "resource_available")
     private int resourceAvailable;
 
-    @ManyToMany
-    private List<Authority> authorityList;
+    public Resource() {
+    }
 
     public int getResourceId() {
         return resourceId;
@@ -39,12 +29,12 @@ public class Resource extends BasePOJO {
         this.resourceURL = resource;
     }
 
-    public String getDescription() {
-        return description;
+    public String getResourceName() {
+        return resourceName;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setResourceName(String resourceName) {
+        this.resourceName = resourceName;
     }
 
     public int getResourceAvailable() {
@@ -55,11 +45,4 @@ public class Resource extends BasePOJO {
         this.resourceAvailable = resourceAvailable;
     }
 
-    public List<Authority> getAuthorityList() {
-        return authorityList;
-    }
-
-    public void setAuthorityList(List<Authority> authorityList) {
-        this.authorityList = authorityList;
-    }
 }

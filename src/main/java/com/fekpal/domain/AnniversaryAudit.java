@@ -1,29 +1,20 @@
 package com.fekpal.domain;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Entity
-@Table(name = "anniversary_audit")
 public class AnniversaryAudit extends BasePOJO{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int id;
 
-    @ManyToOne(optional = false)
     private Club club;
 
-    @Column(name = "file_name")
     private String fileName;
 
-    @Column(name = "audit_state")
     private int auditState;
 
-    @Column(name = "audit_result")
     private String auditResult;
 
-    @Column(name = "submit_time")
     private Timestamp submitTime;
 
     private String description;

@@ -1,42 +1,28 @@
 package com.fekpal.domain;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Entity
-@Table(name = "club_member")
 public class ClubMenber extends BasePOJO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "club_id")
     private Club club;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "member_duty")
     private int memberDuty;
 
-    @Column(name = "user_state")
     private int userState;
 
-    @Column(name = "join_time")
     private Timestamp joinTime;
 
     private String description;
 
-    @Column(name = "leave_time")
     private Timestamp leaveTime;
 
-    @Column(name = "club_department")
     private String clubDepartment;
 
-    private int avaliable;
+    private int available;
 
     public int getId() {
         return id;
@@ -110,11 +96,11 @@ public class ClubMenber extends BasePOJO {
         this.clubDepartment = clubDepartment;
     }
 
-    public int getAvaliable() {
-        return avaliable;
+    public int getAvailable() {
+        return available;
     }
 
-    public void setAvaliable(int avaliable) {
-        this.avaliable = avaliable;
+    public void setAvailable(int available) {
+        this.available = available;
     }
 }

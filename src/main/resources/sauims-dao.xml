@@ -3,42 +3,40 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd">
-
-    <context:component-scan base-package="com.fekpal.dao"/>
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <context:property-placeholder location="classpath:jdbc.properties"/>
+    <context:annotation-config/>
+    <context:component-scan base-package="com.fekpal.dao"/>
 
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
+    <!--数据源-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
           p:driverClassName="${jdbc.driverClassName}"
           p:url="${jdbc.url}"
           p:username="${jdbc.username}"
           p:password="${jdbc.password}"/>
 
-    <bean id="transactionManager"
-          class="org.springframework.orm.hibernate4.HibernateTransactionManager"
-          p:sessionFactory-ref="sessionFactory"
+    <!--mybatis定义的数据源-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
+          p:dataSource-ref="dataSource"
+          p:configLocation="classpath:mybatis-config.xml"/>
+
+    <!--扫描sql映射文件-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
+          p:basePackage="com.fekpal.dao"/>
+    <!--p:sqlSessionFactory-ref="sqlSessionFactory"写这个必错-->
+
+    <!--事务管理-->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
           p:dataSource-ref="dataSource"/>
 
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="packagesToScan">
-            <list>
-                <value>com.fekpal.domain</value>
-            </list>
-        </property>
+    <!--使用声明式事务-->
+    <tx:annotation-driven transaction-manager="txManager"/>
 
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
-                <prop key="hibernate.show_sql">true</prop>
-            </props>
-        </property>
-    </bean>
-
-    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate"
-          p:sessionFactory-ref="sessionFactory"/>
 </beans>

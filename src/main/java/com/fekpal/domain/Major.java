@@ -1,23 +1,13 @@
 package com.fekpal.domain;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "major")
 public class Major extends BasePOJO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "major_id")
     private int majorId;
 
-    @Column(name = "major_name")
     private String majorName;
 
-    @ManyToOne(optional = false)
     private Department department;
 
-    @Column(name = "major_available")
     private int majorAvailable;
 
     public int getMajorId() {

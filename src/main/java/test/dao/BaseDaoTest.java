@@ -10,9 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Created by APone on 2017/8/17.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:sauims-dao.xml"})
-@Rollback(value = false)
-@Transactional(transactionManager = "transactionManager")
+@ContextConfiguration(locations = {"classpath:/sauims-dao.xml"})
 public class BaseDaoTest  {
 
 }

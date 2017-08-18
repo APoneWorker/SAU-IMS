@@ -1,19 +1,11 @@
 package com.fekpal.domain;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
 
-@Entity
-@Table(name = "user")
 public class User extends BasePOJO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
     private int userId;
 
-    @Column(name = "user_name")
     private String userName;
 
     private String password;
@@ -24,25 +16,17 @@ public class User extends BasePOJO {
 
     private String key;
 
-    @Column(name = "login_ip")
     private String loginIp;
 
-    @Column(name = "login_time")
     private Timestamp loginTime;
 
-    @Column(name = "register_ip")
     private String registerIp;
 
-    @Column(name = "register_time")
     private Timestamp registerTime;
 
     private int authority;
 
-    @Column(name = "user_state")
     private int userState;
-
-    // @ManyToMany(mappedBy = "likeList",cascade = CascadeType.ALL)
-    //private List<Club>
 
     public int getUserId() {
         return userId;

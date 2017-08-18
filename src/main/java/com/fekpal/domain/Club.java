@@ -1,61 +1,30 @@
 package com.fekpal.domain;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
 
-@Entity
-@Table(name = "club_info")
 public class Club extends BasePOJO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "club_id")
     private int clubId;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "club_name")
     private String clubName;
 
-    @Column(name = "foundTime")
     private Timestamp foundTime;
 
     private String description;
 
-    @Column(name = "admin_name")
     private String adminName;
 
-    @Column(name = "club_type")
     private String clubType;
 
-    @Column(name = "club_logo")
     private String clubLogo;
 
-    @Column(name = "club_view")
     private String clubView;
 
-    @Column(name = "like_number")
     private int likeNumber;
 
     private int members;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "club_like",
-            joinColumns = @JoinColumn(name = "club_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<User> likeList;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "club_member",
-            joinColumns = @JoinColumn(name = "club_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<User> memberList;
-
-    @OneToMany(mappedBy = "club")
-    private List<AnniversaryAudit> anniversaryAuditList;
 
     public int getClubId() {
         return clubId;
@@ -143,29 +112,5 @@ public class Club extends BasePOJO {
 
     public void setMembers(int members) {
         this.members = members;
-    }
-
-    public List<AnniversaryAudit> getAnniversaryAuditList() {
-        return anniversaryAuditList;
-    }
-
-    public void setAnniversaryAuditList(List<AnniversaryAudit> anniversaryAuditList) {
-        this.anniversaryAuditList = anniversaryAuditList;
-    }
-
-    public List<User> getLikeList() {
-        return likeList;
-    }
-
-    public void setLikeList(List<User> likeList) {
-        this.likeList = likeList;
-    }
-
-    public List<User> getMemberList() {
-        return memberList;
-    }
-
-    public void setMemberList(List<User> memberList) {
-        this.memberList = memberList;
     }
 }

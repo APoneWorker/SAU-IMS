@@ -1,37 +1,23 @@
 package com.fekpal.domain;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Entity
-@Table(name = "message")
 public class Message extends BasePOJO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "message_id")
     private int messageId;
 
-    @Column(name = "message_title")
     private String messageTitle;
 
-    @Column(name = "message_content")
     private String messageContent;
 
-    @Column(name = "release_time")
     private Timestamp releaseTime;
 
-    @ManyToOne
-    @JoinTable(name = "user_id")
     private User user;
 
-    @Column(name = "message_type")
     private int messageType;
 
-    @Column(name = "message_annex")
     private String messageAnnex;
 
-    @Column(name = "message_state")
     private int messageState;
 
     public int getMessageId() {

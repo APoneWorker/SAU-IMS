@@ -1,33 +1,22 @@
 package com.fekpal.domain;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Entity
-@Table(name = "sau_info")
+
 public class Sau extends BasePOJO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "sau_id")
     private int sauId;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "sau_name")
     private String sauName;
 
-    @Column(name = "found_time")
     private Timestamp foundTime;
 
     private String description;
 
-    @Column(name = "admin_name")
     private String adminName;
 
-    @Column(name = "sau_logo")
     private String sauLogo;
 
     private int members;
