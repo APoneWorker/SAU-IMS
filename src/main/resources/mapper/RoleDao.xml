@@ -6,7 +6,7 @@
 <mapper namespace="com.fekpal.dao.RoleDao">
 
     <cache/>
-    <!--加载全部权限的资源-->
+
     <select id="loadAll" resultMap="roleResultMap">
         select *
         from role r

@@ -1,7 +1,10 @@
 package com.fekpal.domain;
 
+import org.springframework.stereotype.Repository;
+
 import java.sql.Timestamp;
 
+@Repository
 public class User extends BasePOJO {
 
     private int userId;
@@ -14,7 +17,7 @@ public class User extends BasePOJO {
 
     private String email;
 
-    private String key;
+    private String userKey;
 
     private String loginIp;
 
@@ -68,12 +71,12 @@ public class User extends BasePOJO {
         this.email = email;
     }
 
-    public String getKey() {
-        return key;
+    public String getUserKey() {
+        return userKey;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setUserKey(String userKey) {
+        this.userKey = userKey;
     }
 
     public String getLoginIp() {
