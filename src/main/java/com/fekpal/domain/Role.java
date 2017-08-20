@@ -1,10 +1,7 @@
 package com.fekpal.domain;
 
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
-@Repository
 public class Role extends BasePOJO {
 
     private int roleId;

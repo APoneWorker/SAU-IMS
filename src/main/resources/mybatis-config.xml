@@ -16,5 +16,6 @@
     <mappers>
         <mapper resource="mapper/RoleDao.xml"/>
         <mapper resource="mapper/UserDao.xml"/>
+        <mapper resource="mapper/ClubDao.xml"/>
     </mappers>
 </configuration>

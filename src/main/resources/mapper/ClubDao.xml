@@ -2,3 +2,69 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fekpal.dao.ClubDao">
+    <cache/>
+
+    <select id="getClubByClubId" parameterType="int" resultMap="clubResult">
+      select * from club_info where club_id = #{clubId}
+    </select>
+
+    <select id="getClubByClubName" parameterType="String" resultMap="clubResult">
+      select * from club_info where club_name = #{clubName}
+    </select>
+
+    <select id="getClubByUser" parameterType="User" resultMap="clubResult">
+      select * from club_info where user_id = #{userId}
+    </select>
+
+    <select id="findClubByClubName" resultMap="clubResult">
+      select * from club_info where club_name like concat('%',#{arg0},'%') limit #{arg1},#{arg2}
+    </select>
+
+    <select id="hadClubName" parameterType="String" resultType="boolean">
+      select count(*) from club_info where club_name = #{clubName}
+    </select>
+
+    <insert id="addClub" parameterType="Club" useGeneratedKeys="true" keyProperty="clubId" keyColumn="club_id">
+      insert club_info (user_id, club_name, found_time, admin_name)
+      values (#{user.userId},#{clubName},#{foundTime},#{adminName})
+    </insert>
+
+    <update id="updateClub" parameterType="Club">
+        update club_info set
+        club_name = #{clubName},
+        club_logo = #{clubLogo},
+        club_type = #{clubType},
+        club_view = #{clubView},
+        admin_name = #{adminName},
+        description = #{description},
+        members = #{members}
+        where club_id = #{clubId}
+    </update>
+
+    <update id="updateLikeNumber" parameterType="int">
+        update club_info set
+        like_number = like_number + 1
+        where club_id = #{clubId}
+    </update>
+
+    <select id="loadAllClub" resultMap="clubResult" useCache="false">
+        select * from club_info limit #{arg0},#{arg1}
+    </select>
+
+
+    <resultMap id="clubResult" type="Club">
+        <id property="clubId" column="club_id"/>
+        <result property="clubName" column="club_name"/>
+        <result property="foundTime" column="found_time"/>
+        <result property="adminName" column="admin_name"/>
+        <result property="clubType" column="club_type"/>
+        <result property="clubLogo" column="club_logo"/>
+        <result property="clubView" column="club_view"/>
+        <result property="likeNumber" column="like_number"/>
+        <association property="user" javaType="User">
+            <id property="userId" column="user_id"/>
+        </association>
+    </resultMap>
+</mapper>

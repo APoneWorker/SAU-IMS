@@ -32,9 +32,8 @@
         <result property="userState" column="user_state"/>
     </resultMap>
 
-    <insert id="addUser" parameterType="User"  useGeneratedKeys="true" keyProperty="userId" keyColumn="user_id">
-    insert user
-    (user_name,password,email,phone,user_key,login_ip, login_time, register_ip, register_time, authority, user_state)
+    <insert id="addUser" parameterType="User" useGeneratedKeys="true" keyProperty="userId" keyColumn="user_id">
+    insert user(user_name,password,email,phone,user_key,login_ip, login_time,register_ip,register_time,authority,user_state)
     values (#{userName},#{password},#{email},#{phone},#{userKey},#{loginIp},#{loginTime},#{registerIp},#{registerTime},#{authority},#{userState})
     </insert>
 

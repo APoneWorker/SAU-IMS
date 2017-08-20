@@ -1,10 +1,7 @@
 package com.fekpal.domain;
 
-import org.springframework.stereotype.Repository;
-
 import java.sql.Timestamp;
 
-@Repository
 public class User extends BasePOJO {
 
     private int userId;

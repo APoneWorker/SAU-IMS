@@ -8,7 +8,6 @@ public class Person extends BasePOJO {
 
     private User user;
 
-
     private String realName;
 
     private String nickname;
