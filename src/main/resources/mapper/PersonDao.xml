@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fekpal.dao.PersonDao">
+    <cache/>
+
+    <select id="getPersonByPersonId" parameterType="int" resultMap="personResult">
+
+    </select>
+    <resultMap id="personResult" type="Person">
+        <id property="personId" column="person_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="realName" column="real_name"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="studentId" column="student_id"/>
+        <result property="personLogo" column="'person_logo"/>
+    </resultMap>
+</mapper>

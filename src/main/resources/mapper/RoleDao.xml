@@ -10,10 +10,10 @@
     <select id="loadAll" resultMap="roleResultMap">
         select *
         from role r
-        left outer join role_authority ra on r.role_id = ra.role_id
-        left outer join authority a on ra.authority_id= a.authority_id
-        left outer join authority_resource ar on a.authority_id = ar.authority_id
-        left outer join resource re on ar.resource_id = re.resource_id
+        inner join role_authority ra on r.role_id = ra.role_id
+        inner join authority a on ra.authority_id= a.authority_id
+        inner join authority_resource ar on a.authority_id = ar.authority_id
+        inner join resource re on ar.resource_id = re.resource_id
     </select>
 
     <resultMap id="roleResultMap" type="Role">

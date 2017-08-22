@@ -4,6 +4,8 @@ import com.fekpal.domain.Sau;
 import com.fekpal.domain.User;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by APone on 2017/8/15.
  * SauDao的接口
@@ -45,7 +47,7 @@ public interface SauDao {
     /**
      * 获得所有的校社联
      *
-     * @return Sau
+     * @return List
      */
-    Sau loadAllSau();
+    List<Sau> loadAllSau();
 }

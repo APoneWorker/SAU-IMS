@@ -11,11 +11,17 @@
         <typeAlias type="com.fekpal.domain.User" alias="User"/>
         <typeAlias type="com.fekpal.domain.Sau" alias="Sau"/>
         <typeAlias type="com.fekpal.domain.Club" alias="Club"/>
+        <typeAlias type="com.fekpal.domain.Person" alias="Person"/>
+        <typeAlias type="com.fekpal.domain.Department" alias="Department"/>
+        <typeAlias type="com.fekpal.domain.Major" alias="Major"/>
     </typeAliases>
 
     <mappers>
         <mapper resource="mapper/RoleDao.xml"/>
         <mapper resource="mapper/UserDao.xml"/>
         <mapper resource="mapper/ClubDao.xml"/>
+        <mapper resource="mapper/SauDao.xml/"/>
+        <mapper resource="mapper/PersonDao.xml"/>
+        <mapper resource="mapper/DepartmentDao.xml"/>
     </mappers>
 </configuration>

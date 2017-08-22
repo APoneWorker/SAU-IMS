@@ -5,14 +5,40 @@
 
 <mapper namespace="com.fekpal.dao.SauDao">
     <cache/>
+
+    <select id="getSauByUser" parameterType="User" resultMap="sauResult">
+        select * from sau_info where user_id = #{userId}
+    </select>
+
+    <select id="getSauBySauId" parameterType="int" resultMap="sauResult">
+        select * from sau_info where sau_id = #{sauId}
+    </select>
+
+    <insert id="addSau" parameterType="Sau" useGeneratedKeys="true" keyProperty="sauId" keyColumn="sau_id">
+        insert sau_info (user_id,sau_name,found_time,admin_name)
+        values (#{userId},#{sauName},#{foundTime},#{adminName})
+    </insert>
+
+    <update id="updateSau" parameterType="Sau">
+        update sau_info set
+        sau_name = #{sauName},
+        admin_name = #{adminName},
+        sau_logo = #{sau_logo},
+        description = #{description},
+        members = #{members}
+        where sau_id = #{sauId}
+    </update>
+
+    <select id="loadAllSau" resultMap="sauResult">
+        select * from sau_info
+    </select>
+
     <resultMap id="sauResult" type="Sau">
         <id property="sauId" column="sau_id"/>
+        <result property="userId" column="user_id"/>
         <result property="sauName" column="sau_name"/>
         <result property="foundTime" column="found_time"/>
         <result property="adminName" column="admin_name"/>
         <result property="sauLogo" column="sau_logo"/>
-        <association property="user" javaType="User">
-            <id property="userId" column="user_id"/>
-        </association>
     </resultMap>
 </mapper>

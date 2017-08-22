@@ -1,6 +1,7 @@
 package test.dao;
 
 import com.fekpal.dao.ClubDao;
+import com.fekpal.dao.UserDao;
 import com.fekpal.domain.Club;
 import com.fekpal.domain.User;
 import org.junit.Assert;
@@ -18,6 +19,9 @@ public class ClubDaoTest extends BaseDaoTest {
     @Autowired
     ClubDao clubDao;
 
+    @Autowired
+    UserDao userDao;
+
     private Club club = new Club();
 
     private User user = new User();
@@ -27,13 +31,27 @@ public class ClubDaoTest extends BaseDaoTest {
         club.setAdminName("zj");
         club.setClubName("IT社");
         club.setFoundTime(Timestamp.valueOf("1996-1-2 01:01:01"));
-        user.setUserId(22);
-        club.setUser(user);
+
+        user.setUserName("zjboy");
+        user.setPassword("123456");
+        user.setEmail("zjboy@163.com");
+        user.setPhone("12345678901");
+        user.setUserKey("123456");
+        user.setLoginTime(Timestamp.valueOf("1996-02-01 01:02:01"));
+        user.setLoginIp("0.0.0.0");
+        user.setRegisterTime(Timestamp.valueOf("1992-01-02 01:02:09"));
+        user.setRegisterIp("0.0.0.0");
+        user.setAuthority(0);
+        user.setUserState(1);
     }
 
     @Test
     public void testClubDao() {
+        userDao.addUser(user);
+
+        club.setUserId(user.getUserId());
         clubDao.addClub(club);
+
         Assert.assertNull(clubDao.getClubByClubId(1));
         System.out.println((club = clubDao.getClubByClubId(club.getClubId())).toString());
         Assert.assertTrue(!clubDao.findClubByClubName("T社", 0, 2).isEmpty());
@@ -43,10 +61,11 @@ public class ClubDaoTest extends BaseDaoTest {
         System.out.println(clubDao.getClubByClubName(club.getClubName()).toString());
         Assert.assertNull(clubDao.getClubByClubName("asd"));
         Assert.assertNotNull(clubDao.getClubByUser(user));
+
         user.setUserId(1);
         Assert.assertNull(clubDao.getClubByUser(user));
 
-        user.setUserId(22);
+        user.setUserId(club.getUserId());
         Assert.assertNotNull(clubDao.getClubByUser(user));
 
         clubDao.updateLikeNumber(club.getClubId());
@@ -76,6 +95,14 @@ public class ClubDaoTest extends BaseDaoTest {
 
     public void setClubDao(ClubDao clubDao) {
         this.clubDao = clubDao;
+    }
+
+    public UserDao getUserDao() {
+        return userDao;
+    }
+
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
     }
 
     public Club getClub() {

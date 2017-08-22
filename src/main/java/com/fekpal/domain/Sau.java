@@ -6,7 +6,7 @@ public class Sau extends BasePOJO {
 
     private int sauId;
 
-    private User user;
+    private int userId;
 
     private String sauName;
 
@@ -28,12 +28,12 @@ public class Sau extends BasePOJO {
         this.sauId = sauId;
     }
 
-    public User getUser() {
-        return user;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getSauName() {
