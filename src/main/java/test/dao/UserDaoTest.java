@@ -36,7 +36,7 @@ public class UserDaoTest extends BaseDaoTest {
         user.setLoginIp("0.0.0.0");
         user.setRegisterTime(Timestamp.valueOf("1992-01-02 01:02:09"));
         user.setRegisterIp("0.0.0.0");
-        user.setAuthority(0);
+        user.setAuthority(2);
         user.setUserState(1);
     }
 

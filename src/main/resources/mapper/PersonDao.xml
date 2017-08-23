@@ -7,13 +7,53 @@
     <cache/>
 
     <select id="getPersonByPersonId" parameterType="int" resultMap="personResult">
-
+      select * from person_info where person_id = #{personId}
     </select>
+
+    <select id="getPersonByNickName" parameterType="String" resultMap="personResult">
+        select * from person_info where nickname = #{nickname}
+    </select>
+
+    <select id="getPersonByUser" parameterType="User" resultMap="personResult">
+        select * from person_info where user_id = #{userId}
+    </select>
+
+    <select id="hadNickName" parameterType="String" resultType="boolean">
+        select count(*) from person_info where nickname = #{nickname}
+    </select>
+
+    <update id="updatePerson" parameterType="Person">
+        update person_info set
+        real_name = #{realName},
+        nickname = #{nickname},
+        gender = #{gender},
+        birthday = #{birthday},
+        description = #{description},
+        address = #{address},
+        department = #{department},
+        major = #{major},
+        student_id = #{studentId},
+        person_logo = #{personLogo}
+        where person_id = #{personId}
+    </update>
+
+    <insert id="addLikeClub">
+        insert club_like (user_id,club_id)
+        values(#{arg0.userId},#{arg1.clubId})
+    </insert>
+
+    <select id="loadAllLikeClub" parameterType="User" resultType="int">
+        select club_id from club_like where user_id = #{userId}
+    </select>
+
+    <select id="loadAllPerson" resultMap="personResult">
+        select * from person_info limit #{arg0},#{arg1}
+    </select>
+
     <resultMap id="personResult" type="Person">
         <id property="personId" column="person_id"/>
         <result property="userId" column="user_id"/>
         <result property="realName" column="real_name"/>
-        <result property="nickName" column="nick_name"/>
         <result property="studentId" column="student_id"/>
         <result property="personLogo" column="'person_logo"/>
     </resultMap>

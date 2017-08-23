@@ -62,11 +62,19 @@ public interface PersonDao {
     void addLikeClub(User user, Club club);
 
     /**
+     * 获得所有喜爱的社团id
+     *
+     * @param user User
+     * @return List
+     */
+    List<Integer> loadAllLikeClub(User user);
+
+    /**
      * 获得所有个人
      *
      * @param start int
      * @param count int
      * @return List
      */
-    List<Person> getAllPerson(int start, int count);
+    List<Person> loadAllPerson(int start, int count);
 }

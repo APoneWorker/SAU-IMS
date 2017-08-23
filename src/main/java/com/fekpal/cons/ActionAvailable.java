@@ -7,12 +7,17 @@ package com.fekpal.cons;
 public class ActionAvailable {
 
     /**
+     * 无效的
+     */
+    public static final int UNAVAIABLE = 0;
+
+    /**
      * 有效的
      */
     public static final int AVAILABLE = 1;
 
     /**
-     * 无效的
+     * 待审（审核中），适用于社团申请或其他用于标识非审核状态的状态
      */
-    public static final int UNAVAIABLE = 0;
+    public static final int AUDITING = 2;
 }

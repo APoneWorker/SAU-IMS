@@ -27,6 +27,7 @@
         <result property="userName" column="user_name"/>
         <result property="loginIp" column="login_ip"/>
         <result property="loginTime" column="login_time"/>
+        <result property="userKey" column="user_key"/>
         <result property="registerIp" column="register_ip"/>
         <result property="registerTime" column="register_time"/>
         <result property="userState" column="user_state"/>

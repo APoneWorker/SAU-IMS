@@ -1,6 +1,7 @@
 package com.fekpal.dao;
 
 import com.fekpal.domain.User;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -8,6 +9,7 @@ import java.util.List;
  * Created by APone on 2017/8/15.
  * userDao接口
  */
+@Repository
 public interface UserDao {
 
     /**

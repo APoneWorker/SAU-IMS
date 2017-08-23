@@ -8,7 +8,7 @@ public class MessageRelease {
 
     private User user;
 
-    private int avaliable;
+    private int available;
 
     private int readFlag;
 
@@ -36,12 +36,12 @@ public class MessageRelease {
         this.user = user;
     }
 
-    public int getAvaliable() {
-        return avaliable;
+    public int getAvailable() {
+        return available;
     }
 
-    public void setAvaliable(int avaliable) {
-        this.avaliable = avaliable;
+    public void setAvailable(int available) {
+        this.available = available;
     }
 
     public int getReadFlag() {

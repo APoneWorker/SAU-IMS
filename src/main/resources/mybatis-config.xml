@@ -14,8 +14,12 @@
         <typeAlias type="com.fekpal.domain.Person" alias="Person"/>
         <typeAlias type="com.fekpal.domain.Department" alias="Department"/>
         <typeAlias type="com.fekpal.domain.Major" alias="Major"/>
+        <typeAlias type="com.fekpal.domain.AnniversaryAudit" alias="AnniversaryAudit"/>
+        <typeAlias type="com.fekpal.domain.Message" alias="Message"/>
+        <typeAlias type="com.fekpal.domain.MessageRelease" alias="MessageRelease"/>
     </typeAliases>
 
+    <!--映射文件-->
     <mappers>
         <mapper resource="mapper/RoleDao.xml"/>
         <mapper resource="mapper/UserDao.xml"/>
@@ -23,5 +27,6 @@
         <mapper resource="mapper/SauDao.xml/"/>
         <mapper resource="mapper/PersonDao.xml"/>
         <mapper resource="mapper/DepartmentDao.xml"/>
+        <mapper resource="mapper/AnniversaryAuditDao.xml"/>
     </mappers>
 </configuration>

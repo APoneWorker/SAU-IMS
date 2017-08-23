@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fekpal.dao.AnniversaryAuditDao">
+    <cache/>
+
+    <select id="getAnnByAnnId" parameterType="int" resultMap="annResult">
+        select * from anniversary_audit where id = #{annId}
+    </select>
+
+    <select id="getAnnByClub" resultMap="annResult">
+        select * from anniversary_audit
+        where club_id = #{arg0.clubId}
+        order by audit_state desc, submit_time desc
+        limit #{arg1},#{arg2}
+    </select>
+
+    <select id="getAnnAuditingByClub" parameterType="Club" resultMap="annResult">
+        select * from anniversary_audit
+        where club_id = #{clubId} and audit_state = 2
+    </select>
+
+    <select id="findAnnByClubName" resultMap="annResult">
+        select *
+        from anniversary_audit a
+        inner join club_info c on a.club_id = c.club_id
+        where c.club_name like concat('%',#{arg0},'%')
+        order by submit_time desc
+        limit #{arg1},#{arg2}
+    </select>
+
+    <insert id="addAnniversaryAudit" parameterType="AnniversaryAudit" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id">
+        insert anniversary_audit(user_id,file_name,submit_time,description)
+        values(#{user.userId},#{fileName},#{submitTime},#{description})
+    </insert>
+
+    <update id="updateAnniversaryAudit" parameterType="AnniversaryAudit">
+        update anniversary_audit set
+        audit_result = #{auditResult},
+        audit_state = #{auditState},
+        audit_time = #{auditTime}
+        where id = #{id}
+    </update>
+
+    <select id="loadAllAnniversaryAudit" resultMap="annResult">
+        select *
+        from anniversary_audit a
+        inner join club_info c on a.club_id = c.club_id
+        order by submit_time desc
+        limit #{arg0},#{arg1}
+    </select>
+
+    <select id="getAnniversaryAuditByState" resultMap="annResult">
+        select *
+        from anniversary_audit a
+        INNER  join club_info c on a.club_id = c.club_id
+        where audit_state = #{arg0}
+        order by submit_time desc
+        limit #{arg1},#{arg1}
+    </select>
+
+
+    <resultMap id="annResult" type="AnniversaryAudit">
+        <id property="id" column="id"/>
+        <result property="fileName" column="file_name"/>
+        <result property="auditState" column="audit_state"/>
+        <result property="auditTime" column="audit_time"/>
+        <result property="auditResult" column="audit_result"/>
+        <result property="submitTime" column="submit_time"/>
+        <association property="club" javaType="Club">
+            <id property="clubId" column="club_id"/>
+            <result property="userId" column="user_id"/>
+            <result property="clubName" column="club_name"/>
+            <result property="foundTime" column="found_time"/>
+            <result property="adminName" column="admin_name"/>
+            <result property="clubLogo" column="club_logo"/>
+        </association>
+    </resultMap>
+</mapper>
