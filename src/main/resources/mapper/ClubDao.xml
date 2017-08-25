@@ -14,7 +14,7 @@
       select * from club_info where club_name = #{clubName}
     </select>
 
-    <select id="getClubByUser" parameterType="User" resultMap="clubResult">
+    <select id="getClubByUserId" parameterType="int" resultMap="clubResult">
       select * from club_info where user_id = #{userId}
     </select>
 
@@ -27,7 +27,7 @@
     </select>
 
     <insert id="addClub" parameterType="Club" useGeneratedKeys="true" keyProperty="clubId" keyColumn="club_id">
-      insert club_info (user_id, club_name, found_time, admin_name)
+      insert into club_info (user_id, club_name, found_time, admin_name)
       values (#{userId},#{clubName},#{foundTime},#{adminName})
     </insert>
 

@@ -14,7 +14,7 @@
         select * from person_info where nickname = #{nickname}
     </select>
 
-    <select id="getPersonByUser" parameterType="User" resultMap="personResult">
+    <select id="getPersonByUserId" parameterType="int" resultMap="personResult">
         select * from person_info where user_id = #{userId}
     </select>
 
@@ -38,11 +38,11 @@
     </update>
 
     <insert id="addLikeClub">
-        insert club_like (user_id,club_id)
-        values(#{arg0.userId},#{arg1.clubId})
+        insert into club_like (user_id,club_id)
+        values(#{arg0},#{arg1})
     </insert>
 
-    <select id="loadAllLikeClub" parameterType="User" resultType="int">
+    <select id="loadAllLikeByUserId" parameterType="int" resultType="int">
         select club_id from club_like where user_id = #{userId}
     </select>
 

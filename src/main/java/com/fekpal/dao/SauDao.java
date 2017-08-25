@@ -14,12 +14,12 @@ import java.util.List;
 public interface SauDao {
 
     /**
-     * 根据校社联用户获取校社联信息
+     * 根据校社联用户id获取校社联信息
      *
-     * @param user User
+     * @param userId int
      * @return Sau
      */
-    Sau getSauByUser(User user);
+    Sau getSauByUserId(int userId);
 
 
     /**

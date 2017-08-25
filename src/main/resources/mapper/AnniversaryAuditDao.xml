@@ -10,14 +10,14 @@
         select * from anniversary_audit where id = #{annId}
     </select>
 
-    <select id="getAnnByClub" resultMap="annResult">
+    <select id="getAnnByClubId" resultMap="annResult">
         select * from anniversary_audit
-        where club_id = #{arg0.clubId}
+        where club_id = #{arg0}
         order by audit_state desc, submit_time desc
         limit #{arg1},#{arg2}
     </select>
 
-    <select id="getAnnAuditingByClub" parameterType="Club" resultMap="annResult">
+    <select id="getAnnAuditingByClubId" parameterType="int" resultMap="annResult">
         select * from anniversary_audit
         where club_id = #{clubId} and audit_state = 2
     </select>

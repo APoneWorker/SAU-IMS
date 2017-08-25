@@ -31,12 +31,12 @@ public interface PersonDao {
     Person getPersonByNickName(String nickName);
 
     /**
-     * 根据用户获得个人
+     * 根据用户id获得个人
      *
-     * @param user User
+     * @param userId int
      * @return Person
      */
-    Person getPersonByUser(User user);
+    Person getPersonByUserId(int userId);
 
     /**
      * 是否有相同的昵称
@@ -56,18 +56,18 @@ public interface PersonDao {
     /**
      * 添加喜爱社团
      *
-     * @param user User
-     * @param club Club
+     * @param userId int
+     * @param clubId int
      */
-    void addLikeClub(User user, Club club);
+    void addLikeClub(int userId, int clubId);
 
     /**
      * 获得所有喜爱的社团id
      *
-     * @param user User
+     * @param userId int
      * @return List
      */
-    List<Integer> loadAllLikeClub(User user);
+    List<Integer> loadAllLikeByUserId(int userId);
 
     /**
      * 获得所有个人

@@ -24,18 +24,20 @@ public interface AnniversaryAuditDao {
     /**
      * 根据社团获得所有有关的审核
      *
-     * @param club Club
+     * @param clubId int
+     * @param start  int
+     * @param count  int
      * @return List
      */
-    List<AnniversaryAudit> getAnnByClub(Club club, int start, int count);
+    List<AnniversaryAudit> getAnnByClubId(int clubId, int start, int count);
 
     /**
      * 根据社团获得当前待审核的审核（或许没有）
      *
-     * @param club Club
+     * @param clubId int
      * @return AnniversaryAudit
      */
-    AnniversaryAudit getAnnAuditingByClub(Club club);
+    AnniversaryAudit getAnnAuditingByClubId(int clubId);
 
     /**
      * 根据社团名称搜索所有审核，时间和未审核排列优先

@@ -6,7 +6,7 @@
 <mapper namespace="com.fekpal.dao.SauDao">
     <cache/>
 
-    <select id="getSauByUser" parameterType="User" resultMap="sauResult">
+    <select id="getSauByUserId" parameterType="User" resultMap="sauResult">
         select * from sau_info where user_id = #{userId}
     </select>
 
@@ -15,7 +15,7 @@
     </select>
 
     <insert id="addSau" parameterType="Sau" useGeneratedKeys="true" keyProperty="sauId" keyColumn="sau_id">
-        insert sau_info (user_id,sau_name,found_time,admin_name)
+        insert into sau_info (user_id,sau_name,found_time,admin_name)
         values (#{userId},#{sauName},#{foundTime},#{adminName})
     </insert>
 

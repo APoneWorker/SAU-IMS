@@ -13,7 +13,45 @@ import java.util.List;
 @Repository
 public interface MessageDao {
 
+    /**
+     * 根据消息id获得消息
+     *
+     * @param messageId int
+     * @return Message
+     */
     Message getMessageByMessageId(int messageId);
 
-    List<Message> getMessageByUser(User user);
+    /**
+     * 根据用户id获得消息列表
+     *
+     * @param userId int
+     * @param start  int
+     * @param count  int
+     * @return List
+     */
+    List<Message> getMessagesByUserId(int userId, int start, int count);
+
+    /**
+     * 根据消息标题查找
+     *
+     * @param message Message
+     * @param start   int
+     * @param count   int
+     * @return List
+     */
+    List<Message> findMessageByMessageTitle(Message message, int start, int count);
+
+    /**
+     * 添加消息
+     *
+     * @param message Message
+     */
+    void addMessage(Message message);
+
+    /**
+     * 更新消息
+     *
+     * @param message Message
+     */
+    void updateMessage(Message message);
 }

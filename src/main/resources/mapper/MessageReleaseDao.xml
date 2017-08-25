@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fekpal.dao.MessageReleaseDao">
+    <cache/>
+
+    <select id="getMessageByMessageReleaseId" parameterType="int" resultMap="messageResult">
+        select *
+        from message_release mr
+        inner join message m on mr.message_id = m.message_id
+        where mr.id = #{messageReleaseId}
+    </select>
+
+    <select id="getMessagesByUserId" parameterType="int" resultMap="messageResult">
+        select *
+        from message_release mr
+        inner join message m on mr.message_id = m.message_id
+        where receive_id = #{arg0} limit #{arg1},#{arg2}
+    </select>
+
+    <select id="findMessageByMessageTitle" resultMap="messageResult">
+        select *
+        from message_release mr
+        inner join message m on mr.message_id = m.message_id
+        where message_title like concat('%',#{arg0.messageTitle},'%') and receive_id = #{arg0.receiveId}
+        limit #{arg1},#{arg2}
+    </select>
+
+    <insert id="addMessageRelease" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into message_release(message_id, receive_id) values
+        <foreach collection="messageReleaseList" item="item" separator=",">
+            (#{item.messageId},#{item.receiveId})
+        </foreach>
+    </insert>
+
+    <update id="updateMessageRelease">
+        update message_release set
+        available = #{arg0.available},
+        read_flag = #{arg0.readFlag}
+        where id in
+        <foreach collection="arg1" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </update>
+
+    <resultMap id="messageResult" type="MessageRelease">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="readFlag" column="read_flag"/>
+        <association property="message" javaType="Message">
+            <id property="messageId" column="message_id"/>
+            <result property="receiveId" column="receive_id"/>
+            <result property="messageTitle" column="message_title"/>
+            <result property="messageContent" column="message_content"/>
+            <result property="releaseTime" column="release_time"/>
+            <result property="releaseName" column="release_name"/>
+            <result property="messageType" column="message_type"/>
+            <result property="messageAnnex" column="message_annex"/>
+            <result property="messageState" column="message_state"/>
+        </association>
+    </resultMap>
+</mapper>

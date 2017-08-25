@@ -6,10 +6,6 @@ public class ClubMember extends BasePOJO {
 
     private int id;
 
-    private Club club;
-
-    private User user;
-
     private int memberDuty;
 
     private int userState;
@@ -30,22 +26,6 @@ public class ClubMember extends BasePOJO {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Club getClub() {
-        return club;
-    }
-
-    public void setClub(Club club) {
-        this.club = club;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public int getMemberDuty() {

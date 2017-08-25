@@ -6,7 +6,7 @@ public class MessageRelease {
 
     private Message message;
 
-    private User user;
+    private int receiveId;
 
     private int available;
 
@@ -20,20 +20,20 @@ public class MessageRelease {
         this.id = id;
     }
 
+    public int getReceiveId() {
+        return receiveId;
+    }
+
+    public void setReceiveId(int receiveId) {
+        this.receiveId = receiveId;
+    }
+
     public Message getMessage() {
         return message;
     }
 
     public void setMessage(Message message) {
         this.message = message;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public int getAvailable() {

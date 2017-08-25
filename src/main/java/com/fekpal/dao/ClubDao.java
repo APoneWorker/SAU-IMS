@@ -30,12 +30,12 @@ public interface ClubDao {
     Club getClubByClubName(String clubName);
 
     /**
-     * 根据社团用户获得社团
+     * 根据社团用户id获得社团
      *
-     * @param user User
+     * @param userId int
      * @return Club
      */
-    Club getClubByUser(User user);
+    Club getClubByUser(int userId);
 
     /**
      * 根据社团名称模糊搜索
