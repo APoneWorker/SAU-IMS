@@ -35,7 +35,7 @@ public interface ClubDao {
      * @param userId int
      * @return Club
      */
-    Club getClubByUser(int userId);
+    Club getClubByUserId(int userId);
 
     /**
      * 根据社团名称模糊搜索
