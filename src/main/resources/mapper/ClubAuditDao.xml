@@ -48,12 +48,13 @@
         limit #{arg0},#{arg1}
     </select>
 
-    <resultMap id="auditResult" type="ClubAuditResult">
+    <resultMap id="auditResult" type="ClubAudit">
         <id property="id" column="id"/>
         <result property="sendTime" column="send_time"/>
         <result property="auditTime" column="audit_time"/>
         <result property="auditResult" column="audit_result"/>
         <result property="auditDescription" column="audit_description"/>
+
         <association property="club" javaType="Club">
             <id property="clubId" column="club_id"/>
             <result property="userId" column="user_id"/>

@@ -52,7 +52,7 @@ public class ClubDaoTest extends BaseDaoTest {
         club.setUserId(user.getUserId());
         clubDao.addClub(club);
 
-        Assert.assertNull(clubDao.getClubByClubId(1));
+        Assert.assertNull(clubDao.getClubByClubId(10));
         System.out.println((club = clubDao.getClubByClubId(club.getClubId())).toString());
         Assert.assertTrue(!clubDao.findClubByClubName("T社", 0, 2).isEmpty());
         Assert.assertTrue(clubDao.findClubByClubName("zj", 0, 2).isEmpty());
@@ -83,7 +83,9 @@ public class ClubDaoTest extends BaseDaoTest {
         Assert.assertTrue(!clubDao.loadAllClub(0, 2).isEmpty());
 
         club.setClubName("呵呵社");
+        club.setDescription("注解在此");
         clubDao.updateClub(club);
+
         Assert.assertNotNull(clubDao.getClubByClubName("呵呵社"));
         Assert.assertNull(clubDao.getClubByClubName("IT社"));
         System.out.println(clubDao.getClubByClubName("呵呵社").toString());

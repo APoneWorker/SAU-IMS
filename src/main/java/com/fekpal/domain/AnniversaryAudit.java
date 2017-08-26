@@ -18,7 +18,7 @@ public class AnniversaryAudit extends BasePOJO {
 
     private Timestamp submitTime;
 
-    private String description;
+    private String submitDescription;
 
     public int getId() {
         return id;
@@ -76,11 +76,11 @@ public class AnniversaryAudit extends BasePOJO {
         this.submitTime = submitTime;
     }
 
-    public String getDescription() {
-        return description;
+    public String getSubmitDescription() {
+        return submitDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setSubmitDescription(String submitDescription) {
+        this.submitDescription = submitDescription;
     }
 }

@@ -63,5 +63,6 @@
         <result property="clubLogo" column="club_logo"/>
         <result property="clubView" column="club_view"/>
         <result property="likeNumber" column="like_number"/>
+        <result property="members" column="members"/>
     </resultMap>
 </mapper>
