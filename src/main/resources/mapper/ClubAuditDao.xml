@@ -54,6 +54,7 @@
         <result property="auditTime" column="audit_time"/>
         <result property="auditResult" column="audit_result"/>
         <result property="auditDescription" column="audit_description"/>
+        <result property="file" column="file"/>
 
         <association property="club" javaType="Club">
             <id property="clubId" column="club_id"/>

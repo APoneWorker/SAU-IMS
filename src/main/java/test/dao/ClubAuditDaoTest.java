@@ -1,5 +1,6 @@
 package test.dao;
 
+import com.fekpal.dao.ClubAuditDao;
 import com.fekpal.dao.ClubDao;
 import com.fekpal.domain.Club;
 import com.fekpal.domain.ClubAudit;
@@ -12,7 +13,7 @@ import java.sql.Timestamp;
 /**
  * Created by APone on 2017/8/27.
  */
-public class ClubAuditDao extends BaseDaoTest {
+public class ClubAuditDaoTest extends BaseDaoTest {
 
     @Autowired
     private ClubAuditDao clubAuditDao;
@@ -30,12 +31,26 @@ public class ClubAuditDao extends BaseDaoTest {
         club.setClubName("IT社");
         club.setFoundTime(Timestamp.valueOf("1996-1-2 01:01:01"));
 
-
+        clubAudit.setClub(club);
+        clubAudit.setFile("java部落");
+        clubAudit.setSendTime(Timestamp.valueOf("1996-06-09 00:01:02"));
     }
 
     @Test
     public void testClubAudit() {
         clubDao.addClub(club);
+        clubAuditDao.addClubAudit(clubAudit);
+
+        clubAuditDao.findClubAuditByClubName("java");
+
+        clubAuditDao.getClubAuditByClubId(club.getClubId());
+
+        clubAudit=clubAuditDao.getClubAuditById(clubAudit.getId());
+
+        clubAuditDao.loadAllCLubAudit(0,1);
+
+        clubAuditDao.updateClubAudit(clubAudit);
+
     }
 
     public ClubAuditDao getClubAuditDao() {
