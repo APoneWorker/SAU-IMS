@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Timestamp;
 
+import static test.dao.Domain.club;
+import static test.dao.Domain.user;
+
 /**
  * Created by APone on 2017/8/21.
  */
@@ -22,35 +25,15 @@ public class ClubDaoTest extends BaseDaoTest {
     @Autowired
     UserDao userDao;
 
-    private Club club = new Club();
-
-    private User user = new User();
-
     @Before
     public void init() {
-        club.setAdminName("zj");
-        club.setClubName("IT社");
-        club.setFoundTime(Timestamp.valueOf("1996-1-2 01:01:01"));
-
-        user.setUserName("zjboy");
-        user.setPassword("123456");
-        user.setEmail("zjboy@163.com");
-        user.setPhone("12345678901");
-        user.setUserKey("123456");
-        user.setLoginTime(Timestamp.valueOf("1996-02-01 01:02:01"));
-        user.setLoginIp("0.0.0.0");
-        user.setRegisterTime(Timestamp.valueOf("1992-01-02 01:02:09"));
-        user.setRegisterIp("0.0.0.0");
-        user.setAuthority(0);
-        user.setUserState(1);
+        userDao.addUser(user);
+        club.setUserId(user.getUserId());
+        clubDao.addClub(club);
     }
 
     @Test
     public void testClubDao() {
-        userDao.addUser(user);
-
-        club.setUserId(user.getUserId());
-        clubDao.addClub(club);
 
         Assert.assertNull(clubDao.getClubByClubId(10));
         System.out.println((club = clubDao.getClubByClubId(club.getClubId())).toString());
@@ -84,6 +67,7 @@ public class ClubDaoTest extends BaseDaoTest {
 
         club.setClubName("呵呵社");
         club.setDescription("注解在此");
+        club.setMembers(club.getMembers() + 1);
         clubDao.updateClub(club);
 
         Assert.assertNotNull(clubDao.getClubByClubName("呵呵社"));
@@ -105,21 +89,5 @@ public class ClubDaoTest extends BaseDaoTest {
 
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
-    }
-
-    public Club getClub() {
-        return club;
-    }
-
-    public void setClub(Club club) {
-        this.club = club;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }

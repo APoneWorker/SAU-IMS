@@ -22,6 +22,12 @@
         select count(*) from person_info where nickname = #{nickname}
     </select>
 
+    <insert id="addPerson" parameterType="Person" useGeneratedKeys="true" keyProperty="personId" keyColumn="person_id">
+        insert into person_info (user_id,  nickname)
+        values(#{userId},#{nickname})
+    </insert>
+
+
     <update id="updatePerson" parameterType="Person">
         update person_info set
         real_name = #{realName},
@@ -55,6 +61,13 @@
         <result property="userId" column="user_id"/>
         <result property="realName" column="real_name"/>
         <result property="studentId" column="student_id"/>
-        <result property="personLogo" column="'person_logo"/>
+        <result property="personLogo" column="person_logo"/>
+        <result property="gender" column="gender"/>
+        <result property="nickname" column="nickname"/>
+        <result property="birthday" column="birthday"/>
+        <result property="address" column="address"/>
+        <result property="description" column="description"/>
+        <result property="department" column="department"/>
+        <result property="major" column="major"/>
     </resultMap>
 </mapper>

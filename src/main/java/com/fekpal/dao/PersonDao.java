@@ -47,6 +47,13 @@ public interface PersonDao {
     boolean hadNickName(String nickName);
 
     /**
+     * 添加个人
+     *
+     * @param person Person
+     */
+    void addPerson(Person person);
+
+    /**
      * 更新个人
      *
      * @param person Person

@@ -1,14 +1,19 @@
 package test.dao;
 
+import com.fekpal.cons.AuditState;
 import com.fekpal.dao.ClubAuditDao;
 import com.fekpal.dao.ClubDao;
-import com.fekpal.domain.Club;
 import com.fekpal.domain.ClubAudit;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Timestamp;
+import java.util.List;
+
+import static test.dao.Domain.club;
+import static test.dao.Domain.clubAudit;
 
 /**
  * Created by APone on 2017/8/27.
@@ -21,36 +26,46 @@ public class ClubAuditDaoTest extends BaseDaoTest {
     @Autowired
     private ClubDao clubDao;
 
-    private Club club = new Club();
-
-    private ClubAudit clubAudit = new ClubAudit();
-
     @Before
     public void init() {
-        club.setAdminName("zj");
-        club.setClubName("IT社");
-        club.setFoundTime(Timestamp.valueOf("1996-1-2 01:01:01"));
-
+        clubDao.addClub(club);
         clubAudit.setClub(club);
-        clubAudit.setFile("java部落");
-        clubAudit.setSendTime(Timestamp.valueOf("1996-06-09 00:01:02"));
+        clubAuditDao.addClubAudit(clubAudit);
     }
 
     @Test
     public void testClubAudit() {
-        clubDao.addClub(club);
-        clubAuditDao.addClubAudit(clubAudit);
 
-        clubAuditDao.findClubAuditByClubName("java");
+        List<ClubAudit> clubAudits=clubAuditDao.findClubAuditByClubName("IT");
+        System.out.println(clubAudits.size());
+        System.out.println(clubAudits);
+        clubAudits=clubAuditDao.findClubAuditByClubName("dss");
+        System.out.println(clubAudits.size());
 
-        clubAuditDao.getClubAuditByClubId(club.getClubId());
+        clubAudits=clubAuditDao.getClubAuditByClubId(club.getClubId());
+        System.out.println(clubAudits.size());
+        System.out.println(clubAudits);
+        clubAudits=clubAuditDao.getClubAuditByClubId(0);
+        System.out.println(clubAudits.size());
 
-        clubAudit=clubAuditDao.getClubAuditById(clubAudit.getId());
+        clubAudit = clubAuditDao.getClubAuditById(clubAudit.getId());
+        Assert.assertNotNull(clubAudit);
+        System.out.println(clubAudit);
+        clubAudit=clubAuditDao.getClubAuditById(0);
+        Assert.assertNull(clubAudit);
 
-        clubAuditDao.loadAllCLubAudit(0,1);
 
+        clubAudits=clubAuditDao.loadAllCLubAudit(0, 1);
+        System.out.println(clubAudits.size());
+        System.out.println(clubAudits);
+
+        clubAudit=clubAudits.get(0);
+        clubAudit.setAuditResult(AuditState.PASS);
+        clubAudit.setAuditTime(Timestamp.valueOf("2017-01-01 02:02:02"));
         clubAuditDao.updateClubAudit(clubAudit);
-
+        clubAudit=clubAuditDao.getClubAuditById(clubAudit.getId());
+        Assert.assertNotNull(clubAudit);
+        System.out.println(clubAudit);
     }
 
     public ClubAuditDao getClubAuditDao() {

@@ -15,15 +15,16 @@
     </select>
 
     <insert id="addSau" parameterType="Sau" useGeneratedKeys="true" keyProperty="sauId" keyColumn="sau_id">
-        insert into sau_info (user_id,sau_name,found_time,admin_name)
-        values (#{userId},#{sauName},#{foundTime},#{adminName})
+        insert into sau_info (user_id)
+        values (#{userId})
     </insert>
 
     <update id="updateSau" parameterType="Sau">
         update sau_info set
         sau_name = #{sauName},
         admin_name = #{adminName},
-        sau_logo = #{sau_logo},
+        found_time=#{foundTime},
+        sau_logo = #{sauLogo},
         description = #{description},
         members = #{members}
         where sau_id = #{sauId}
@@ -40,5 +41,7 @@
         <result property="foundTime" column="found_time"/>
         <result property="adminName" column="admin_name"/>
         <result property="sauLogo" column="sau_logo"/>
+        <result property="description" column="description"/>
+        <result property="members" column="members"/>
     </resultMap>
 </mapper>

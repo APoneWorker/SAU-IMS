@@ -4,8 +4,6 @@ import com.fekpal.cons.AuditState;
 import com.fekpal.dao.AnniversaryAuditDao;
 import com.fekpal.dao.ClubDao;
 import com.fekpal.domain.AnniversaryAudit;
-import com.fekpal.domain.Club;
-import com.fekpal.domain.User;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Timestamp;
 import java.util.List;
+
+import static test.dao.Domain.anniversaryAudit;
+import static test.dao.Domain.club;
 
 /**
  * Created by APone on 2017/8/26.
@@ -25,27 +26,15 @@ public class AnnDaoTest extends BaseDaoTest {
     @Autowired
     private ClubDao clubDao;
 
-    private AnniversaryAudit anniversaryAudit = new AnniversaryAudit();
-
     @Before
     public void init() {
-
-        Club club = new Club();
-        club.setUserId(1);
-        club.setAdminName("zj");
-        club.setClubName("IT社");
-        club.setFoundTime(Timestamp.valueOf("1996-1-2 01:01:01"));
         clubDao.addClub(club);
-
-        anniversaryAudit.setSubmitTime(Timestamp.valueOf("1996-06-09 01:01:01"));
-        anniversaryAudit.setSubmitDescription("这是it社重改版本");
-        anniversaryAudit.setFileName("434DUHWDU4234HU");
-        anniversaryAudit.setClub(club);
+        anniversaryAuditDao.addAnniversaryAudit(anniversaryAudit);
     }
 
     @Test
     public void testAnnDao() {
-        anniversaryAuditDao.addAnniversaryAudit(anniversaryAudit);
+
         System.out.println(anniversaryAudit);
 
         AnniversaryAudit anniversaryAudit1 = anniversaryAuditDao.getAnnAuditingByClubId(anniversaryAudit.getClub().getClubId());

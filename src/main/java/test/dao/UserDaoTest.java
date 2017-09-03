@@ -1,48 +1,30 @@
 package test.dao;
 
 import com.fekpal.dao.UserDao;
-import com.fekpal.domain.User;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Timestamp;
-
-import static org.junit.Assert.assertTrue;
+import static test.dao.Domain.user;
 
 /**
  * Created by APone on 2017/8/16.
  */
-@Rollback
-@Transactional(transactionManager = "txManager")
 public class UserDaoTest extends BaseDaoTest {
 
     @Autowired
     private UserDao userDao;
 
-    private User user = new User();
 
     @Before
     public void init() {
-        user.setUserName("zjboy");
-        user.setPassword("123456");
-        user.setEmail("zjboy@163.com");
-        user.setPhone("12345678901");
-        user.setUserKey("123456");
-        user.setLoginTime(Timestamp.valueOf("1996-02-01 01:02:01"));
-        user.setLoginIp("0.0.0.0");
-        user.setRegisterTime(Timestamp.valueOf("1992-01-02 01:02:09"));
-        user.setRegisterIp("0.0.0.0");
-        user.setAuthority(2);
-        user.setUserState(1);
+        userDao.addUser(user);
     }
 
     @Test
     public void testUserDao() {
-        userDao.addUser(user);
+
         System.out.println(userDao.getUserByEmail("zjboy@163.com").toString());
         System.out.println(userDao.getUserByUserId(user.getUserId()).toString());
         System.out.println(userDao.getUserByUserName("zjboy").toString());
