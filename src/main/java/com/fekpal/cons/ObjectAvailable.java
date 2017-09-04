@@ -4,7 +4,7 @@ package com.fekpal.cons;
  * Created by APone on 2017/8/15.
  * 状态常量
  */
-public class ActionAvailable {
+public class ObjectAvailable {
 
     /**
      * 无效的

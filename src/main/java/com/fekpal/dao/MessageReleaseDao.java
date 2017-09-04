@@ -34,12 +34,12 @@ public interface MessageReleaseDao {
     /**
      * 根据标题查找专属消息
      *
-     * @param messageRelease MessageRelease
-     * @param start          int
-     * @param count          int
+     * @param messageTitle String
+     * @param start        int
+     * @param count        int
      * @return List
      */
-    List<MessageRelease> findMessageByMessageTitle(MessageRelease messageRelease, int start, int count);
+    List<MessageRelease> findMessageByMessageTitle(String messageTitle, int receiveId, int start, int count);
 
     /**
      * 添加专属消息

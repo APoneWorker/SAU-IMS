@@ -24,8 +24,8 @@
         select *
         from message_release mr
         inner join message m on mr.message_id = m.message_id
-        where message_title like concat('%',#{arg0.messageTitle},'%') and receive_id = #{arg0.receiveId}
-        limit #{arg1},#{arg2}
+        where message_title like concat('%',#{arg0},'%') and receive_id = #{arg1}
+        limit #{arg2},#{arg3}
     </select>
 
     <insert id="addMessageRelease" useGeneratedKeys="true" keyProperty="id" keyColumn="id">

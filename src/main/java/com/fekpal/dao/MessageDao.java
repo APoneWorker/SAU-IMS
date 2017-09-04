@@ -22,7 +22,7 @@ public interface MessageDao {
     Message getMessageByMessageId(int messageId);
 
     /**
-     * 根据用户id获得消息列表
+     * 根据用户id获得消息列表,可代替loadAllMessage并指定特定的用户id的Message
      *
      * @param userId int
      * @param start  int
@@ -34,12 +34,13 @@ public interface MessageDao {
     /**
      * 根据消息标题查找
      *
-     * @param message Message
-     * @param start   int
-     * @param count   int
+     * @param messageTitle String
+     * @param userId       int
+     * @param start        int
+     * @param count        int
      * @return List
      */
-    List<Message> findMessageByMessageTitle(Message message, int start, int count);
+    List<Message> findMessageByMessageTitle(String messageTitle, int userId, int start, int count);
 
     /**
      * 添加消息

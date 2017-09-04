@@ -16,12 +16,11 @@
 
     <select id="findMessageByMessageTitle" resultMap="messageResult">
         select * from message
-        where message_title like concat('%',#{arg0.messageTitle},'%') and user_id = #{userId}
-        limit #{arg1},#{arg2}
+        where message_title like concat('%',#{arg0},'%') and user_id = #{arg1}
+        limit #{arg2},#{arg3}
     </select>
 
-    <insert id="addMessage" parameterType="Message" useGeneratedKeys="true" keyProperty="messageId"
-            keyColumn="message_id">
+    <insert id="addMessage" parameterType="Message" useGeneratedKeys="true" keyProperty="messageId" keyColumn="message_id">
         insert into message
         (user_id,message_title, message_content, release_time, message_type, message_annex, release_name)
         values (#{userId},#{messageTitle},#{messageContent},#{releaseTime},#{messageType},#{messageAnnex},#{releaseName})
