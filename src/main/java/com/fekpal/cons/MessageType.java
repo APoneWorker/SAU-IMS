@@ -20,4 +20,14 @@ public class MessageType {
      * 自定义消息
      */
     public static final int CUSTOM = 2;
+
+    /**
+     * 未读
+     */
+    public static final int UN_READ = 0;
+
+    /**
+     * 已读
+     */
+    public static final int READ = 1;
 }

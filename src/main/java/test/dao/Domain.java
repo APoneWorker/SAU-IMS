@@ -33,6 +33,8 @@ public class Domain {
 
     public static MessageRelease messageRelease1 = new MessageRelease();
 
+    public static ClubMember clubMember = new ClubMember();
+
     static {
         user.setUserName("zjboy");
         user.setPassword("123456");
@@ -86,6 +88,7 @@ public class Domain {
         message1.setMessageType(MessageType.CUSTOM);
         message1.setReleaseTime(Timestamp.valueOf("1996-06-09 00:01:02"));
 
+        clubMember.setJoinTime(Timestamp.valueOf("1995-01-06 12:12:12"));
     }
 
 }

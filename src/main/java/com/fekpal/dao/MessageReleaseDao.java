@@ -15,45 +15,45 @@ public interface MessageReleaseDao {
     /**
      * 根据消息id获得专属消息
      *
-     * @param messageReleaseId int
+     * @param id int
      * @return MessageRelease
      */
-    MessageRelease getMessageByMessageReleaseId(int messageReleaseId);
+    MessageRelease getMessageByMessageReleaseId(int id);
 
     /**
      * 根据用户id获得
      *
-     * @param receiveId int
+     * @param id int
      * @param start     int
      * @param count     int
      * @return List
      */
-    List<MessageRelease> getMessagesByUserId(int receiveId, int start, int count);
+    List<MessageRelease> getMessagesByReceiveId(int id, int start, int count);
 
 
     /**
      * 根据标题查找专属消息
      *
-     * @param messageTitle String
+     * @param title String
      * @param start        int
      * @param count        int
      * @return List
      */
-    List<MessageRelease> findMessageByMessageTitle(String messageTitle, int receiveId, int start, int count);
+    List<MessageRelease> findMessageByMessageTitle(String title, int receiveId, int start, int count);
 
     /**
      * 添加专属消息
      *
-     * @param messageReleaseList List
+     * @param list List
      */
-    void addMessageRelease(List<MessageRelease> messageReleaseList);
+    void addMessageRelease(List<MessageRelease> list);
 
     /**
      * 更新消息
      *
      * @param messageRelease MessageRelease
-     * @param integerList    List
+     * @param list    List
      */
-    void updateMessageRelease(MessageRelease messageRelease, List<Integer> integerList);
+    void updateMessageRelease(MessageRelease messageRelease, List<Integer> list);
 
 }

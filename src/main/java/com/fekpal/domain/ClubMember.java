@@ -16,8 +16,6 @@ public class ClubMember extends BasePOJO {
 
     private Timestamp joinTime;
 
-    private String description;
-
     private Timestamp leaveTime;
 
     private String clubDepartment;
@@ -70,14 +68,6 @@ public class ClubMember extends BasePOJO {
 
     public void setJoinTime(Timestamp joinTime) {
         this.joinTime = joinTime;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public Timestamp getLeaveTime() {

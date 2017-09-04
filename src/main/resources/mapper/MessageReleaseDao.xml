@@ -6,32 +6,32 @@
 <mapper namespace="com.fekpal.dao.MessageReleaseDao">
     <cache/>
 
-    <select id="getMessageByMessageReleaseId" parameterType="int" resultMap="messageResult">
+    <select id="getMessageByMessageReleaseId" parameterType="int" resultMap="messageReleaseResult">
         select *
         from message_release mr
         inner join message m on mr.message_id = m.message_id
-        where mr.id = #{messageReleaseId}
+        where id = #{id}
     </select>
 
-    <select id="getMessagesByUserId" parameterType="int" resultMap="messageResult">
+    <select id="getMessagesByReceiveId" resultMap="messageReleaseResult">
         select *
         from message_release mr
         inner join message m on mr.message_id = m.message_id
-        where receive_id = #{arg0} limit #{arg1},#{arg2}
+        where mr.receive_id = #{arg0} limit #{arg1},#{arg2}
     </select>
 
-    <select id="findMessageByMessageTitle" resultMap="messageResult">
+    <select id="findMessageByMessageTitle" resultMap="messageReleaseResult">
         select *
         from message_release mr
-        inner join message m on mr.message_id = m.message_id
+        inner join message m on m.message_id = mr.message_id
         where message_title like concat('%',#{arg0},'%') and receive_id = #{arg1}
         limit #{arg2},#{arg3}
     </select>
 
-    <insert id="addMessageRelease" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    <insert id="addMessageRelease" parameterType="List" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into message_release(message_id, receive_id) values
-        <foreach collection="messageReleaseList" item="item" separator=",">
-            (#{item.messageId},#{item.receiveId})
+        <foreach collection="list" item="item" separator=",">
+            (#{item.message.messageId},#{item.receiveId})
         </foreach>
     </insert>
 
@@ -45,13 +45,15 @@
         </foreach>
     </update>
 
-    <resultMap id="messageResult" type="MessageRelease">
+    <resultMap id="messageReleaseResult" type="MessageRelease">
         <id property="id" column="id"/>
-        <result property="userId" column="user_id"/>
         <result property="readFlag" column="read_flag"/>
+        <result property="receiveId" column="receive_id"/>
+        <result property="available" column="available"/>
+
         <association property="message" javaType="Message">
             <id property="messageId" column="message_id"/>
-            <result property="receiveId" column="receive_id"/>
+            <result property="userId" column="user_id"/>
             <result property="messageTitle" column="message_title"/>
             <result property="messageContent" column="message_content"/>
             <result property="releaseTime" column="release_time"/>

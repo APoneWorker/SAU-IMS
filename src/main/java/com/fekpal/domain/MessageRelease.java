@@ -1,6 +1,6 @@
 package com.fekpal.domain;
 
-public class MessageRelease {
+public class MessageRelease extends BasePOJO{
 
     private int id;
 

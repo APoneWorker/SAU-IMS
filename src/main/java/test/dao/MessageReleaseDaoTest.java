@@ -1,9 +1,12 @@
 package test.dao;
 
+import com.fekpal.cons.MessageType;
+import com.fekpal.cons.ObjectAvailable;
 import com.fekpal.dao.MessageDao;
 import com.fekpal.dao.MessageReleaseDao;
 import com.fekpal.dao.UserDao;
 import com.fekpal.domain.MessageRelease;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,14 +36,14 @@ public class MessageReleaseDaoTest extends BaseDaoTest {
         userDao.addUser(anUser);
 
         message.setUserId(anUser.getUserId());
-        message1.setUserId(user.getUserId());
+        message1.setUserId(anUser.getUserId());
         messageDao.addMessage(message);
         messageDao.addMessage(message1);
 
         messageRelease.setMessage(message);
         messageRelease1.setMessage(message1);
-        messageRelease.setId(user.getUserId());
-        messageRelease1.setId(anUser.getUserId());
+        messageRelease.setReceiveId(user.getUserId());
+        messageRelease1.setReceiveId(user.getUserId());
 
         List<MessageRelease> list = new ArrayList<>();
         list.add(messageRelease);
@@ -50,7 +53,38 @@ public class MessageReleaseDaoTest extends BaseDaoTest {
 
     @Test
     public void testMessageReleaseDao() {
-        //messageReleaseDao.findMessageByMessageTitle("通知",0,2)
+        
+        List<MessageRelease> list = messageReleaseDao.findMessageByMessageTitle("通知tg   ", user.getUserId(), 0, 2);
+        System.out.println(list.size());
+        System.out.println(list);
+        list = messageReleaseDao.findMessageByMessageTitle("sdf", user.getUserId(), 0, 2);
+        System.out.println(list.size());
+
+        MessageRelease temp = messageReleaseDao.getMessageByMessageReleaseId(messageRelease.getId());
+        Assert.assertNotNull(temp);
+        System.out.println(temp);
+        temp = messageReleaseDao.getMessageByMessageReleaseId(messageRelease1.getId());
+        Assert.assertNotNull(temp);
+        System.out.println(temp);
+        temp = messageReleaseDao.getMessageByMessageReleaseId(0);
+        Assert.assertNull(temp);
+
+        list = messageReleaseDao.getMessagesByReceiveId(user.getUserId(), 0, 2);
+        System.out.println(list.size());
+        System.out.println(list);
+        list = messageReleaseDao.getMessagesByReceiveId(0, 0, 2);
+        System.out.println(list.size());
+
+        MessageRelease temp1 = new MessageRelease();
+        temp1.setAvailable(ObjectAvailable.UNAVAIABLE);
+        temp1.setReadFlag(MessageType.READ);
+        List<Integer> list1 = new ArrayList<>();
+        list1.add(messageRelease.getId());
+        list1.add(messageRelease1.getId());
+        messageReleaseDao.updateMessageRelease(temp1, list1);
+        list = messageReleaseDao.getMessagesByReceiveId(user.getUserId(), 0, 2);
+        System.out.println(list.size());
+        System.out.println(list);
     }
 
     public MessageDao getMessageDao() {

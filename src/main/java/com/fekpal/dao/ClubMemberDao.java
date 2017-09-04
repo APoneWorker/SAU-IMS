@@ -67,5 +67,5 @@ public interface ClubMemberDao {
      * @param clubId int
      * @return List
      */
-    List<ClubMember> getAllAuditingByClub(int clubId);
+    List<ClubMember> getAllAuditingByClubId(int clubId);
 }

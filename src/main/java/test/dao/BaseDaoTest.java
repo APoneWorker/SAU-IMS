@@ -1,6 +1,5 @@
 package test.dao;
 
-import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
