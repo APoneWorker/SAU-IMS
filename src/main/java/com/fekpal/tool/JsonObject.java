@@ -8,6 +8,7 @@ import java.util.Map;
  * Created by APone on 2017/8/14.
  * 用于序列化传输的json类，不提供list的setter方法
  */
+@Deprecated
 public class JsonObject {
 
     private int status;

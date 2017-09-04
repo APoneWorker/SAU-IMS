@@ -1,6 +1,5 @@
 package com.fekpal.tool;
 
-import com.fekpal.cons.ResponseCode;
 import org.apache.poi.xwpf.converter.core.BasicURIResolver;
 import org.apache.poi.xwpf.converter.core.FileImageExtractor;
 import org.apache.poi.xwpf.converter.xhtml.XHTMLConverter;
@@ -17,21 +16,37 @@ import java.io.*;
 public class WordToHTML {
 
 
-    public boolean toHtml(String fileName, String htmlName, String imageName) {
+    /**
+     * 转化为网页文件docx版,注意命名唯一性
+     *
+     * @param wordFileName  String word文件的路径 如 X:/xxx/xxx.docx
+     * @param htmlFileName  String 网页文件的路径 如 X:/xxx/xxx.html
+     * @param htmlImageName String 图片文件夹路径 如 X:/xxx/image/
+     * @param imageBaseURL  String 网页中图片的路径 如 image/
+     * @return boolean
+     */
+    public boolean docxToHtml(String wordFileName, String htmlFileName, String htmlImageName, String imageBaseURL) {
 
         OutputStreamWriter outputStreamWriter = null;
         try {
-            FileInputStream fileInputStream = new FileInputStream(fileName);
+            //读取word文件流
+            FileInputStream fileInputStream = new FileInputStream(wordFileName);
+            //创建文档对象，并创建word配置对象
             XWPFDocument document = new XWPFDocument(fileInputStream);
             XHTMLOptions options = XHTMLOptions.create();
 
-            // 存放图片的文件夹,并设置html中图片的路径,图片获取路径
-            options.setExtractor(new FileImageExtractor(new File(imageName)));
-            options.URIResolver(new BasicURIResolver("image/" + fileName.replaceAll(".docx", "")));
+            //设置word中的图片转化为网页图片后，网页图片存放的文件夹路径
+            options.setExtractor(new FileImageExtractor(new File(htmlImageName)));
 
-            outputStreamWriter = new OutputStreamWriter(new FileOutputStream(htmlName + "00.html"), "utf-8");
+            //设置网页里图片的路径(即为<img src="???">)，一般为网页的相对路径，这个设置将影响网页图片的显示
+            options.URIResolver(new BasicURIResolver(imageBaseURL));
+
+            //设置网页文件的路径，即为新建网页文件，编码为utf8
+            outputStreamWriter = new OutputStreamWriter(new FileOutputStream(htmlFileName), "utf-8");
             XHTMLConverter xhtmlConverter = (XHTMLConverter) XHTMLConverter.getInstance();
+            //将以上的配置注入，转化开始
             xhtmlConverter.convert(document, outputStreamWriter, options);
+
             return true;
 
         } catch (IOException e) {
@@ -50,7 +65,7 @@ public class WordToHTML {
 
     public static void main(String[] args) {
         try {
-            new WordToHTML().toHtml("D:/00.docx", "D:/ac/", "D:/ac/image/");
+            new WordToHTML().docxToHtml("D:/00.docx", "D:/ac/00.html", "D:/ac/image/", "image/");
         } catch (Exception e) {
             e.printStackTrace();
         }
