@@ -32,11 +32,4 @@
           p:basePackage="com.fekpal.dao"/>
     <!--p:sqlSessionFactory-ref="sqlSessionFactory"写这个必错-->
 
-    <!--事务管理-->
-    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
-          p:dataSource-ref="dataSource"/>
-
-    <!--使用声明式事务-->
-    <tx:annotation-driven transaction-manager="txManager"/>
-
 </beans>

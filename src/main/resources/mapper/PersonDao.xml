@@ -43,14 +43,6 @@
         where person_id = #{personId}
     </update>
 
-    <insert id="addLikeClub">
-        insert into club_like (user_id,club_id)
-        values(#{arg0},#{arg1})
-    </insert>
-
-    <select id="loadAllLikeByUserId" parameterType="int" resultType="int">
-        select club_id from club_like where user_id = #{userId}
-    </select>
 
     <select id="loadAllPerson" resultMap="personResult">
         select * from person_info limit #{arg0},#{arg1}

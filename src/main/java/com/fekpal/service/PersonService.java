@@ -1,18 +1,18 @@
-package com.fekpal.dao;
+package com.fekpal.service;
 
-import com.fekpal.domain.Club;
 import com.fekpal.domain.Person;
-import com.fekpal.domain.User;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
- * Created by APone on 2017/8/15.
- * PersonDao的接口,个人普通用户信息，校社联用户和社团以此类推
+ * Created by APone on 2017/9/5.
+ * PersonService接口
  */
-@Repository
-public interface PersonDao {
+@Service
+@Transactional
+public interface PersonService {
 
     /**
      * 根据社团id获得个人
@@ -44,14 +44,7 @@ public interface PersonDao {
      * @param nickName String
      * @return boolean
      */
-    boolean hadNickName(String nickName);
-
-    /**
-     * 添加个人
-     *
-     * @param person Person
-     */
-    void addPerson(Person person);
+    boolean checkSameNickName(String nickName);
 
     /**
      * 更新个人
@@ -60,6 +53,21 @@ public interface PersonDao {
      */
     void updatePerson(Person person);
 
+    /**
+     * 添加喜爱社团
+     *
+     * @param personId int
+     * @param clubId   int
+     */
+    void addLikeClub(int personId, int clubId);
+
+    /**
+     * 获得所有喜爱的社团id
+     *
+     * @param personId int
+     * @return List
+     */
+    List<Integer> loadAllLikeByPersonId(int personId);
 
     /**
      * 获得所有个人

@@ -34,5 +34,6 @@
         <mapper resource="mapper/ClubMemberDao.xml"/>
         <mapper resource="mapper/MessageDao.xml"/>
         <mapper resource="mapper/MessageReleaseDao.xml"/>
+        <mapper resource="mapper/LikeClubDao.xml"/>
     </mappers>
 </configuration>

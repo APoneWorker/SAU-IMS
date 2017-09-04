@@ -3,8 +3,8 @@ package com.fekpal.service;
 import org.springframework.stereotype.Service;
 
 /**
- * Created by APone on 2017/8/25.
+ * Created by APone on 2017/9/5.
  */
 @Service
-public interface MessageService {
+public interface PersonalMessageService {
 }

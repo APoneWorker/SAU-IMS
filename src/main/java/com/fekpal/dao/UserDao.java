@@ -56,9 +56,8 @@ public interface UserDao {
      * 修改用户部分信息
      *
      * @param user User
-     * @return boolean
      */
-    boolean updateUser(User user);
+    void updateUser(User user);
 
     /**
      * 判断是否存在相同用户名称
