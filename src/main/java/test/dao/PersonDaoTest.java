@@ -1,6 +1,7 @@
 package test.dao;
 
 import com.fekpal.dao.ClubDao;
+import com.fekpal.dao.LikeClubDao;
 import com.fekpal.dao.PersonDao;
 import com.fekpal.dao.UserDao;
 import com.fekpal.domain.Person;
@@ -31,6 +32,9 @@ public class PersonDaoTest extends BaseDaoTest {
     @Autowired
     private ClubDao clubDao;
 
+    @Autowired
+    private LikeClubDao likeClubDao;
+
     @Before
     public void init() {
         userDao.addUser(user);
@@ -60,16 +64,16 @@ public class PersonDaoTest extends BaseDaoTest {
         p = personDao.getPersonByUserId(0);
         Assert.assertNull(p);
 
-        personDao.addLikeClub(user.getUserId(), club.getClubId());
-        personDao.addLikeClub(user.getUserId(), 2);//不存在的社团id
+        likeClubDao.addLikeClub(user.getUserId(), club.getClubId());
+        likeClubDao.addLikeClub(user.getUserId(), 2);//不存在的社团id
 
         Assert.assertTrue(personDao.hadNickName("佳佳"));
         Assert.assertFalse(personDao.hadNickName("1"));
 
-        List<Integer> integerList = personDao.loadAllLikeByUserId(user.getUserId());
+        List<Integer> integerList = likeClubDao.loadAllLikeByPersonId(user.getUserId());
         System.out.println(integerList.size());
         System.out.println(integerList);
-        integerList = personDao.loadAllLikeByUserId(0);
+        integerList = likeClubDao.loadAllLikeByPersonId(0);
         System.out.println(integerList.size());
 
         List<Person> personList = personDao.loadAllPerson(0, 2);
@@ -98,5 +102,21 @@ public class PersonDaoTest extends BaseDaoTest {
 
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
+    }
+
+    public ClubDao getClubDao() {
+        return clubDao;
+    }
+
+    public void setClubDao(ClubDao clubDao) {
+        this.clubDao = clubDao;
+    }
+
+    public LikeClubDao getLikeClubDao() {
+        return likeClubDao;
+    }
+
+    public void setLikeClubDao(LikeClubDao likeClubDao) {
+        this.likeClubDao = likeClubDao;
     }
 }

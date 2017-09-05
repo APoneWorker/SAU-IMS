@@ -41,8 +41,9 @@ public interface AnniversaryAuditDao {
 
     /**
      * 根据社团名称搜索所有审核，时间和未审核排列优先
-     *
      * @param clubName String
+     * @param start int
+     * @param count int
      * @return List
      */
     List<AnniversaryAudit> findAnnByClubName(String clubName, int start, int count);
@@ -63,7 +64,8 @@ public interface AnniversaryAuditDao {
 
     /**
      * 获取所有审核,时间和未审核排列优先
-     *
+     * @param start int
+     * @param count int
      * @return List
      */
     List<AnniversaryAudit> loadAllAnniversaryAudit(int start, int count);
