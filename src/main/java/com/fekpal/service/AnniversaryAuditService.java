@@ -1,15 +1,12 @@
 package com.fekpal.service;
 
 import com.fekpal.domain.AnniversaryAudit;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by APone on 2017/8/25.
- * AnniversaryAuditService接口
  */
-@Service
 public interface AnniversaryAuditService {
 
     /**
@@ -40,9 +37,10 @@ public interface AnniversaryAuditService {
 
     /**
      * 根据社团名称搜索所有审核，时间和未审核排列优先
+     *
      * @param clubName String
-     * @param start int
-     * @param count int
+     * @param start    int
+     * @param count    int
      * @return List
      */
     List<AnniversaryAudit> findAnnByClubName(String clubName, int start, int count);
@@ -63,6 +61,7 @@ public interface AnniversaryAuditService {
 
     /**
      * 获取所有审核,时间和未审核排列优先
+     *
      * @param start int
      * @param count int
      * @return List

@@ -2,7 +2,6 @@ package com.fekpal.service;
 
 import com.fekpal.domain.Message;
 import com.fekpal.domain.MessageRelease;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -10,7 +9,6 @@ import java.util.List;
  * Created by APone on 2017/8/25.
  * MessageService接口
  */
-@Service
 public interface MessageService {
 
     /**

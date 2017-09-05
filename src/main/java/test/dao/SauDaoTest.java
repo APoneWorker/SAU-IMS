@@ -57,20 +57,4 @@ public class SauDaoTest extends BaseDaoTest {
         sau = sauDao.getSauBySauId(sau.getSauId());
         System.out.println(sau);
     }
-
-    public SauDao getSauDao() {
-        return sauDao;
-    }
-
-    public void setSauDao(SauDao sauDao) {
-        this.sauDao = sauDao;
-    }
-
-    public UserDao getUserDao() {
-        return userDao;
-    }
-
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
-    }
 }

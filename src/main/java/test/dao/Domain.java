@@ -90,5 +90,4 @@ public class Domain {
 
         clubMember.setJoinTime(Timestamp.valueOf("1995-01-06 12:12:12"));
     }
-
 }

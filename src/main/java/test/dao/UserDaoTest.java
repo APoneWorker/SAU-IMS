@@ -50,12 +50,4 @@ public class UserDaoTest extends BaseDaoTest {
         Assert.assertNotNull("密码正确", userDao.getUserByUserNameAndPassword("zjboy", "12"));
         System.out.println(userDao.getUserByUserNameAndPassword("zjboy", "12").toString());
     }
-
-    public UserDao getUserDao() {
-        return userDao;
-    }
-
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
-    }
 }

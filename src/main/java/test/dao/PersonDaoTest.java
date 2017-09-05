@@ -87,36 +87,4 @@ public class PersonDaoTest extends BaseDaoTest {
         System.out.println(p);
 
     }
-
-    public PersonDao getPersonDao() {
-        return personDao;
-    }
-
-    public void setPersonDao(PersonDao personDao) {
-        this.personDao = personDao;
-    }
-
-    public UserDao getUserDao() {
-        return userDao;
-    }
-
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
-    }
-
-    public ClubDao getClubDao() {
-        return clubDao;
-    }
-
-    public void setClubDao(ClubDao clubDao) {
-        this.clubDao = clubDao;
-    }
-
-    public LikeClubDao getLikeClubDao() {
-        return likeClubDao;
-    }
-
-    public void setLikeClubDao(LikeClubDao likeClubDao) {
-        this.likeClubDao = likeClubDao;
-    }
 }

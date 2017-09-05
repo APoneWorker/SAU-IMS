@@ -34,12 +34,4 @@ public class DepartmentDaoTest extends BaseDaoTest {
             }
         }
     }
-
-    public DepartmentDao getDepartmentDao() {
-        return departmentDao;
-    }
-
-    public void setDepartmentDao(DepartmentDao departmentDao) {
-        this.departmentDao = departmentDao;
-    }
 }

@@ -5,6 +5,7 @@ import com.fekpal.dao.PersonDao;
 import com.fekpal.domain.Person;
 import com.fekpal.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * Created by APone on 2017/9/5.
  * PersonService实现类
  */
+@Service
 public class PersonServiceImpl implements PersonService {
 
     @Autowired
@@ -58,21 +60,5 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public List<Person> loadAllPerson(int start, int count) {
         return personDao.loadAllPerson(start, count);
-    }
-
-    public PersonDao getPersonDao() {
-        return personDao;
-    }
-
-    public void setPersonDao(PersonDao personDao) {
-        this.personDao = personDao;
-    }
-
-    public LikeClubDao getLikeClubDao() {
-        return likeClubDao;
-    }
-
-    public void setLikeClubDao(LikeClubDao likeClubDao) {
-        this.likeClubDao = likeClubDao;
     }
 }

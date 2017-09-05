@@ -63,7 +63,6 @@
         limit #{arg1},#{arg2}
     </select>
 
-
     <resultMap id="annResult" type="AnniversaryAudit">
         <id property="id" column="id"/>
         <result property="fileName" column="file_name"/>

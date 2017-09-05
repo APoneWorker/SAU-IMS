@@ -2,7 +2,6 @@ package com.fekpal.service;
 
 import com.fekpal.domain.ClubMember;
 import com.fekpal.domain.Person;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -10,7 +9,6 @@ import java.util.List;
  * Created by APone on 2017/9/5.
  * ClubMemberService接口
  */
-@Service
 public interface ClubMemberService {
 
     /**

@@ -10,11 +10,13 @@ import com.fekpal.domain.Sau;
 import com.fekpal.domain.User;
 import com.fekpal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by APone on 2017/9/5.
  * UserService实现类
  */
+@Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -83,37 +85,5 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean checkSameEmail(String email) {
         return userDao.hadEmail(email);
-    }
-
-    public UserDao getUserDao() {
-        return userDao;
-    }
-
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
-    }
-
-    public PersonDao getPersonDao() {
-        return personDao;
-    }
-
-    public void setPersonDao(PersonDao personDao) {
-        this.personDao = personDao;
-    }
-
-    public ClubDao getClubDao() {
-        return clubDao;
-    }
-
-    public void setClubDao(ClubDao clubDao) {
-        this.clubDao = clubDao;
-    }
-
-    public SauDao getSauDao() {
-        return sauDao;
-    }
-
-    public void setSauDao(SauDao sauDao) {
-        this.sauDao = sauDao;
     }
 }

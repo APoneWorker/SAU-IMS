@@ -1,8 +1,6 @@
 package com.fekpal.service;
 
 import com.fekpal.domain.Sau;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -10,8 +8,6 @@ import java.util.List;
  * Created by APone on 2017/9/5.
  * SauService接口
  */
-@Service
-@Transactional
 public interface SauService {
 
     /**

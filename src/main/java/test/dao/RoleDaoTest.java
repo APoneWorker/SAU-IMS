@@ -40,12 +40,4 @@ public class RoleDaoTest extends BaseDaoTest {
             System.out.println();
         }
     }
-
-    public RoleDao getRoleDao() {
-        return roleDao;
-    }
-
-    public void setRoleDao(RoleDao roleDao) {
-        this.roleDao = roleDao;
-    }
 }

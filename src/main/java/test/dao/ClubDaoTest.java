@@ -74,20 +74,4 @@ public class ClubDaoTest extends BaseDaoTest {
         Assert.assertNull(clubDao.getClubByClubName("IT社"));
         System.out.println(clubDao.getClubByClubName("呵呵社").toString());
     }
-
-    public ClubDao getClubDao() {
-        return clubDao;
-    }
-
-    public void setClubDao(ClubDao clubDao) {
-        this.clubDao = clubDao;
-    }
-
-    public UserDao getUserDao() {
-        return userDao;
-    }
-
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
-    }
 }

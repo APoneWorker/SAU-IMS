@@ -67,20 +67,4 @@ public class ClubAuditDaoTest extends BaseDaoTest {
         Assert.assertNotNull(clubAudit);
         System.out.println(clubAudit);
     }
-
-    public ClubAuditDao getClubAuditDao() {
-        return clubAuditDao;
-    }
-
-    public void setClubAuditDao(ClubAuditDao clubAuditDao) {
-        this.clubAuditDao = clubAuditDao;
-    }
-
-    public ClubDao getClubDao() {
-        return clubDao;
-    }
-
-    public void setClubDao(ClubDao clubDao) {
-        this.clubDao = clubDao;
-    }
 }

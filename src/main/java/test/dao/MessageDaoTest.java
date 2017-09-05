@@ -60,20 +60,4 @@ public class MessageDaoTest extends BaseDaoTest {
         message = messageDao.getMessageByMessageId(message.getMessageId());
         System.out.println(message);
     }
-
-    public MessageDao getMessageDao() {
-        return messageDao;
-    }
-
-    public void setMessageDao(MessageDao messageDao) {
-        this.messageDao = messageDao;
-    }
-
-    public UserDao getUserDao() {
-        return userDao;
-    }
-
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
-    }
 }

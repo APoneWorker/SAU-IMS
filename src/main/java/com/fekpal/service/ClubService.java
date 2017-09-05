@@ -1,16 +1,12 @@
 package com.fekpal.service;
 
 import com.fekpal.domain.Club;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
  * Created by APone on 2017/9/5.
  */
-@Service
-@Transactional
 public interface ClubService {
 
     /**

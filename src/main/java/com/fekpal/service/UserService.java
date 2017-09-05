@@ -4,15 +4,11 @@ import com.fekpal.domain.Club;
 import com.fekpal.domain.Person;
 import com.fekpal.domain.Sau;
 import com.fekpal.domain.User;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by APone on 2017/8/25.
  * UserService接口
  */
-@Service
-@Transactional
 public interface UserService {
 
     /**

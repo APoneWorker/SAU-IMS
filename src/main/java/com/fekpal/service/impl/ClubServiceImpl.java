@@ -4,6 +4,7 @@ import com.fekpal.dao.ClubDao;
 import com.fekpal.domain.Club;
 import com.fekpal.service.ClubService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * Created by APone on 2017/9/5.
  * ClubService实现类
  */
+@Service
 public class ClubServiceImpl implements ClubService {
 
     @Autowired
@@ -54,13 +56,5 @@ public class ClubServiceImpl implements ClubService {
     @Override
     public List<Club> loadAllClub(int start, int count) {
         return clubDao.loadAllClub(start, count);
-    }
-
-    public ClubDao getClubDao() {
-        return clubDao;
-    }
-
-    public void setClubDao(ClubDao clubDao) {
-        this.clubDao = clubDao;
     }
 }

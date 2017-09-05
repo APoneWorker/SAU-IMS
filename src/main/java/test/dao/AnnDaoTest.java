@@ -74,23 +74,5 @@ public class AnnDaoTest extends BaseDaoTest {
         anniversaryAuditDao.updateAnniversaryAudit(anniversaryAudit1);
 
         System.out.println(anniversaryAuditDao.getAnnByAnnId(anniversaryAudit1.getId()));
-
-    }
-
-
-    public ClubDao getClubDao() {
-        return clubDao;
-    }
-
-    public void setClubDao(ClubDao clubDao) {
-        this.clubDao = clubDao;
-    }
-
-    public AnniversaryAuditDao getAnniversaryAuditDao() {
-        return anniversaryAuditDao;
-    }
-
-    public void setAnniversaryAuditDao(AnniversaryAuditDao anniversaryAuditDao) {
-        this.anniversaryAuditDao = anniversaryAuditDao;
     }
 }

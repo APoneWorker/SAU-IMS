@@ -86,28 +86,4 @@ public class MessageReleaseDaoTest extends BaseDaoTest {
         System.out.println(list.size());
         System.out.println(list);
     }
-
-    public MessageDao getMessageDao() {
-        return messageDao;
-    }
-
-    public void setMessageDao(MessageDao messageDao) {
-        this.messageDao = messageDao;
-    }
-
-    public MessageReleaseDao getMessageReleaseDao() {
-        return messageReleaseDao;
-    }
-
-    public void setMessageReleaseDao(MessageReleaseDao messageReleaseDao) {
-        this.messageReleaseDao = messageReleaseDao;
-    }
-
-    public UserDao getUserDao() {
-        return userDao;
-    }
-
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
-    }
 }
