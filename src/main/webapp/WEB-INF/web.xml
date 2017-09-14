@@ -20,7 +20,66 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+    <!-- 注册spring核心编码过滤器-->
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!--  处理get请求乱码问题的，自定义过滤器进行编码格式的设置 -->
+    <filter>
+        <filter-name>EncodingFilter</filter-name>
+        <filter-class>com.fekpal.tool.EncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- springmvc接受put和delete的方法-->
+    <filter>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- 用于获取项目根目录的监听器配置-->
+    <context-param>
+        <param-name>webAppRootKey</param-name>
+        <param-value>SAU.webapp</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.util.WebAppRootListener</listener-class>
+    </listener>
+
+    <!-- 通过错误码来配置error-page ,配置了当系统发生404错误时，跳转到错误处理页面NotFound.jsp。 -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/page404.html</location>
+    </error-page>
+
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>indexPage.html</welcome-file>
     </welcome-file-list>
 </web-app>

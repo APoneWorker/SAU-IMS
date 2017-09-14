@@ -11,6 +11,7 @@ import com.fekpal.domain.User;
  */
 public interface UserService {
 
+
     /**
      * 根据用户id获得用户
      *

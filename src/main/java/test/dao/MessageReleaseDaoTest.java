@@ -53,7 +53,7 @@ public class MessageReleaseDaoTest extends BaseDaoTest {
 
     @Test
     public void testMessageReleaseDao() {
-        
+
         List<MessageRelease> list = messageReleaseDao.findMessageByMessageTitle("通知tg   ", user.getUserId(), 0, 2);
         System.out.println(list.size());
         System.out.println(list);
@@ -77,7 +77,7 @@ public class MessageReleaseDaoTest extends BaseDaoTest {
 
         MessageRelease temp1 = new MessageRelease();
         temp1.setAvailable(ObjectAvailable.UNAVAIABLE);
-        temp1.setReadFlag(MessageType.READ);
+        temp1.setReadFlag(MessageType.HAVE_READ);
         List<Integer> list1 = new ArrayList<>();
         list1.add(messageRelease.getId());
         list1.add(messageRelease1.getId());

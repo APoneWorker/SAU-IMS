@@ -29,5 +29,5 @@ public class MessageType {
     /**
      * 已读
      */
-    public static final int READ = 1;
+    public static final int HAVE_READ = 1;
 }

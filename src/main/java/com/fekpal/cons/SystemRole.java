@@ -7,6 +7,11 @@ package com.fekpal.cons;
 public class SystemRole {
 
     /**
+     * 公共
+     */
+    public static final int PUBLIC = -1;
+
+    /**
      * 普通用户
      */
     public static final int PERSON = 1;
