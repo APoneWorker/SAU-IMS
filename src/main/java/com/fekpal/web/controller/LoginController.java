@@ -1,5 +1,6 @@
 package com.fekpal.web.controller;
 
+import com.fekpal.cons.SystemRole;
 import com.fekpal.domain.User;
 import com.fekpal.domain.controller.UserLogin;
 import com.fekpal.service.UserService;
@@ -87,39 +88,36 @@ public class LoginController {
         //模拟service成取到用户
 
         //调用工具类判断用户名和密码的格式
-        // TODO: 2017/8/18
-
         //判断用户名和密码
         User realUser = userService.getUserByUserName(userName);
 
         //如果得到的用户为空的话，表示找不到该用户
         if (realUser == null) {
             returnData.setStateCode(1, "该用户找不到，请重新输入");
-            return ((Map<String, Object>) returnData.getMap());
+            return returnData.getMap();
         }
 
-        if (MD5Tool.md5(realUser.getPassword()).equals(MD5Tool.md5(userLogin.getPassword()))) {
+        if (realUser.getPassword().equals(MD5Tool.md5(userLogin.getPassword()))) {
+
             //清除当前session的验证码
             session.removeAttribute("code");
 
             //获取用户登陆ip
-            String ip = getIpAddr(request);
+            String ip = getIpAddress(request);
 
             out.println("登陆成功" + "。 用户IP为：" + ip);
-            //登陆成功
-            //从service中得到用户对象
-            // TODO: 2017/8/19
+
+            //登陆成功,从service中得到用户对象
             //把用户信息放到一个map集合中去，然后返回
-            Map<String, Object> userMap = new LinkedHashMap<String, Object>();
-            String[] roleList = {"普通成员", "社团成员", "校社联成员"};
-            userMap.put("role", roleList[realUser.getAuthority()]);
+            Map<String, Object> userMap = new LinkedHashMap<>();
+            userMap.put("role", SystemRole.ROLE_NAME[realUser.getAuthority()]);
             userMap.put("userId", realUser.getUserId());
             userMap.put("userName", realUser.getUserName());
             userMap.put("userLogo", null);
             returnData.setData(userMap);
 
             //如果Service校验通过，将用户身份记录到session
-            session.setAttribute("userCode", realUser.getUserId());
+            session.setAttribute("userCode", realUser);
         } else {
             returnData.setStateCode(1, "用户名或密码有误，请重新输入！");
             //用于前端回显数据
@@ -131,8 +129,8 @@ public class LoginController {
     /**
      * 用户的登出方法
      *
-     * @param session
-     * @return
+     * @param session HttpSession
+     * @return Map
      */
     @RequestMapping("/logout")
     @ResponseBody
@@ -169,7 +167,7 @@ public class LoginController {
      * @param request 用户的请求
      * @return 返回IP地址
      */
-    public String getIpAddr(HttpServletRequest request) {
+    public String getIpAddress(HttpServletRequest request) {
         String ip = request.getHeader("x-forwarded-for");
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("Proxy-Client-IP");

@@ -30,9 +30,6 @@
         </property>
     </bean>
 
-    <!-- 导入邮件发送相关的配置 -->
-    <context:property-placeholder location="classpath:mail.properties"/>
-
     <!-- 邮件发送器   -->
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="${mail.host}"/>
@@ -66,20 +63,25 @@
 
     <!-- 拦截器 -->
     <mvc:interceptors>
-        <!--
-                拦截所有链接
-                <bean class="com.fekpal.web.interceptor.LoginInterceptor"/>
-        -->
         <!-- 多个拦截器，顺序执行 -->
+        <!--登录拦截器-->
         <mvc:interceptor>
-            <!-- 需排除拦截的地址 -->
             <mvc:mapping path="/**"/>
             <bean class="com.fekpal.web.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
+
+        <!--资源路径访问拦截器-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.fekpal.web.interceptor.URIInterceptor"/>
+        </mvc:interceptor>
     </mvc:interceptors>
 
+
     <!--为避免静态资源路径要经过拦截器等，直接访问文件夹-->
+    <!--
     <mvc:resources mapping="/js/**" location="/js/"/>
     <mvc:resources mapping="/css/**" location="/css/"/>
     <mvc:resources mapping="/images/**" location="/images/"/>
+    -->
 </beans>
