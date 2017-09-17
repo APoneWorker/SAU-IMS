@@ -24,7 +24,7 @@
         sau_name = #{sauName},
         admin_name = #{adminName},
         found_time=#{foundTime},
-        sau_logo = #{sauLogo},
+        sau_logo = #{logo},
         description = #{description},
         members = #{members}
         where sau_id = #{sauId}
@@ -40,7 +40,7 @@
         <result property="sauName" column="sau_name"/>
         <result property="foundTime" column="found_time"/>
         <result property="adminName" column="admin_name"/>
-        <result property="sauLogo" column="sau_logo"/>
+        <result property="logo" column="sau_logo"/>
         <result property="description" column="description"/>
         <result property="members" column="members"/>
     </resultMap>

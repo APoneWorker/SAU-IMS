@@ -1,13 +1,15 @@
 package com.fekpal.web.controller.clubAdmin;
 
 import com.fekpal.cons.ResponseCode;
+import com.fekpal.domain.AnniversaryAudit;
+import com.fekpal.service.AnniversaryAuditService;
 import com.fekpal.tool.BaseReturnData;
 import com.fekpal.tool.FileUploadTool;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.springframework.http.HttpRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +18,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.*;
@@ -30,6 +31,11 @@ import static java.lang.System.out;
 @Controller
 public class ClubAnnRegisterController {
 
+
+    @Autowired
+    private AnniversaryAuditService auditService;
+
+
     /**
      * 查看全部注册的信息的方法
      *
@@ -41,35 +47,32 @@ public class ClubAnnRegisterController {
     @ResponseBody
     @RequestMapping(value = "/club/ann", method = RequestMethod.GET)
     public Map<String, Object> getAllAuditMsg(@RequestParam(required = false) Map<String, Object> annARegisterMap, HttpSession session, HttpServletRequest request) {
+
         BaseReturnData returnData = new BaseReturnData();
 
         //得到用户id
-        int userId = 0;
-        if (session.getAttribute("userCode") != null) {
-            userId = (Integer) session.getAttribute("userCode");
-        }
+
 
         //从dao中根据用户id得到本社社团历史年度注册信息的对象，并获取该对象属性
         // TODO: 2017/8/27
+        int userId=0;
         out.println("从dao中根据用户id得到社团年度审核信息的对象，并获取该对象属性,用户id为：" + userId);
-        //模拟数据
+
         //将得到的数据放入每个map集合中
-        Map<String, Object> auditMsgListMap1 = new LinkedHashMap<String, Object>();
-        auditMsgListMap1.put("auditMsgId", 234);
-        auditMsgListMap1.put("auditTitle", "2017年");
-        auditMsgListMap1.put("submitTime", new Date());
-        auditMsgListMap1.put("auditState", 2);
-
-        Map<String, Object> auditMsgListMap2 = new LinkedHashMap<String, Object>();
-        auditMsgListMap2.put("auditMsgId", 235);
-        auditMsgListMap2.put("auditTitle", "2016年");
-        auditMsgListMap2.put("submitTime", new Date());
-        auditMsgListMap2.put("auditState", 2);
-
         //创建放全部年度注册信息的list集合，并将它放入返回数据
-        List<Map<String, Object>> auditMsgList = new ArrayList<Map<String, Object>>();
-        auditMsgList.add(auditMsgListMap1);
-        auditMsgList.add(auditMsgListMap2);
+        List<Map<String, Object>> auditMsgList = new ArrayList<>();
+        List<AnniversaryAudit> list=auditService.loadAllAnniversaryAudit(0,50);
+
+        for(AnniversaryAudit audit:list){
+            Map<String, Object> auditMsg = new LinkedHashMap<>();
+            Date date=new Date(audit.getSubmitTime().getTime());
+            auditMsg.put("auditMsgId", audit.getId());
+            auditMsg.put("auditTitle", audit.getClub().getClubName()+"年度注册审核");
+            auditMsg.put("submitTime", date);
+            auditMsg.put("auditState", audit.getAuditState());
+            auditMsgList.add(auditMsg);
+        }
+
         returnData.setData(auditMsgList);
         return returnData.getMap();
     }

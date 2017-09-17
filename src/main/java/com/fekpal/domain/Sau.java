@@ -2,11 +2,9 @@ package com.fekpal.domain;
 
 import java.sql.Timestamp;
 
-public class Sau extends BasePOJO {
+public class Sau extends User {
 
     private int sauId;
-
-    private int userId;
 
     private String sauName;
 
@@ -16,8 +14,6 @@ public class Sau extends BasePOJO {
 
     private String adminName;
 
-    private String sauLogo;
-
     private int members;
 
     public int getSauId() {
@@ -26,14 +22,6 @@ public class Sau extends BasePOJO {
 
     public void setSauId(int sauId) {
         this.sauId = sauId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getSauName() {
@@ -66,14 +54,6 @@ public class Sau extends BasePOJO {
 
     public void setAdminName(String adminName) {
         this.adminName = adminName;
-    }
-
-    public String getSauLogo() {
-        return sauLogo;
-    }
-
-    public void setSauLogo(String sauLogo) {
-        this.sauLogo = sauLogo;
     }
 
     public int getMembers() {

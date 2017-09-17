@@ -25,7 +25,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
         //是否已登录,否则退回到首页
         if (session.getAttribute("userCode") == null) {
-            request.getRequestDispatcher("/indexPage.html").forward(request, response);
+            request.getRequestDispatcher("/login.html").forward(request, response);
             return false;
         }
 

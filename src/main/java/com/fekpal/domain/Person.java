@@ -2,11 +2,9 @@ package com.fekpal.domain;
 
 import java.sql.Timestamp;
 
-public class Person extends BasePOJO {
+public class Person extends User {
 
     private int personId;
-
-    private int userId;
 
     private String realName;
 
@@ -26,22 +24,12 @@ public class Person extends BasePOJO {
 
     private String studentId;
 
-    private String personLogo;
-
     public int getPersonId() {
         return personId;
     }
 
     public void setPersonId(int personId) {
         this.personId = personId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getRealName() {
@@ -114,13 +102,5 @@ public class Person extends BasePOJO {
 
     public void setStudentId(String studentId) {
         this.studentId = studentId;
-    }
-
-    public String getPersonLogo() {
-        return personLogo;
-    }
-
-    public void setPersonLogo(String personLogo) {
-        this.personLogo = personLogo;
     }
 }

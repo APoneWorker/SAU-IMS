@@ -34,7 +34,7 @@
     <update id="updateClub" parameterType="Club">
         update club_info set
         club_name = #{clubName},
-        club_logo = #{clubLogo},
+        club_logo = #{logo},
         club_type = #{clubType},
         club_view = #{clubView},
         admin_name = #{adminName},
@@ -60,7 +60,7 @@
         <result property="foundTime" column="found_time"/>
         <result property="adminName" column="admin_name"/>
         <result property="clubType" column="club_type"/>
-        <result property="clubLogo" column="club_logo"/>
+        <result property="logo" column="club_logo"/>
         <result property="clubView" column="club_view"/>
         <result property="likeNumber" column="like_number"/>
         <result property="members" column="members"/>

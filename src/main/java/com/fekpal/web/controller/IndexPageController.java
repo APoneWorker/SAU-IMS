@@ -94,7 +94,7 @@ public class IndexPageController {
         //社团社长名称
         club1.setAdminName(club.getAdminName());
         //社团logo
-        club1.setClubLogo(club.getClubLogo());
+        club1.setClubLogo(club.getLogo());
         //社团名称
         club1.setClubName(club.getClubName());
         //社团介绍

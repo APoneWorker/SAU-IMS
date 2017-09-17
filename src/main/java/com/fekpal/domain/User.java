@@ -24,9 +24,19 @@ public class User extends BasePOJO {
 
     private Timestamp registerTime;
 
+    private String logo;
+
     private int authority;
 
     private int userState;
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
 
     public int getUserId() {
         return userId;

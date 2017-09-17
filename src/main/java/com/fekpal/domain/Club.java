@@ -2,11 +2,9 @@ package com.fekpal.domain;
 
 import java.sql.Timestamp;
 
-public class Club extends BasePOJO {
+public class Club extends User {
 
     private int clubId;
-
-    private int userId;
 
     private String clubName;
 
@@ -17,8 +15,6 @@ public class Club extends BasePOJO {
     private String adminName;
 
     private String clubType;
-
-    private String clubLogo;
 
     private String clubView;
 
@@ -32,14 +28,6 @@ public class Club extends BasePOJO {
 
     public void setClubId(int clubId) {
         this.clubId = clubId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getClubName() {
@@ -80,14 +68,6 @@ public class Club extends BasePOJO {
 
     public void setClubType(String clubType) {
         this.clubType = clubType;
-    }
-
-    public String getClubLogo() {
-        return clubLogo;
-    }
-
-    public void setClubLogo(String clubLogo) {
-        this.clubLogo = clubLogo;
     }
 
     public String getClubView() {

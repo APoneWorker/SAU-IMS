@@ -34,7 +34,7 @@ public interface ClubMemberService {
      * @param cluId int
      * @return List
      */
-    List<Person> getAllMemberByClubId(int cluId);
+    List<Person> getAllMemberByClubId(int clubId);
 
     /**
      * 根据id获得社员信息

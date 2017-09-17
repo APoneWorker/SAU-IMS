@@ -73,8 +73,8 @@ public interface AnniversaryAuditService {
      *
      * @param state int
      * @param start int
-     * @param end   int
+     * @param count int
      * @return List
      */
-    List<AnniversaryAudit> getAnniversaryAuditByState(int state, int start, int end);
+    List<AnniversaryAudit> getAnniversaryAuditByState(int state, int start, int count);
 }

@@ -4,10 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <!--配置类别名-->
-    
+    <!--
     <settings>
         <setting name="logImpl" value="STDOUT_LOGGING"/>
     </settings>
+    -->
     <typeAliases>
         <typeAlias type="com.fekpal.domain.Role" alias="Role"/>
         <typeAlias type="com.fekpal.domain.Authority" alias="Authority"/>

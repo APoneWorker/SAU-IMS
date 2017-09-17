@@ -39,7 +39,7 @@
         department = #{department},
         major = #{major},
         student_id = #{studentId},
-        person_logo = #{personLogo}
+        person_logo = #{logo}
         where person_id = #{personId}
     </update>
 
@@ -53,7 +53,7 @@
         <result property="userId" column="user_id"/>
         <result property="realName" column="real_name"/>
         <result property="studentId" column="student_id"/>
-        <result property="personLogo" column="person_logo"/>
+        <result property="logo" column="person_logo"/>
         <result property="gender" column="gender"/>
         <result property="nickname" column="nickname"/>
         <result property="birthday" column="birthday"/>

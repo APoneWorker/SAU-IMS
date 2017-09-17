@@ -66,13 +66,19 @@
         <!-- 多个拦截器，顺序执行 -->
         <!--登录拦截器-->
         <mvc:interceptor>
-            <mvc:mapping path="/**"/>
+            <mvc:mapping path="/sau/**"/>
+            <mvc:mapping path="/club/**"/>
+            <mvc:mapping path="/member/**"/>
+            <mvc:mapping path="/msg/**"/>
             <bean class="com.fekpal.web.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
 
         <!--资源路径访问拦截器-->
         <mvc:interceptor>
-            <mvc:mapping path="/**"/>
+            <mvc:mapping path="/sau/**"/>
+            <mvc:mapping path="/club/**"/>
+            <mvc:mapping path="/member/**"/>
+            <mvc:mapping path="/msg/**"/>
             <bean class="com.fekpal.web.interceptor.URIInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
