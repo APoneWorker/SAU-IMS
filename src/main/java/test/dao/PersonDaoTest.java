@@ -64,6 +64,12 @@ public class PersonDaoTest extends BaseDaoTest {
         p = personDao.getPersonByUserId(0);
         Assert.assertNull(p);
 
+        p = personDao.getPersonAllInfoByUserId(user.getUserId());
+        Assert.assertNotNull(p);
+        System.out.println(p);
+        p = personDao.getPersonAllInfoByUserId(0);
+        Assert.assertNull(p);
+
         likeClubDao.addLikeClub(user.getUserId(), club.getClubId());
         likeClubDao.addLikeClub(user.getUserId(), 2);//不存在的社团id
 

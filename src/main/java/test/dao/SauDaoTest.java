@@ -46,6 +46,12 @@ public class SauDaoTest extends BaseDaoTest {
         sau = sauDao.getSauByUserId(0);
         Assert.assertNull(sau);
 
+        sau = sauDao.getSauAllInfoByUserId(user.getUserId());
+        Assert.assertNotNull(sau);
+        System.out.println(sau);
+        sau = sauDao.getSauAllInfoByUserId(0);
+        Assert.assertNull(sau);
+
         List<Sau> sauList = sauDao.loadAllSau();
         System.out.println(sauList.size());
         System.out.println(sauList);

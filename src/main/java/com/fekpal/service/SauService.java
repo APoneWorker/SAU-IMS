@@ -41,4 +41,11 @@ public interface SauService {
      * @return List
      */
     List<Sau> loadAllSau();
+
+    /**
+     * 根据社团id获得社团所有信息（包括用户层）
+     * @param userId int
+     * @return CLub
+     */
+    Sau getSauAllInfoByUserId(int userId);
 }

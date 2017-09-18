@@ -37,4 +37,9 @@ public class SauServiceImpl implements SauService {
     public List<Sau> loadAllSau() {
         return sauDao.loadAllSau();
     }
+
+    @Override
+    public Sau getSauAllInfoByUserId(int userId) {
+        return sauDao.getSauAllInfoByUserId(userId);
+    }
 }

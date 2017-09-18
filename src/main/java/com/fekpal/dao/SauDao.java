@@ -1,7 +1,6 @@
 package com.fekpal.dao;
 
 import com.fekpal.domain.Sau;
-import com.fekpal.domain.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -50,4 +49,11 @@ public interface SauDao {
      * @return List
      */
     List<Sau> loadAllSau();
+
+    /**
+     * 根据社团id获得社团所有信息（包括用户层）
+     * @param userId int
+     * @return CLub
+     */
+    Sau getSauAllInfoByUserId(int userId);
 }

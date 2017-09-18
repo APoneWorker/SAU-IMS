@@ -18,7 +18,7 @@ public class UserServiceTest extends BaseServiceTest{
 
     @Before
     public void init() {
-        userService.addNewPerson(user, person);
+        userService.addNewPerson(person);
     }
 
     @Test

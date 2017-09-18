@@ -1,13 +1,8 @@
 package com.fekpal.service.impl;
 
-import com.fekpal.dao.ClubDao;
-import com.fekpal.dao.PersonDao;
-import com.fekpal.dao.SauDao;
-import com.fekpal.dao.UserDao;
-import com.fekpal.domain.Club;
-import com.fekpal.domain.Person;
-import com.fekpal.domain.Sau;
-import com.fekpal.domain.User;
+import com.fekpal.cons.SystemRole;
+import com.fekpal.dao.*;
+import com.fekpal.domain.*;
 import com.fekpal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,9 +26,30 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private SauDao sauDao;
 
+    @Autowired
+    private ClubAuditDao clubAuditDao;
+
     @Override
     public User getUserByUserId(int userId) {
-        return userDao.getUserByUserId(userId);
+        int authority = userDao.getUserByUserId(userId).getAuthority();
+
+        User user;
+        switch (authority) {
+            case SystemRole.PERSON:
+                user = personDao.getPersonAllInfoByUserId(userId);
+                break;
+            case SystemRole.CLUB:
+                user = clubDao.getClubAllInfoByUserId(userId);
+                break;
+            case SystemRole.SAU:
+                user = sauDao.getSauAllInfoByUserId(userId);
+                break;
+            default:
+                user = new User();
+                break;
+        }
+
+        return user;
     }
 
     @Override
@@ -52,23 +68,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addNewPerson(User user, Person person) {
-        userDao.addUser(user);
-        person.setUserId(user.getUserId());
+    public void addNewPerson(Person person) {
+        userDao.addUser(person);
         personDao.addPerson(person);
     }
 
     @Override
-    public void addNewClub(User user, Club club) {
-        userDao.addUser(user);
-        club.setUserId(user.getUserId());
+    public void addNewClub(Club club) {
+        userDao.addUser(club);
         clubDao.addClub(club);
     }
 
     @Override
-    public void addNewSau(User user, Sau sau) {
-        userDao.addUser(user);
-        sau.setUserId(user.getUserId());
+    public void addNewSau(Sau sau) {
+        userDao.addUser(sau);
         sauDao.addSau(sau);
     }
 

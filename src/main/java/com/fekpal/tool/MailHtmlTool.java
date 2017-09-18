@@ -145,5 +145,4 @@ public class MailHtmlTool {
         messageHelper.setText(content, true);
         mailSender.send(mimeMessage);
     }
-
 }

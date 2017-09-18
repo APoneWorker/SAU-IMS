@@ -45,11 +45,17 @@ public class ClubDaoTest extends BaseDaoTest {
         Assert.assertNull(clubDao.getClubByClubName("asd"));
         Assert.assertNotNull(clubDao.getClubByUserId(user.getUserId()));
 
-        user.setUserId(1);
+        user.setUserId(0);
         Assert.assertNull(clubDao.getClubByUserId(user.getUserId()));
-
         user.setUserId(club.getUserId());
         Assert.assertNotNull(clubDao.getClubByUserId(user.getUserId()));
+        System.out.println(clubDao.getClubByUserId(user.getUserId()));
+
+        user.setUserId(0);
+        Assert.assertNull(clubDao.getClubAllInfoByUserId(user.getUserId()));
+        user.setUserId(club.getUserId());
+        Assert.assertNotNull(clubDao.getClubAllInfoByUserId(user.getUserId()));
+        System.out.println(clubDao.getClubAllInfoByUserId(user.getUserId()));
 
         clubDao.updateLikeNumber(club.getClubId());
         clubDao.updateLikeNumber(club.getClubId());

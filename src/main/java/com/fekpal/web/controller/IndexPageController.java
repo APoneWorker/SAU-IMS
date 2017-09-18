@@ -30,9 +30,6 @@ public class IndexPageController {
     @Autowired
     private ClubService clubService;
 
-    @Autowired
-    private UserService userService;
-
     /**
      * 得到社团列表信息
      *
@@ -54,22 +51,17 @@ public class IndexPageController {
         for (Club club : clubList) {
 
             ClubListMsg clubs = new ClubListMsg();
-            //社团id
             clubs.setClubId(club.getClubId());
-            //社团预览图
             clubs.setClubView(club.getClubView());
-            //社团介绍
             clubs.setDescription(club.getDescription());
-            //社团喜爱人数
             clubs.setLikeNumber(club.getLikeNumber());
-            //社团人数
             clubs.setMembers(club.getMembers());
             //将社团加入到数据的list集合中
             list.add(clubs);
         }
-
         //将list加入到数据中
         returnData.setData(list);
+
         return returnData.getMap();
     }
 
@@ -87,45 +79,20 @@ public class IndexPageController {
         BaseReturnData returnData = new BaseReturnData();
 
         Club club = clubService.getClubByClubId(clubId);
-
         ClubDetail club1 = new ClubDetail();
-        //社团id
-        club1.setClubId(club.getClubId());
-        //社团社长名称
-        club1.setAdminName(club.getAdminName());
-        //社团logo
-        club1.setClubLogo(club.getLogo());
-        //社团名称
-        club1.setClubName(club.getClubName());
-        //社团介绍
-        club1.setDescription(club.getDescription());
-        //社团email
-        club1.setEmail(userService.getUserByUserId(club.getUserId()).getEmail());
-        //社团建立时间
-        club1.setFoundTime(new Date(club.getFoundTime().getTime()));
-        //社团人数
-        club1.setMembers(club.getMembers());
 
+        club1.setClubId(club.getClubId());
+        club1.setAdminName(club.getAdminName());
+        club1.setClubLogo(club.getLogo());
+        club1.setClubName(club.getClubName());
+        club1.setDescription(club.getDescription());
+        club1.setEmail(club.getEmail());
+        club1.setFoundTime(new Date(club.getFoundTime().getTime()));
+        club1.setMembers(club.getMembers());
         //将某个社团详细信息加入到数据中
         returnData.setData(club1);
+
         return returnData.getMap();
-    }
-
-    /**
-     * 用于测试时间传输的格式和目录
-     *
-     * @param date 前端传递过来的描述
-     * @return 返回时间格式
-     */
-    @RequestMapping("/time")
-    @ResponseBody
-    public Date testDate(@RequestParam Date date) {
-        out.println(WebPath.consPath);
-        out.println(WebPath.rootParentPath);
-
-        out.println("格式化前" + date);
-        out.println("格式化后" + new SimpleDateFormat("yyyy-MM-dd").format(date));
-        return date;
     }
 }
 

@@ -55,19 +55,19 @@ public class ClubAnnRegisterController {
 
         //从dao中根据用户id得到本社社团历史年度注册信息的对象，并获取该对象属性
         // TODO: 2017/8/27
-        int userId=0;
+        int userId = 0;
         out.println("从dao中根据用户id得到社团年度审核信息的对象，并获取该对象属性,用户id为：" + userId);
 
         //将得到的数据放入每个map集合中
         //创建放全部年度注册信息的list集合，并将它放入返回数据
         List<Map<String, Object>> auditMsgList = new ArrayList<>();
-        List<AnniversaryAudit> list=auditService.loadAllAnniversaryAudit(0,50);
+        List<AnniversaryAudit> list = auditService.loadAllAnniversaryAudit(0, 50);
 
-        for(AnniversaryAudit audit:list){
+        for (AnniversaryAudit audit : list) {
             Map<String, Object> auditMsg = new LinkedHashMap<>();
-            Date date=new Date(audit.getSubmitTime().getTime());
+            Date date = new Date(audit.getSubmitTime().getTime());
             auditMsg.put("auditMsgId", audit.getId());
-            auditMsg.put("auditTitle", audit.getClub().getClubName()+"年度注册审核");
+            auditMsg.put("auditTitle", audit.getClub().getClubName() + "年度注册审核");
             auditMsg.put("submitTime", date);
             auditMsg.put("auditState", audit.getAuditState());
             auditMsgList.add(auditMsg);
@@ -211,10 +211,10 @@ public class ClubAnnRegisterController {
 
         //将文件存入服务器中的与本项目同目录的//MySAUImages/clubAnnRegister文件夹中，返回文件名
         List<String> fileNameList = FileUploadTool.fileHandle(file, request, "clubAnnRegister");
-        if( fileNameList!= null) {
+        if (fileNameList != null) {
             fileName = fileNameList.get(0);
-        }else {
-            returnData.setStateCode(ResponseCode.REQUEST_ERROR,"还没有发送文件过来，请重新发送");
+        } else {
+            returnData.setStateCode(ResponseCode.REQUEST_ERROR, "还没有发送文件过来，请重新发送");
             return returnData.getMap();
         }
 
@@ -359,29 +359,31 @@ public class ClubAnnRegisterController {
      * @param myfiles 上传的文件
      * @return 上传信息是否正确
      */
-    public Map<String, Object> handleFile(MultipartFile[] myfiles) {
+    public static Map<String, Object> handleFile(MultipartFile[] myfiles) {
+
         BaseReturnData returnData = new BaseReturnData();
         //判断文件格式和大小是否符合
-        for (MultipartFile myfile : myfiles) {
-            if (!myfile.isEmpty()) {
-                if (myfile.getSize() > 1024 * 1024 * 10) {
-                    returnData.setStateCode(ResponseCode.REQUEST_ERROR, "文件大于10m请重新上传");
+
+        for (MultipartFile file : myfiles) {
+            if (!file.isEmpty()) {
+
+                if (file.getSize() > 1024 * 1024 * 10) {
+                    returnData.setStateCode(ResponseCode.REQUEST_ERROR, "文件不能大于10m");
                     return returnData.getMap();
                 }
-                if (!myfile.getContentType().toString().equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document")
-                        && !myfile.getContentType().toString().equals("application/msword")) {
+
+                if (!file.getContentType().equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+                        && !file.getContentType().equals("application/msword")) {
                     returnData.setStateCode(ResponseCode.REQUEST_ERROR, "上传的文件不符合格式，请重新上传");
                     return returnData.getMap();
                 }
+
             } else {
                 returnData.setStateCode(1, "没上传文件，请重新上传");
                 return returnData.getMap();
             }
         }
-        //如果上传的文件为空，返回提示语句
-        if (myfiles == null) {
-            returnData.setStateCode(1, "没上传文件，请重新上传");
-        }
+
         return returnData.getMap();
     }
 }

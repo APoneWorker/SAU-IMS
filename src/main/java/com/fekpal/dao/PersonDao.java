@@ -69,4 +69,11 @@ public interface PersonDao {
      * @return List
      */
     List<Person> loadAllPerson(int start, int count);
+
+    /**
+     * 根据社团id获得社团所有信息（包括用户层）
+     * @param userId int
+     * @return CLub
+     */
+    Person getPersonAllInfoByUserId(int userId);
 }

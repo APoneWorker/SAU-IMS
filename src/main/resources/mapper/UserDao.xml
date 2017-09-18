@@ -22,17 +22,6 @@
       select * from user where email = #{email}
     </select>
 
-    <resultMap id="userResult" type="User">
-        <id property="userId" column="user_id"/>
-        <result property="userName" column="user_name"/>
-        <result property="loginIp" column="login_ip"/>
-        <result property="loginTime" column="login_time"/>
-        <result property="userKey" column="user_key"/>
-        <result property="registerIp" column="register_ip"/>
-        <result property="registerTime" column="register_time"/>
-        <result property="userState" column="user_state"/>
-    </resultMap>
-
     <insert id="addUser" parameterType="User" useGeneratedKeys="true" keyProperty="userId" keyColumn="user_id">
     insert into user(user_name,password,email,phone,user_key,login_ip, login_time,register_ip,register_time,authority,user_state)
     values (#{userName},#{password},#{email},#{phone},#{userKey},#{loginIp},#{loginTime},#{registerIp},#{registerTime},#{authority},#{userState})
@@ -49,12 +38,22 @@
         where user_id = #{userId}
     </update>
 
-    <select id="hadAccount" parameterType="String" resultType="boolean">
+    <select id="hadAccount" parameterType="String" resultType="boolean" useCache="false">
         select count(*) from user where user_name = #{userName}
     </select>
 
-    <select id="hadEmail" parameterType="String" resultType="boolean">
+    <select id="hadEmail" parameterType="String" resultType="boolean" useCache="false">
         select count(*) from user where email = #{email}
     </select>
 
+    <resultMap id="userResult" type="User">
+        <id property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="loginIp" column="login_ip"/>
+        <result property="loginTime" column="login_time"/>
+        <result property="userKey" column="user_key"/>
+        <result property="registerIp" column="register_ip"/>
+        <result property="registerTime" column="register_time"/>
+        <result property="userState" column="user_state"/>
+    </resultMap>
 </mapper>

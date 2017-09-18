@@ -26,17 +26,7 @@ import org.xbill.DNS.Type;
 
 public class EmailValidTool {
 
-    public static void main(String[] args) {
-
-        System.out.println(new EmailValidTool().valid("2078697336@qq.com", "jootmir.org"));
-        System.out.println(new EmailValidTool().valid("Canlong2015@126.com", "jootmir.org"));
-        System.out.println(new EmailValidTool().valid("s19961234@126.com", "jootmir.org"));
-        System.out.println(new EmailValidTool().valid("151612220@m.gduf.edu.cn", "jootmir.org"));
-        System.out.println(new EmailValidTool().valid("100582783@qq.com", "jootmir.org"));
-        System.out.println(new EmailValidTool().valid("10;;0582783@qq.com", "jootmir.org"));
-        System.out.println(new EmailValidTool().valid("as05as@127.com", "jootmir.org"));
-
-    }
+    public static final String DOMAIN = "jootmir.org";
 
     /**
      * 验证邮箱是否存在
@@ -112,9 +102,9 @@ public class EmailValidTool {
             e1.printStackTrace();
         } catch (InterruptedException e3) {
             e3.printStackTrace();
-        }catch (IOException e2) {
+        } catch (IOException e2) {
             e2.printStackTrace();
-        }  finally {
+        } finally {
             try {
                 socket.close();
             } catch (IOException e) {

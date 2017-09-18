@@ -48,26 +48,23 @@ public interface UserService {
     /**
      * 添加普通成员
      *
-     * @param user   User
      * @param person Person
      */
-    void addNewPerson(User user, Person person);
+    void addNewPerson(Person person);
 
     /**
      * 添加社团成员
      *
-     * @param user User
      * @param club Club
      */
-    void addNewClub(User user, Club club);
+    void addNewClub(Club club);
 
     /**
      * 添加校社联成员
      *
-     * @param user User
      * @param sau  Sau
      */
-    void addNewSau(User user, Sau sau);
+    void addNewSau(Sau sau);
 
     /**
      * 修改用户认证信息

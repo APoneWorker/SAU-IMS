@@ -61,4 +61,9 @@ public class PersonServiceImpl implements PersonService {
     public List<Person> loadAllPerson(int start, int count) {
         return personDao.loadAllPerson(start, count);
     }
+
+    @Override
+    public Person getPersonAllInfoByUserId(int userId) {
+        return personDao.getPersonAllInfoByUserId(userId);
+    }
 }

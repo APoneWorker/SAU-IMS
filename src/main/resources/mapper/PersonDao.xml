@@ -48,9 +48,23 @@
         select * from person_info limit #{arg0},#{arg1}
     </select>
 
+    <select id="getPersonAllInfoByUserId" parameterType="int" resultMap="personResult" useCache="false">
+        select *
+        from person_info p
+        inner join user u on p.user_id = u.user_id
+        where p.user_id = #{userId}
+    </select>
+
     <resultMap id="personResult" type="Person">
         <id property="personId" column="person_id"/>
         <result property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="loginIp" column="login_ip"/>
+        <result property="loginTime" column="login_time"/>
+        <result property="userKey" column="user_key"/>
+        <result property="registerIp" column="register_ip"/>
+        <result property="registerTime" column="register_time"/>
+        <result property="userState" column="user_state"/>
         <result property="realName" column="real_name"/>
         <result property="studentId" column="student_id"/>
         <result property="logo" column="person_logo"/>

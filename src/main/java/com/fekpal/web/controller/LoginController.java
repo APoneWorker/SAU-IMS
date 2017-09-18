@@ -35,16 +35,13 @@ public class LoginController {
     /**
      * 用户登录提交方法
      *
-     * @param session
-     * @param userLogin
+     * @param session   HttpSession
+     * @param userLogin UserLogin
      * @return 返回用户信息
-     * @throws Exception
      */
     @RequestMapping("/login/go")
     @ResponseBody
-    public Map<String, Object> login(@RequestBody UserLogin userLogin, HttpSession session, HttpServletRequest request) throws Exception {
-        //模拟用户一直处于登录状态
-        session.setAttribute("userCode", 123);
+    public Map<String, Object> login(@RequestBody UserLogin userLogin, HttpSession session) {
 
         //创建返回数据模板
         BaseReturnData returnData = new BaseReturnData();
@@ -60,69 +57,56 @@ public class LoginController {
         String code = userLogin.getCaptcha();
         String userName = userLogin.getUserName();
 
+        //打印出验证码
+        if (session.getAttribute("code") != null) {
+            //从session域获取系统生成的验证码
+            String sCode = (String) session.getAttribute("code");
 
-        //模拟service层的方法
-        if (session != null) {
-            //打印出验证码
-            out.println((String) session.getAttribute("code"));
-            if (session.getAttribute("code") != null) {
-                //从session域获取系统生成的验证码
-                String scode = (String) session.getAttribute("code");
-
-                //判断验证码是否相等
-                if (!code.toLowerCase().equals(scode.toLowerCase())) {
-                    out.println("验证码不相等");
-                    returnData.setStateCode(1, "验证码不正确");
-                    //用于前端回显数据
-                    returnData.setData(userLogin);
-                    return returnData.getMap();
-                }
-            } else {
-                returnData.setStateCode(1, "验证码已过期，请重新获得验证码");
-                //用于前端回显数据
+            //判断验证码是否相等
+            if (!code.toLowerCase().equals(sCode.toLowerCase())) {
+                returnData.setStateCode(1, "验证码不正确");
                 returnData.setData(userLogin);
                 return returnData.getMap();
             }
 
+        } else {
+            returnData.setStateCode(1, "验证码无效，请重新获得验证码");
+            returnData.setData(userLogin);
+            return returnData.getMap();
         }
-        //模拟service成取到用户
 
-        //调用工具类判断用户名和密码的格式
-        //判断用户名和密码
-        User realUser = userService.getUserByUserName(userName);
 
         //如果得到的用户为空的话，表示找不到该用户
-        if (realUser == null) {
+        if (!userService.checkSameAccount(userName)) {
             returnData.setStateCode(1, "该用户找不到，请重新输入");
             return returnData.getMap();
         }
 
-        if (realUser.getPassword().equals(MD5Tool.md5(userLogin.getPassword()))) {
+        User user = userService.getUserByUserNameAndPassword(userName, MD5Tool.md5(userLogin.getPassword()));
+
+        if (user != null) {
 
             //清除当前session的验证码
             session.removeAttribute("code");
 
-            //获取用户登陆ip
-            String ip = getIpAddress(request);
+            //登陆成功,从service中得到用户信息对象
+            user = userService.getUserByUserId(user.getUserId());
 
-            out.println("登陆成功" + "。 用户IP为：" + ip);
-
-            //登陆成功,从service中得到用户对象
             //把用户信息放到一个map集合中去，然后返回
             Map<String, Object> userMap = new LinkedHashMap<>();
-            userMap.put("role", SystemRole.ROLE_NAME[realUser.getAuthority()]);
-            userMap.put("userId", realUser.getUserId());
-            userMap.put("userName", realUser.getUserName());
-            userMap.put("userLogo", null);
+            userMap.put("role", SystemRole.ROLE_NAME[user.getAuthority()]);
+            userMap.put("userId", user.getUserId());
+            userMap.put("userName", user.getUserName());
+            userMap.put("userLogo", user.getLogo());
             returnData.setData(userMap);
 
             //如果Service校验通过，将用户身份记录到session
-            session.setAttribute("userCode", realUser);
+            session.setAttribute("userCode", user);
         } else {
             returnData.setStateCode(1, "用户名或密码有误，请重新输入！");
-            //用于前端回显数据
             returnData.setData(userLogin);
         }
+
         return returnData.getMap();
     }
 
@@ -144,8 +128,8 @@ public class LoginController {
     /**
      * 生成登陆验证码，并向浏览器输出
      *
-     * @param response
-     * @param session
+     * @param response HttpServletResponse
+     * @param session  HttpSession
      */
     @RequestMapping(value = "/login/code", method = RequestMethod.GET)
     public void captchaCode(HttpServletResponse response, HttpSession session) {
@@ -157,7 +141,6 @@ public class LoginController {
             session.setAttribute("code", code);
         } catch (IOException e) {
             e.printStackTrace();
-            throw new RuntimeException(e);
         }
     }
 
@@ -167,14 +150,17 @@ public class LoginController {
      * @param request 用户的请求
      * @return 返回IP地址
      */
-    public String getIpAddress(HttpServletRequest request) {
+    public static String getIpAddress(HttpServletRequest request) {
+
         String ip = request.getHeader("x-forwarded-for");
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("Proxy-Client-IP");
         }
+
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("WL-Proxy-Client-IP");
         }
+
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getRemoteAddr();
         }

@@ -27,8 +27,8 @@
     </select>
 
     <insert id="addClub" parameterType="Club" useGeneratedKeys="true" keyProperty="clubId" keyColumn="club_id">
-      insert into club_info (user_id, club_name, found_time, admin_name)
-      values (#{userId},#{clubName},#{foundTime},#{adminName})
+      insert into club_info (user_id, club_name, found_time, admin_name,club_type)
+      values (#{userId},#{clubName},#{foundTime},#{adminName},#{clubType})
     </insert>
 
     <update id="updateClub" parameterType="Club">
@@ -53,9 +53,23 @@
         select * from club_info limit #{arg0},#{arg1}
     </select>
 
+    <select id="getClubAllInfoByUserId" parameterType="int" resultMap="clubResult" useCache="false">
+        select *
+        from club_info c
+        inner join user u on c.user_id = u.user_id
+        where c.user_id = #{userId}
+    </select>
+
     <resultMap id="clubResult" type="Club">
         <id property="clubId" column="club_id"/>
         <result property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="loginIp" column="login_ip"/>
+        <result property="loginTime" column="login_time"/>
+        <result property="userKey" column="user_key"/>
+        <result property="registerIp" column="register_ip"/>
+        <result property="registerTime" column="register_time"/>
+        <result property="userState" column="user_state"/>
         <result property="clubName" column="club_name"/>
         <result property="foundTime" column="found_time"/>
         <result property="adminName" column="admin_name"/>

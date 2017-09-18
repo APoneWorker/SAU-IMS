@@ -57,4 +57,9 @@ public class ClubServiceImpl implements ClubService {
     public List<Club> loadAllClub(int start, int count) {
         return clubDao.loadAllClub(start, count);
     }
+
+    @Override
+    public Club getClubAllInfoByUserId(int userId) {
+        return clubDao.getClubAllInfoByUserId(userId);
+    }
 }

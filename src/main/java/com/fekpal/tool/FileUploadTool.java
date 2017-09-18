@@ -27,12 +27,11 @@ public class FileUploadTool {
      */
     public static List<String> imageHandle(MultipartFile[] myfiles, HttpServletRequest request,String childrenPath){
         //处理上传图片
-        List<String> imgPathList = new ArrayList<String>();
+        List<String> imgPathList = new ArrayList<>();
         //存放放在服务器的文件名
-        List<String> fileNameList = new ArrayList<String>();
+        List<String> fileNameList = new ArrayList<>();
         for(MultipartFile myfile : myfiles){
             if(myfile.isEmpty()){
-//                System.out.println("文件未上传");
                 return null;
             }else{
 /*                System.out.println("文件长度: " + myfile.getSize());

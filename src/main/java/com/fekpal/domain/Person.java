@@ -36,11 +36,11 @@ public class Person extends User {
         return realName;
     }
 
-    public void setRealname(String realName) {
+    public void setRealName(String realName) {
         this.realName = realName;
     }
 
-    public String getNickname() {
+    public String getNickName() {
         return nickname;
     }
 
