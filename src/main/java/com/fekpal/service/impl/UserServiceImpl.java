@@ -7,6 +7,8 @@ import com.fekpal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by APone on 2017/9/5.
  * UserService实现类
@@ -98,5 +100,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean checkSameEmail(String email) {
         return userDao.hadEmail(email);
+    }
+
+    @Override
+    public List<User> loadAllUser() {
+        return userDao.loadAllUser();
     }
 }

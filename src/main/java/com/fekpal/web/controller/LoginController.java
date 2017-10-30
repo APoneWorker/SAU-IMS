@@ -32,6 +32,9 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private BaseReturnData returnData;
+
     /**
      * 用户登录提交方法
      *
@@ -42,9 +45,6 @@ public class LoginController {
     @RequestMapping("/login/go")
     @ResponseBody
     public Map<String, Object> login(@RequestBody UserLogin userLogin, HttpSession session) {
-
-        //创建返回数据模板
-        BaseReturnData returnData = new BaseReturnData();
 
         //判断用户是否已经登陆
         if (session.getAttribute("userCode") != null) {
@@ -119,9 +119,8 @@ public class LoginController {
     @RequestMapping("/logout")
     @ResponseBody
     public Map<String, Object> logout(HttpSession session) {
-        BaseReturnData returnData = new BaseReturnData();
-        //注销session
-        session.invalidate();
+
+        session.invalidate();//注销session
         return returnData.getMap();
     }
 

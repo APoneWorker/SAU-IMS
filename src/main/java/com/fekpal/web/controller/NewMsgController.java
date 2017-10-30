@@ -1,9 +1,7 @@
 package com.fekpal.web.controller;
 
-import com.fekpal.cons.MessageType;
 import com.fekpal.cons.ObjectAvailable;
 import com.fekpal.cons.ResponseCode;
-import com.fekpal.dao.MessageDao;
 import com.fekpal.domain.Message;
 import com.fekpal.domain.MessageRelease;
 import com.fekpal.domain.User;
@@ -31,6 +29,9 @@ public class NewMsgController {
     @Autowired
     private MessageService messageService;
 
+    @Autowired
+    private BaseReturnData returnData;
+
     /**
      * 根据用户id返回全部消息或者删除某些消息的方法
      *
@@ -43,7 +44,6 @@ public class NewMsgController {
     @RequestMapping(value = "/msg", method = {RequestMethod.GET, RequestMethod.DELETE})
     public Map<String, Object> getAllMsg(HttpSession session, HttpServletRequest request, @RequestParam(required = false) Map<String, Object> msgIdMap) {
 
-        BaseReturnData returnData = new BaseReturnData();
         //获取用户信息
         User user = (User) session.getAttribute("userCode");
         //获取用户id
@@ -112,7 +112,6 @@ public class NewMsgController {
     @RequestMapping(value = "/msg/{messageId}", method = RequestMethod.GET)
     public Map<String, Object> getMsgById(@PathVariable int messageId, HttpSession session) {
 
-        BaseReturnData returnData = new BaseReturnData();
         //获取用户信息
         User user = (User) session.getAttribute("userCode");
 
@@ -153,7 +152,6 @@ public class NewMsgController {
     @RequestMapping(value = "/msg/search", method = RequestMethod.GET)
     public Map<String, Object> searchMsg(HttpServletRequest request, HttpSession session, @RequestParam String findContent) {
 
-        BaseReturnData returnData = new BaseReturnData();
         User user = (User) session.getAttribute("userCode");
 
         //如果查找内容为空的话，则查询全部消息

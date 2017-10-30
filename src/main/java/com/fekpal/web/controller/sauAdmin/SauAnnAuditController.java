@@ -2,7 +2,15 @@ package com.fekpal.web.controller.sauAdmin;
 
 import com.fekpal.cons.ResponseCode;
 import com.fekpal.cons.WebPath;
+import com.fekpal.domain.AnniversaryAudit;
+import com.fekpal.domain.Sau;
+import com.fekpal.domain.User;
+import com.fekpal.service.AnniversaryAuditService;
+import com.fekpal.service.ClubAuditService;
+import com.fekpal.service.ClubService;
+import com.fekpal.service.SauService;
 import com.fekpal.tool.BaseReturnData;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +28,17 @@ import static java.lang.System.out;
  */
 @Controller
 public class SauAnnAuditController {
+
+    @Autowired
+    private SauService sauService;
+
+    @Autowired
+    private AnniversaryAuditService auditService;
+
+    @Autowired
+    private ClubService clubService;
+
+
     /**
      * 查看全部审核的信息的方法
      *
@@ -29,37 +48,24 @@ public class SauAnnAuditController {
     @ResponseBody
     @RequestMapping(value = "/sau/audit/ann", method = RequestMethod.GET)
     public Map<String, Object> getAllAuditMsg(HttpSession session) {
+
         BaseReturnData returnData = new BaseReturnData();
 
-        //得到用户id
-        int userId = 0;
-        if (session.getAttribute("userCode") != null) {
-            userId = (Integer) session.getAttribute("userCode");
+        Map<String, Object> auditMsgListMap = new LinkedHashMap<>();
+        List<Map<String, Object>> auditMsgList = new ArrayList<>();
+        List<AnniversaryAudit> lists = auditService.loadAllAnniversaryAudit(0, 50);
+
+        for (AnniversaryAudit audit : lists) {
+            //创建放全部审核信息的list集合，并将它放入返回数据
+            auditMsgListMap.put("auditMsgId", audit.getId());
+            auditMsgListMap.put("auditTitle", audit.getClub().getClubName());
+            auditMsgListMap.put("registerName", audit.getClub().getAdminName());
+            auditMsgListMap.put("registerTime", audit.getClub().getFoundTime());
+            auditMsgListMap.put("auditState", audit.getAuditState());
+            auditMsgList.add(auditMsgListMap);
+            returnData.setData(auditMsgList);
         }
 
-        //从dao中根据用户id得到社团年度审核信息的对象，并获取该对象属性
-        // TODO: 2017/8/27
-        //模拟数据
-        //将得到的数据放入每个map集合中
-        Map<String, Object> auditMsgListMap1 = new LinkedHashMap<String, Object>();
-        auditMsgListMap1.put("auditMsgId", 234);
-        auditMsgListMap1.put("auditTitle", "乒乓球协会");
-        auditMsgListMap1.put("registerName", "张三");
-        auditMsgListMap1.put("registerTime", new Date());
-        auditMsgListMap1.put("auditState", 2);
-
-        Map<String, Object> auditMsgListMap2 = new LinkedHashMap<String, Object>();
-        auditMsgListMap2.put("auditMsgId", 235);
-        auditMsgListMap2.put("auditTitle", "羽毛球协会");
-        auditMsgListMap2.put("registerName", "李四");
-        auditMsgListMap2.put("registerTime", new Date());
-        auditMsgListMap2.put("auditState", 2);
-
-        //创建放全部审核信息的list集合，并将它放入返回数据
-        List<Map<String, Object>> auditMsgList = new ArrayList<Map<String, Object>>();
-        auditMsgList.add(auditMsgListMap1);
-        auditMsgList.add(auditMsgListMap2);
-        returnData.setData(auditMsgList);
         return returnData.getMap();
     }
 
@@ -74,15 +80,12 @@ public class SauAnnAuditController {
     @RequestMapping(value = "/sau/audit/ann/{auditMsgId}", method = RequestMethod.GET)
     public Map<String, Object> getAuditMsgDetail(@PathVariable("auditMsgId") int auditMsgId, HttpSession session) {
         BaseReturnData returnData = new BaseReturnData();
-        //得到用户id
-        int userId = 0;
-        if (session.getAttribute("userCode") != null) {
-            userId = (Integer) session.getAttribute("userCode");
-        }
+
+        User user=(User)session.getAttribute("userCode");
+
         if (auditMsgId > 0) {
             //根据审核id和用户id,和role值从dao中得到审核消息内容
             // TODO: 2017/8/27
-            out.println("年度审核信息id是：" + auditMsgId + "。用户id是：" + userId);
 
             //审核社团年度注册信息
             //模拟数据
@@ -171,7 +174,7 @@ public class SauAnnAuditController {
         //模拟数据
         String fileNameHtml = "testHTMLOnline.html";
         //设置上传目录,即转化为html的目录
-        String uploadPath = WebPath.rootPath+"//WEB-INF//upload//"+"clubAnnRegister";
+        String uploadPath = WebPath.rootPath + "//WEB-INF//upload//" + "clubAnnRegister";
         try {
             InputStream in = new FileInputStream(new File(uploadPath, fileNameHtml));
             //得到输出流
@@ -217,7 +220,7 @@ public class SauAnnAuditController {
         //模拟数据
         String fileNameWord = "1.doc";
         //设置上传目录,即存放审核word文档的目录
-        String uploadPath = WebPath.rootPath+"//WEB-INF//upload//"+"clubAnnRegister";
+        String uploadPath = WebPath.rootPath + "//WEB-INF//upload//" + "clubAnnRegister";
         try {
             InputStream in = new FileInputStream(new File(uploadPath, fileNameWord));
             //设置下载的响应头

@@ -32,6 +32,9 @@ public class SecurityController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private BaseReturnData returnData;
+
     /**
      * 发送重置密码的邮箱验证码
      *
@@ -42,7 +45,6 @@ public class SecurityController {
     @ResponseBody
     @RequestMapping(value = "/security/resetpwd/code", method = RequestMethod.GET)
     public Map<String, Object> sendEmailCaptcha(@RequestParam String email, HttpSession session) {
-        BaseReturnData returnData = new BaseReturnData();
 
         email = email.trim();
 
@@ -89,7 +91,6 @@ public class SecurityController {
     public Map<String, Object> resetPassword(@RequestParam(value = "newPassword") String newPassword, @RequestParam(value = "captcha") String captcha, HttpSession session) {
 
         out.println("发送过来的数据为：newPassword=" + newPassword + "    captcha=" + captcha);
-        BaseReturnData returnData = new BaseReturnData();
 
         //检查验证码和密码是否为空
         if (StringUtils.isEmpty(newPassword) || StringUtils.isEmpty(captcha)) {
@@ -138,7 +139,6 @@ public class SecurityController {
     @RequestMapping(value = "/security/email/code", method = RequestMethod.GET)
     public Map<String, Object> sendEmailCaptcha(HttpSession session, @RequestParam(value = "email") String email) {
 
-        BaseReturnData returnData = new BaseReturnData();
         User user = (User) session.getAttribute("userCode");
         //获取旧邮箱
         String oldEmail = user.getEmail();
@@ -186,8 +186,6 @@ public class SecurityController {
     @ResponseBody
     @RequestMapping(value = "/security/email", method = RequestMethod.PUT)
     public Map<String, Object> resetEmail(@RequestParam(value = "newEmail") String newEmail, @RequestParam(value = "captcha") String captcha, HttpSession session) {
-
-        BaseReturnData returnData = new BaseReturnData();
 
         //检查验证码和密码是否为空
         if (StringUtils.isEmpty(newEmail) || StringUtils.isEmpty(captcha)) {

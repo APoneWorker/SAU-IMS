@@ -1,7 +1,5 @@
 package com.fekpal.web.controller.member;
 
-
-import com.fekpal.cons.SystemRole;
 import com.fekpal.domain.ClubMember;
 import com.fekpal.domain.Person;
 import com.fekpal.domain.User;
@@ -19,9 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
 import java.util.*;
-
-import static java.lang.System.out;
 
 /**
  * 普通用户和社团成员端中心的控制类
@@ -43,7 +40,7 @@ public class MemberCenterController {
      * @return 普通成员或者社团成员的一些基本信息
      */
     @ResponseBody
-    @RequestMapping("/member/center/info")
+    @RequestMapping(value = "/member/center/info", method = RequestMethod.GET)
     public Map<String, Object> getMemberCenterMsg(HttpSession session) {
 
         BaseReturnData returnData = new BaseReturnData();
@@ -52,15 +49,14 @@ public class MemberCenterController {
         //创建链表map集合存放普通成员中心信息
         Map<String, Object> memberCenterMsg = new LinkedHashMap<>();
 
-        //模拟service层通过用户ID得到数据
+        //通过用户ID得到数据
         Person person = personService.getPersonAllInfoByUserId(user.getUserId());
 
         memberCenterMsg.put("userName", person.getUserName());
         memberCenterMsg.put("realName", person.getRealName());
-        //从数据库中取出文件名
         memberCenterMsg.put("personLogo", person.getLogo());
         memberCenterMsg.put("studentID", person.getStudentId());
-        memberCenterMsg.put("gender", SystemRole.GENDER[person.getGender()]);
+        memberCenterMsg.put("gender", person.getGender());
         memberCenterMsg.put("birthday", new Date(person.getBirthday().getTime()));
         memberCenterMsg.put("phone", person.getPhone());
         memberCenterMsg.put("departmentName", person.getDepartment());
@@ -69,15 +65,14 @@ public class MemberCenterController {
 
         //创建社团成员所属社团的list集合
         List<Map<String, Object>> clubsList = new ArrayList<>();
-        List<ClubMember> members = clubMemberService.getClubMemberByPersonId(person.getPersonId());
-        Map<String, Object> clubsMap;
-        for (ClubMember member : members) {
-            clubsMap = new LinkedHashMap<>();
-            clubsMap.put("clubName", member.getClub().getClubName());
-            clubsMap.put("clubDuty", member.getMemberDuty());
-            clubsMap.put("userState", member.getUserState());
-            clubsMap.put("joinTime", new Date(member.getJoinTime().getTime()));
-            clubsMap.put("leaveTime", new Date(member.getLeaveTime().getTime()));
+        //获取用户所有参加的社团的信息
+        List<ClubMember> list = clubMemberService.getClubMemberByPersonId(person.getPersonId());
+
+        for (ClubMember clubMember : list) {
+            Map<String, Object> clubsMap = new LinkedHashMap<>();
+            clubsMap.put("clubName", clubMember.getClub().getClubName());
+            clubsMap.put("clubDuty", clubMember.getMemberDuty());
+            clubsMap.put("userState", clubMember.getUserState());
             clubsList.add(clubsMap);
         }
         memberCenterMsg.put("clubs", clubsList);
@@ -91,28 +86,25 @@ public class MemberCenterController {
     /**
      * 上传成员个人头像的方法
      *
-     * @param myfiles 文件对象，用from-data表单
+     * @param files   文件对象，用from-data表单
      * @param request 请求
      * @return 图片文件名
      */
     @ResponseBody
-    @RequestMapping(value = "/member/center/info/edit/head", method = RequestMethod.PUT)
-    public Map<String, Object> uploadLogo(@RequestParam("file") MultipartFile[] myfiles, HttpServletRequest request, HttpSession session) {
+    @RequestMapping(value = "/member/center/info/edit/head", method = RequestMethod.POST)
+    public Map<String, Object> uploadLogo(@RequestParam("file") MultipartFile[] files, HttpServletRequest request, HttpSession session) {
 
-        Map<String, Object> returnData = ImagesUploadTool.uploadImage(myfiles, request, "club//logo");
-        //初始化社团头像文件名
-        String memberLogoName = "";
-        if ("0".equals(returnData.get("code").toString())) {
+        Map<String, Object> returnData = ImagesUploadTool.uploadImage(files, request, "club//logo");
+
+        if (returnData.get("code").toString().equals("0")) {
+
             Map<String, String> memberLogoNameMap = (Map<String, String>) returnData.get("data");
-            memberLogoName = memberLogoNameMap.get("clubLogo");
             User user = (User) session.getAttribute("userCode");
-
-            //将logo文件名存入数据库
             Person person = personService.getPersonByUserId(user.getUserId());
+
+            String memberLogoName = memberLogoNameMap.get("clubLogo");
             person.setLogo(memberLogoName);
             personService.updatePerson(person);
-            out.println("存入数据库logo的文件名：" + memberLogoName);
-
         }
 
         return returnData;
@@ -129,21 +121,29 @@ public class MemberCenterController {
     @RequestMapping(value = "/member/center/info/edit", method = RequestMethod.PUT)
     public Map<String, Object> subNewCenterMsg(@RequestParam Map<String, Object> memberCenterMsg, HttpSession session) {
 
-        out.println(memberCenterMsg);
-        BaseReturnData returnData = new BaseReturnData();
+        String realName = memberCenterMsg.get("realName").toString();
+        String studentId = memberCenterMsg.get("studentId").toString();
+        int gender = Integer.parseInt(memberCenterMsg.get("gender").toString());
+        Date birthday = (Date) memberCenterMsg.get("birthday");
+        String phone = memberCenterMsg.get("phone").toString();
+        String department = memberCenterMsg.get("departmentName").toString();
+        String major = memberCenterMsg.get("major").toString();
+        String address = memberCenterMsg.get("address").toString();
 
-        //得到用户id
         User user = (User) session.getAttribute("userCode");
-        int userId = user.getUserId();
-        Person person=personService.getPersonByUserId(userId);
-        //注入数据
+        Person person = personService.getPersonByUserId(user.getUserId());
+        person.setRealName(realName);
+        person.setStudentId(studentId);
+        person.setGender(gender);
+        person.setPhone(phone);
+        person.setStudentId(studentId);
+        person.setBirthday(new Timestamp(birthday.getTime()));
+        person.setMajor(major);
+        person.setDepartment(department);
+        person.setAddress(address);
+
         personService.updatePerson(person);
-
-        //将用户存入数据库
-        out.println("用户id:" + userId);
-        out.println("根据用户id存入数据库" + memberCenterMsg);
-
-        return returnData.getMap();
+        return new BaseReturnData().getMap();
     }
 }
 

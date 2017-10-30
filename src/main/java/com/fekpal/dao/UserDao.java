@@ -74,4 +74,10 @@ public interface UserDao {
      * @return boolean
      */
     boolean hadEmail(String email);
+
+    /**
+     * 获取所有系统用户
+     * @return List
+     */
+    List<User> loadAllUser();
 }

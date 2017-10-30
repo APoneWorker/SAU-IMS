@@ -38,6 +38,9 @@ public class RegisterController {
     @Autowired
     private ClubAuditService clubAuditService;
 
+    @Autowired
+    private BaseReturnData returnData;
+
     /**
      * 发送邮箱验证码
      *
@@ -48,8 +51,6 @@ public class RegisterController {
     @ResponseBody
     @RequestMapping(value = "/reg/code", method = RequestMethod.GET)
     public Map<String, Object> sendEmailCaptcha(HttpSession session, @RequestParam(value = "email") String email) {
-
-        BaseReturnData returnData = new BaseReturnData();
 
         //链接数据库判断邮箱是否已经存在
         if (userService.checkSameEmail(email)) {
@@ -100,8 +101,6 @@ public class RegisterController {
                                             HttpServletRequest request,
                                             HttpSession session) {
 
-        BaseReturnData returnData = new BaseReturnData();
-
         //判断用户是否登录
         if (session.getAttribute("userCode") != null) {
             returnData.setStateCode(1, "你已经登录，请退出后在注册。");
@@ -115,7 +114,6 @@ public class RegisterController {
         String phone = clubMsgMap.get("phone").toString().trim();
         String clubName = clubMsgMap.get("clubName").toString().trim();
         String clubType = clubMsgMap.get("clubType").toString().trim();
-        //String description = clubMsgMap.get("description").toString().trim();
         String email = clubMsgMap.get("email").toString().trim();
         String captcha = clubMsgMap.get("captcha").toString().trim();
 
@@ -170,7 +168,7 @@ public class RegisterController {
                 userService.addNewClub(club);
 
                 //将文件存入服务器中的与本项目同目录的//MySAUImages/clubRegister文件夹中
-                List<String> files= FileUploadTool.fileHandle(file, request, "clubRegister");
+                List<String> files= FileUploadTool.fileHandle(file, request,"clubRegister");
                 ClubAudit audit = new ClubAudit();
                 audit.setClub(club);
                 audit.setSendTime(time);
@@ -201,7 +199,6 @@ public class RegisterController {
     public Map<String, Object> personRegister(@RequestBody PersonRegisterMsg personRegisterMsg,
                                               HttpSession session,
                                               HttpServletRequest request) {
-        BaseReturnData returnData = new BaseReturnData();
 
         //判断是否登录
         if (session.getAttribute("userCode") != null) {
@@ -236,9 +233,9 @@ public class RegisterController {
                 String ip = LoginController.getIpAddress(request);
 
                 person.setUserName(personRegisterMsg.getUserName());
-                person.setPassword(personRegisterMsg.getPassword());
+                person.setPassword(MD5Tool.md5(personRegisterMsg.getPassword()));
                 person.setEmail(personRegisterMsg.getUserName());
-                person.setPhone("12345678901");
+                person.setPhone("123456708");
                 person.setUserKey(MD5Tool.md5(time.toString()));
                 person.setRegisterIp(ip);
                 person.setRegisterTime(time);

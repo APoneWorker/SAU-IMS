@@ -1,6 +1,7 @@
 package com.fekpal.tool.role;
 
 import com.fekpal.cons.SystemRole;
+import com.fekpal.domain.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,12 +42,12 @@ public class RoleManager {
     /**
      * 检查当前路径是否与权限相符合
      *
-     * @param authority int 角色类型
-     * @param url       String 允许访问路径
+     * @param user User 角色
+     * @param url  String 允许访问路径
      * @return boolean
      */
-    public static boolean checkAuthority(int authority, String url) {
-        return getInstance().checkUrl(authority, url);
+    public static boolean haveAuthority(User user, String url) {
+        return getInstance().checkUrl(user.getAuthority(), url);
     }
 
     /**

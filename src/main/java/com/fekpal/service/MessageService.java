@@ -50,7 +50,7 @@ public interface MessageService {
     /**
      * 更新消息
      *
-     * @param message Message
+     * @param message    Message
      */
     void updateSendMessage(Message message);
 

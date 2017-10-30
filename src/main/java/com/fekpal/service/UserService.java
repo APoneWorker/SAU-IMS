@@ -5,6 +5,8 @@ import com.fekpal.domain.Person;
 import com.fekpal.domain.Sau;
 import com.fekpal.domain.User;
 
+import java.util.List;
+
 /**
  * Created by APone on 2017/8/25.
  * UserService接口
@@ -88,4 +90,10 @@ public interface UserService {
      * @return boolean
      */
     boolean checkSameEmail(String email);
+
+    /**
+     * 获取所有系统用户
+     * @return List
+     */
+    List<User> loadAllUser();
 }

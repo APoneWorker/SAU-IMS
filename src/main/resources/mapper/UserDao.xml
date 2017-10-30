@@ -46,6 +46,10 @@
         select count(*) from user where email = #{email}
     </select>
 
+    <select id="loadAllUser" resultMap="userResult">
+        select * from user
+    </select>
+
     <resultMap id="userResult" type="User">
         <id property="userId" column="user_id"/>
         <result property="userName" column="user_name"/>

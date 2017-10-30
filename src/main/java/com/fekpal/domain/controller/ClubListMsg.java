@@ -5,6 +5,7 @@ package com.fekpal.domain.controller;
  * Created by hasee on 2017/8/15.
  */
 public class ClubListMsg {
+    private String clubName;
     //社团ID
     private int clubId;
     //社团展示的图片名称
@@ -15,6 +16,27 @@ public class ClubListMsg {
     private int members;
     //喜爱人数
     private int likeNumber;
+
+    public void setClubId(int clubId) {
+        this.clubId = clubId;
+    }
+
+    public void setMembers(int members) {
+        this.members = members;
+    }
+
+    public void setLikeNumber(int likeNumber) {
+        this.likeNumber = likeNumber;
+    }
+
+    public String getClubName() {
+
+        return clubName;
+    }
+
+    public void setClubName(String clubName) {
+        this.clubName = clubName;
+    }
 
     public ClubListMsg(){}
 

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据库导入</title>
+</head>
+<body>
+<script src="js/jquery.min.js"></script>
+
+<input type="button" value="点击获取社团列表信息" id="getAllClubMsg"><br/>
+导入情况<div id="output1"></div><br/>
+<script type="text/javascript">
+    $("#getAllClubMsg").click(function(){
+        var url = "/SAU/index/sql";
+        var sendData = null;
+        $("#output1").text(sendData);
+        $.get(url,sendData,function(backData,textStaut,ajax){
+            $("#input1").text(ajax.responseText);
+        });
+    });
+</script>
+</body>
+</html>
