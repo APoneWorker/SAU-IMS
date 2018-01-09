@@ -2,9 +2,9 @@ package com.fekpal.web.controller;
 
 import com.fekpal.cons.SystemRole;
 import com.fekpal.domain.User;
-import com.fekpal.domain.controller.UserLogin;
+import com.fekpal.domain.json.UserLogin;
 import com.fekpal.service.UserService;
-import com.fekpal.tool.BaseReturnData;
+import com.fekpal.tool.JsonObject;
 
 import com.fekpal.tool.MD5Tool;
 import com.fekpal.tool.ValidateCodeTool;
@@ -20,8 +20,6 @@ import java.io.OutputStream;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static java.lang.System.out;
-
 /**
  * 登陆相关的方法
  * Created by hasee on 2017/8/14.
@@ -33,7 +31,7 @@ public class LoginController {
     private UserService userService;
 
     @Autowired
-    private BaseReturnData returnData;
+    private JsonObject returnData;
 
     /**
      * 用户登录提交方法

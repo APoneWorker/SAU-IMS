@@ -2,8 +2,7 @@ package com.fekpal.web.controller.sauAdmin;
 
 import com.fekpal.cons.ResponseCode;
 import com.fekpal.cons.WebPath;
-import com.fekpal.tool.BaseReturnData;
-import com.sun.org.apache.xml.internal.serializer.OutputPropertiesFactory;
+import com.fekpal.tool.JsonObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.*;
-import java.util.prefs.BackingStoreException;
 
-import static java.lang.System.lineSeparator;
 import static java.lang.System.out;
 
 /**
@@ -31,7 +28,7 @@ public class SauAuditRegController {
     @ResponseBody
     @RequestMapping(value = "/sau/audit/reg", method = RequestMethod.GET)
     public Map<String, Object> getAllAuditMsg(HttpSession session) {
-        BaseReturnData returnData = new BaseReturnData();
+        JsonObject returnData = new JsonObject();
 
         //得到用户id
         int userId = 0;
@@ -76,7 +73,7 @@ public class SauAuditRegController {
     @ResponseBody
     @RequestMapping(value = "/sau/audit/join/{auditMsgId}/{role}", method = RequestMethod.GET)
     public Map<String, Object> getAuditMsgDetail(@PathVariable("auditMsgId") int auditMsgId, @PathVariable(value = "role") int role, HttpSession session) {
-        BaseReturnData returnData = new BaseReturnData();
+        JsonObject returnData = new JsonObject();
         //得到用户id
         int userId = 0;
         if (session.getAttribute("userCode") != null) {
@@ -146,7 +143,7 @@ public class SauAuditRegController {
     @ResponseBody
     @RequestMapping(value = "/sau/audit/reg/{auditMsgId}", method = RequestMethod.PUT)
     public Map<String, Object> sendAuditMsgResult(@PathVariable("auditMsgId") int auditMsgId,@RequestParam Map<String,Object> resultMap, HttpSession session)  {
-        BaseReturnData returnData = new BaseReturnData();
+        JsonObject returnData = new JsonObject();
         //得到用户id
         int userId = 0;
         if (session.getAttribute("userCode") != null) {
@@ -279,7 +276,7 @@ public class SauAuditRegController {
     @ResponseBody
     @RequestMapping(value = "/sau/audit/reg/search",method = RequestMethod.GET)
     public Map<String,Object> searchAuditMsg(@RequestParam String findContent, HttpSession session){
-        BaseReturnData returnData = new BaseReturnData();
+        JsonObject returnData = new JsonObject();
 
         //得到用户id
         int userId = 0;

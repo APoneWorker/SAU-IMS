@@ -7,14 +7,14 @@
     <cache/>
 
     <select id="getUserByUserId" parameterType="int" resultMap="userResult">
-      select * from user where user_id = #{userId}
+      select * from user where user_id = #{id}
     </select>
 
     <select id="getUserByUserName" parameterType="String" resultMap="userResult">
       select * from user where user_name = #{userName}
     </select>
 
-    <select id="getUserByUserNameAndPassword" resultMap="userResult">
+    <select id="getUserByIdentity" resultMap="userResult">
       select * from user where user_name = #{arg0} and password = #{arg1}
     </select>
 
@@ -22,12 +22,12 @@
       select * from user where email = #{email}
     </select>
 
-    <insert id="addUser" parameterType="User" useGeneratedKeys="true" keyProperty="userId" keyColumn="user_id">
+    <insert id="add" parameterType="User" useGeneratedKeys="true" keyProperty="userId" keyColumn="user_id">
     insert into user(user_name,password,email,phone,user_key,login_ip, login_time,register_ip,register_time,authority,user_state)
     values (#{userName},#{password},#{email},#{phone},#{userKey},#{loginIp},#{loginTime},#{registerIp},#{registerTime},#{authority},#{userState})
     </insert>
 
-    <update id="updateUser" parameterType="User">
+    <update id="update" parameterType="User">
         update user set
         password = #{password},
         email = #{email},
@@ -38,15 +38,15 @@
         where user_id = #{userId}
     </update>
 
-    <select id="hadAccount" parameterType="String" resultType="boolean" useCache="false">
+    <select id="isExit" parameterType="String" resultType="boolean" useCache="false">
         select count(*) from user where user_name = #{userName}
     </select>
 
-    <select id="hadEmail" parameterType="String" resultType="boolean" useCache="false">
+    <select id="exitEmail" parameterType="String" resultType="boolean" useCache="false">
         select count(*) from user where email = #{email}
     </select>
 
-    <select id="loadAllUser" resultMap="userResult">
+    <select id="loadAll" resultMap="userResult">
         select * from user
     </select>
 

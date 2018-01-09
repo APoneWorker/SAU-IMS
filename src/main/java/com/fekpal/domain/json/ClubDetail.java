@@ -1,4 +1,4 @@
-package com.fekpal.domain.controller;
+package com.fekpal.domain.json;
 
 import java.util.Date;
 

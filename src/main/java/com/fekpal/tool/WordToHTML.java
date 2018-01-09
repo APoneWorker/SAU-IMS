@@ -25,7 +25,7 @@ public class WordToHTML {
      * @param imageBaseURL  String 网页中图片的路径 如 image/
      * @return boolean
      */
-    public boolean docxToHtml(String wordFileName, String htmlFileName, String htmlImageName, String imageBaseURL) {
+    public boolean convert(String wordFileName, String htmlFileName, String htmlImageName, String imageBaseURL) {
 
         OutputStreamWriter outputStreamWriter = null;
         try {
@@ -65,7 +65,7 @@ public class WordToHTML {
 
     public static void main(String[] args) {
         try {
-            new WordToHTML().docxToHtml("D:/00.docx", "D:/ac/00.html", "D:/ac/image/", "image/");
+            new WordToHTML().convert("D:/00.docx", "D:/ac/00.html", "D:/ac/image/", "image/");
         } catch (Exception e) {
             e.printStackTrace();
         }

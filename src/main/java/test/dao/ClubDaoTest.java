@@ -27,9 +27,9 @@ public class ClubDaoTest extends BaseDaoTest {
 
     @Before
     public void init() {
-        userDao.addUser(user);
+        userDao.add(user);
         club.setUserId(user.getUserId());
-        clubDao.addClub(club);
+        clubDao.add(club);
     }
 
     @Test
@@ -51,30 +51,24 @@ public class ClubDaoTest extends BaseDaoTest {
         Assert.assertNotNull(clubDao.getClubByUserId(user.getUserId()));
         System.out.println(clubDao.getClubByUserId(user.getUserId()));
 
-        user.setUserId(0);
-        Assert.assertNull(clubDao.getClubAllInfoByUserId(user.getUserId()));
-        user.setUserId(club.getUserId());
-        Assert.assertNotNull(clubDao.getClubAllInfoByUserId(user.getUserId()));
-        System.out.println(clubDao.getClubAllInfoByUserId(user.getUserId()));
-
-        clubDao.updateLikeNumber(club.getClubId());
-        clubDao.updateLikeNumber(club.getClubId());
-        clubDao.updateLikeNumber(club.getClubId());
-        clubDao.updateLikeNumber(club.getClubId());
+        clubDao.update(club.getClubId());
+        clubDao.update(club.getClubId());
+        clubDao.update(club.getClubId());
+        clubDao.update(club.getClubId());
 
         System.out.println(club.toString());
         club = clubDao.getClubByUserId(user.getUserId());
         System.out.println(club.toString());
 
-        Assert.assertFalse(clubDao.hadClubName("ip"));
-        Assert.assertTrue(clubDao.hadClubName("IT社"));
+        Assert.assertFalse(clubDao.exitClubName("ip"));
+        Assert.assertTrue(clubDao.exitClubName("IT社"));
 
-        Assert.assertTrue(!clubDao.loadAllClub(0, 2).isEmpty());
+        Assert.assertTrue(!clubDao.loadAll(0, 2).isEmpty());
 
         club.setClubName("呵呵社");
         club.setDescription("注解在此");
         club.setMembers(club.getMembers() + 1);
-        clubDao.updateClub(club);
+        clubDao.update(club);
 
         Assert.assertNotNull(clubDao.getClubByClubName("呵呵社"));
         Assert.assertNull(clubDao.getClubByClubName("IT社"));

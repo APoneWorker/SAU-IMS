@@ -3,9 +3,9 @@ package com.fekpal.web.controller.clubAdmin;
 import com.fekpal.cons.MessageType;
 import com.fekpal.cons.ObjectAvailable;
 import com.fekpal.domain.*;
-import com.fekpal.domain.controller.ClubPublishedNewMsgDomain;
+import com.fekpal.domain.json.ClubPublishedNewMsg;
 import com.fekpal.service.*;
-import com.fekpal.tool.BaseReturnData;
+import com.fekpal.tool.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +34,7 @@ public class ClubMsgPublicController {
     private UserService userService;
 
     @Autowired
-    private BaseReturnData returnData;
+    private JsonObject returnData;
 
 
     /**
@@ -142,7 +142,7 @@ public class ClubMsgPublicController {
      */
     @ResponseBody
     @RequestMapping(value = "/club/msg/new/all", method = RequestMethod.POST)
-    public Map<String, Object> sendMsgToAll(@RequestBody ClubPublishedNewMsgDomain newMsg, HttpSession session) {
+    public Map<String, Object> sendMsgToAll(@RequestBody ClubPublishedNewMsg newMsg, HttpSession session) {
 
         User user = (User) session.getAttribute("userCode");
         Club club = clubService.getClubByUserId(user.getUserId());
@@ -178,7 +178,7 @@ public class ClubMsgPublicController {
      */
     @ResponseBody
     @RequestMapping(value = "/club/msg/new/group", method = RequestMethod.POST)
-    public Map<String, Object> sendMsgToGroup(@RequestBody ClubPublishedNewMsgDomain newMsg, HttpSession session) {
+    public Map<String, Object> sendMsgToGroup(@RequestBody ClubPublishedNewMsg newMsg, HttpSession session) {
 
         User user = (User) session.getAttribute("userCode");
         Club club = clubService.getClubByUserId(user.getUserId());
@@ -214,7 +214,7 @@ public class ClubMsgPublicController {
      */
     @ResponseBody
     @RequestMapping(value = "/club/msg/new/person", method = RequestMethod.POST)
-    public Map<String, Object> sendMsgToPerson(@RequestBody ClubPublishedNewMsgDomain newMsg, HttpSession session) {
+    public Map<String, Object> sendMsgToPerson(@RequestBody ClubPublishedNewMsg newMsg, HttpSession session) {
 
         User user = (User) session.getAttribute("userCode");
         Club club = clubService.getClubByUserId(user.getUserId());

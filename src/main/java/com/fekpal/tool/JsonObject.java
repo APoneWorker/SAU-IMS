@@ -7,7 +7,7 @@ import java.util.Map;
  * 用来产生返回数据的标准工具类
  * Created by hasee on 2017/8/15.
  */
-public class BaseReturnData {
+public class JsonObject {
 
     //创建返回数据的map集合
     private Map<String, Object> map = new HashMap<>();
@@ -16,10 +16,17 @@ public class BaseReturnData {
     private int code = 0;
 
     //响应信息
-    private String msg = "";
+    private String msg;
 
     //数据
-    private Object data = null;
+    private Object data;
+
+    //构造函数
+    public JsonObject(){
+        map.put("code", code);
+        map.put("msg", msg);
+        map.put("data", data);
+    }
 
     /**
      * 设置返回数据的状态码和信息
@@ -48,9 +55,6 @@ public class BaseReturnData {
      * @return Map 返回数据map集合
      */
     public Map<String, Object> getMap() {
-        map.put("code", code);
-        map.put("msg", msg);
-        map.put("data", data);
         return map;
     }
 }

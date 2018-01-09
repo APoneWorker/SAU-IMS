@@ -1,4 +1,4 @@
-package com.fekpal.domain.controller;
+package com.fekpal.domain.json;
 
 /**
  * Created by hasee on 2017/8/18.

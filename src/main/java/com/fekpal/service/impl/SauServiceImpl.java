@@ -30,16 +30,16 @@ public class SauServiceImpl implements SauService {
 
     @Override
     public void updateSauInfo(Sau sau) {
-        sauDao.updateSau(sau);
+        sauDao.update(sau);
     }
 
     @Override
     public List<Sau> loadAllSau() {
-        return sauDao.loadAllSau();
+        return sauDao.loadAll(0,50);
     }
 
     @Override
     public Sau getSauAllInfoByUserId(int userId) {
-        return sauDao.getSauAllInfoByUserId(userId);
+        return null;
     }
 }

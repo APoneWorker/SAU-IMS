@@ -25,15 +25,15 @@ import static java.lang.System.out;
 @Controller
 public class SecurityController {
 
-
+/*
     @Autowired
     private MailHtmlTool mailHtmlTool;//邮箱发送工具
-
+*/
     @Autowired
     private UserService userService;
 
     @Autowired
-    private BaseReturnData returnData;
+    private JsonObject returnData;
 
     /**
      * 发送重置密码的邮箱验证码
@@ -65,7 +65,7 @@ public class SecurityController {
         session.setAttribute("emailCaptcha", captcha);
         session.setAttribute("email", email);
         session.setAttribute("time", TimeTool.getTime());
-
+/*
         try {
             mailHtmlTool.sendHtml(email, "校社联管理系统发给您重置密码的验证码", "您重置密码的验证码是：<br/>"
                     + captcha + "<br/><br/>" + "验证码十分钟内有效");
@@ -73,7 +73,7 @@ public class SecurityController {
         } catch (MessagingException e) {
             returnData.setStateCode(1, "邮件发送失败，请重新发送或稍后再试。");
         }
-
+*/
         return returnData.getMap();
 
     }
@@ -164,7 +164,7 @@ public class SecurityController {
         session.setAttribute("emailCaptcha", captcha);
         session.setAttribute("email", email);
         session.setAttribute("time", TimeTool.getTime());
-
+/*
         try {
             mailHtmlTool.sendHtml(email, "校社联管理系统发给您的验证码", "您的邮箱验证码是：<br/>"
                     + captcha + "<br/><br/>" + "验证码十分钟内有效");
@@ -172,7 +172,7 @@ public class SecurityController {
         } catch (MessagingException e) {
             returnData.setStateCode(1, "邮件发送失败，请点击重新发送。如果多次点击发送后，依然不成功，请稍后再试。");
         }
-
+*/
         return returnData.getMap();
     }
 

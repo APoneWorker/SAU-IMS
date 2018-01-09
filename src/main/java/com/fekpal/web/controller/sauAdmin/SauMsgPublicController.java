@@ -1,8 +1,8 @@
 package com.fekpal.web.controller.sauAdmin;
 
 import com.fekpal.cons.ResponseCode;
-import com.fekpal.domain.controller.SauPublishedNewMsgDomain;
-import com.fekpal.tool.BaseReturnData;
+import com.fekpal.domain.json.SauPublishedNewMsg;
+import com.fekpal.tool.JsonObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +27,7 @@ public class SauMsgPublicController {
     @ResponseBody
     @RequestMapping(value = "/sau/clubs",method = RequestMethod.GET)
     public Map<String,Object> getMassageType(@RequestParam("messageType")int messageType, HttpSession session){
-        BaseReturnData returnData = new BaseReturnData();
+        JsonObject returnData = new JsonObject();
 
         //得到用户id
         int userId = 0;
@@ -68,7 +68,7 @@ public class SauMsgPublicController {
     @ResponseBody
     @RequestMapping(value = "/sau/msg/old",method = RequestMethod.GET)
     public Map<String,Object> getAllOldMsg(HttpSession session){
-        BaseReturnData returnData = new BaseReturnData();
+        JsonObject returnData = new JsonObject();
         //得到用户id
         int userId = 0;
         if(session.getAttribute("userCode")!= null){
@@ -109,7 +109,7 @@ public class SauMsgPublicController {
     @ResponseBody
     @RequestMapping(value = "/sau/msg/old/{messageId}",method = RequestMethod.GET)
     public Map<String,Object> getOneOldMsg (@PathVariable int messageId,HttpSession session){
-        BaseReturnData returnData = new BaseReturnData();
+        JsonObject returnData = new JsonObject();
 
         //得到用户id
         int userId = 0;
@@ -163,8 +163,8 @@ public class SauMsgPublicController {
      */
     @ResponseBody
     @RequestMapping(value = "/sau/msg/new/all",method = RequestMethod.POST)
-    public Map<String,Object> sendMsgToAll (@RequestBody SauPublishedNewMsgDomain newMsg, HttpSession session) {
-        BaseReturnData returnData = new BaseReturnData();
+    public Map<String,Object> sendMsgToAll (@RequestBody SauPublishedNewMsg newMsg, HttpSession session) {
+        JsonObject returnData = new JsonObject();
 
         //得到用户id
         int userId = 0;
@@ -197,8 +197,8 @@ public class SauMsgPublicController {
      */
     @ResponseBody
     @RequestMapping(value = "/sau/msg/new/group",method = RequestMethod.POST)
-    public Map<String,Object> sendMsgToGroup (@RequestBody SauPublishedNewMsgDomain newMsg,HttpSession session) {
-        BaseReturnData returnData = new BaseReturnData();
+    public Map<String,Object> sendMsgToGroup (@RequestBody SauPublishedNewMsg newMsg, HttpSession session) {
+        JsonObject returnData = new JsonObject();
 
         //得到用户id
         int userId = 0;
@@ -232,8 +232,8 @@ public class SauMsgPublicController {
      */
     @ResponseBody
     @RequestMapping(value = "/sau/msg/new/person",method = RequestMethod.POST)
-    public Map<String,Object> sendMsgToPerson (@RequestBody SauPublishedNewMsgDomain newMsg,HttpSession session) {
-        BaseReturnData returnData = new BaseReturnData();
+    public Map<String,Object> sendMsgToPerson (@RequestBody SauPublishedNewMsg newMsg, HttpSession session) {
+        JsonObject returnData = new JsonObject();
         //得到用户id
         int userId = 0;
         if (session.getAttribute("userCode") != null) {
@@ -279,7 +279,7 @@ public class SauMsgPublicController {
     @ResponseBody
     @RequestMapping(value = "/sau/msg/old",method = RequestMethod.DELETE)
     public Map<String,Object> deleteMsgs (@RequestParam Map<String,Object> deleteMsgIdMap,HttpSession session) {
-        BaseReturnData returnData = new BaseReturnData();
+        JsonObject returnData = new JsonObject();
 
         //得到用户id
         int userId = 0;
@@ -316,7 +316,7 @@ public class SauMsgPublicController {
     @ResponseBody
     @RequestMapping(value = "/sau/msg/old/search",method = RequestMethod.GET)
     public Map<String,Object> searchMsg (@RequestParam String findContent,HttpSession session) {
-        BaseReturnData returnData = new BaseReturnData();
+        JsonObject returnData = new JsonObject();
 
         //得到用户id
         int userId = 0;

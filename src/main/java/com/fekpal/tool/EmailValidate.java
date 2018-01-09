@@ -5,7 +5,7 @@ package com.fekpal.tool;
  * Created by hasee on 2017/8/18.
  * 邮箱合法性检测
  */
-public class CheckEmail {
+public class EmailValidate {
 
     /**
      * 检查邮箱合法性
@@ -13,7 +13,7 @@ public class CheckEmail {
      * @param email String
      * @return boolean
      */
-    public static boolean checkEmail(String email) {// 验证邮箱的正则表达式
+    public static boolean check(String email) {
 
         /*
         p{Alpha}:内容是必选的，和字母字符[\p{Lower}\p{Upper}]等价。如：200896@163.com不是合法的。
@@ -24,7 +24,6 @@ public class CheckEmail {
         */
         String format = "\\w{1,15}\\w{1,15}[@][a-z0-9]{2,}[.]\\p{Lower}{2,}";
 
-        // 邮箱名合法，返回true,否则false
         return email.matches(format);
     }
 }

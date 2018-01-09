@@ -35,16 +35,16 @@ public class UserServiceImpl implements UserService {
     public User getUserByUserId(int userId) {
         int authority = userDao.getUserByUserId(userId).getAuthority();
 
-        User user;
+        User user = new User();
         switch (authority) {
             case SystemRole.PERSON:
-                user = personDao.getPersonAllInfoByUserId(userId);
+                //user = personDao.getPersonAllInfoByUserId(userId);
                 break;
             case SystemRole.CLUB:
-                user = clubDao.getClubAllInfoByUserId(userId);
+                ///user = clubDao.getClubAllInfoByUserId(userId);
                 break;
             case SystemRole.SAU:
-                user = sauDao.getSauAllInfoByUserId(userId);
+                //user = sauDao.getSauAllInfoByUserId(userId);
                 break;
             default:
                 user = new User();
@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserByUserNameAndPassword(String userName, String password) {
-        return userDao.getUserByUserNameAndPassword(userName, password);
+        return userDao.getUserByIdentity(userName, password);
     }
 
     @Override
@@ -71,39 +71,39 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addNewPerson(Person person) {
-        userDao.addUser(person);
-        personDao.addPerson(person);
+        userDao.add(person);
+        personDao.add(person);
     }
 
     @Override
     public void addNewClub(Club club) {
-        userDao.addUser(club);
-        clubDao.addClub(club);
+        userDao.add(club);
+        clubDao.add(club);
     }
 
     @Override
     public void addNewSau(Sau sau) {
-        userDao.addUser(sau);
-        sauDao.addSau(sau);
+        userDao.add(sau);
+        sauDao.add(sau);
     }
 
     @Override
     public void updateUserInfo(User user) {
-        userDao.updateUser(user);
+        userDao.update(user);
     }
 
     @Override
     public boolean checkSameAccount(String userName) {
-        return userDao.hadAccount(userName);
+        return userDao.isExit(userName);
     }
 
     @Override
     public boolean checkSameEmail(String email) {
-        return userDao.hadEmail(email);
+        return userDao.exitEmail(email);
     }
 
     @Override
     public List<User> loadAllUser() {
-        return userDao.loadAllUser();
+        return userDao.loadAll(0, 50);
     }
 }

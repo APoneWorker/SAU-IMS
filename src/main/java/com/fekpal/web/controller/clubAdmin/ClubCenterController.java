@@ -30,7 +30,7 @@ public class ClubCenterController {
     private ClubService clubService;
 
     @Autowired
-    private BaseReturnData returnData;
+    private JsonObject returnData;
 
     /**
      * 得到社团中心的信息的方法
@@ -48,7 +48,7 @@ public class ClubCenterController {
         Map<String, Object> clubCenterMsg = new LinkedHashMap<>();
 
         //通过用户ID得到数据
-        Club club = clubService.getClubAllInfoByUserId(user.getUserId());
+        Club club = null;//clubService.getClubAllInfoByUserId(user.getUserId());
 
         clubCenterMsg.put("clubId", club.getClubId());
         clubCenterMsg.put("clubName", club.getClubName());

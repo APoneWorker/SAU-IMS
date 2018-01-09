@@ -6,11 +6,11 @@ import com.fekpal.domain.Club;
 import com.fekpal.domain.ClubMember;
 import com.fekpal.domain.Person;
 import com.fekpal.domain.User;
-import com.fekpal.domain.controller.ClubDetail;
+import com.fekpal.domain.json.ClubDetail;
 import com.fekpal.service.ClubMemberService;
 import com.fekpal.service.ClubService;
 import com.fekpal.service.PersonService;
-import com.fekpal.tool.BaseReturnData;
+import com.fekpal.tool.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -38,7 +38,7 @@ public class MemberClubMsgController {
     private ClubService clubService;
 
     @Autowired
-    private BaseReturnData returnData;
+    private JsonObject returnData;
 
     /**
      * 返回社团信息列表的方法
@@ -152,7 +152,7 @@ public class MemberClubMsgController {
     @ResponseBody
     @RequestMapping(value = "/member/club/{clubId}/star", method = RequestMethod.GET)
     public Map<String, Object> likeClub(@PathVariable("clubId") int clubId, @RequestParam int avaliable, HttpSession session) {
-        BaseReturnData returnData = new BaseReturnData();
+        JsonObject returnData = new JsonObject();
 
         //得到用户id 
         int userId = 0;

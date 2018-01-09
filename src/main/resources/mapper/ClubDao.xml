@@ -53,13 +53,6 @@
         select * from club_info limit #{arg0},#{arg1}
     </select>
 
-    <select id="getClubAllInfoByUserId" parameterType="int" resultMap="clubResult" useCache="false">
-        select *
-        from club_info c
-        inner join user u on c.user_id = u.user_id
-        where c.user_id = #{userId}
-    </select>
-
     <resultMap id="clubResult" type="Club">
         <id property="clubId" column="club_id"/>
         <result property="userId" column="user_id"/>

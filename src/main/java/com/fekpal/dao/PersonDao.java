@@ -1,8 +1,6 @@
 package com.fekpal.dao;
 
-import com.fekpal.domain.Club;
 import com.fekpal.domain.Person;
-import com.fekpal.domain.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,17 +13,17 @@ import java.util.List;
 public interface PersonDao {
 
     /**
-     * 根据社团id获得个人
+     * 根据普通用户id获得个人
      *
-     * @param personId int
+     * @param id int 普通用户id
      * @return Person
      */
-    Person getPersonByPersonId(int personId);
+    Person getPersonByPersonId(int id);
 
     /**
      * 根据昵称获得个人
      *
-     * @param nickName String
+     * @param nickName String 普通用户昵称
      * @return Person
      */
     Person getPersonByNickName(String nickName);
@@ -33,47 +31,40 @@ public interface PersonDao {
     /**
      * 根据用户id获得个人
      *
-     * @param userId int
+     * @param id int 用户id
      * @return Person
      */
-    Person getPersonByUserId(int userId);
+    Person getPersonByUserId(int id);
 
     /**
      * 是否有相同的昵称
      *
-     * @param nickName String
+     * @param nickName String 普通用户昵称
      * @return boolean
      */
-    boolean hadNickName(String nickName);
+    boolean exitNickName(String nickName);
 
     /**
      * 添加个人
      *
-     * @param person Person
+     * @param person Person 普通用户对象
      */
-    void addPerson(Person person);
+    void add(Person person);
 
     /**
      * 更新个人
      *
-     * @param person Person
+     * @param person Person 普通用户对象
      */
-    void updatePerson(Person person);
+    void update(Person person);
 
 
     /**
      * 获得所有个人
      *
-     * @param start int
-     * @param count int
+     * @param start int 开始
+     * @param count int 结束
      * @return List
      */
-    List<Person> loadAllPerson(int start, int count);
-
-    /**
-     * 根据社团id获得社团所有信息（包括用户层）
-     * @param userId int
-     * @return CLub
-     */
-    Person getPersonAllInfoByUserId(int userId);
+    List<Person> loadAll(int start, int count);
 }

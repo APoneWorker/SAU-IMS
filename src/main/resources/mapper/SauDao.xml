@@ -34,13 +34,6 @@
         select * from sau_info
     </select>
 
-    <select id="getSauAllInfoByUserId" parameterType="int" resultMap="sauResult" useCache="false">
-        select *
-        from sau_info s
-        inner join user u on s.user_id = u.user_id
-        where s.user_id = #{userId}
-    </select>
-
     <resultMap id="sauResult" type="Sau">
         <id property="sauId" column="sau_id"/>
         <result property="userId" column="user_id"/>

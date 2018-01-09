@@ -6,18 +6,14 @@ import com.fekpal.domain.ClubMember;
 import com.fekpal.domain.User;
 import com.fekpal.service.ClubMemberService;
 import com.fekpal.service.ClubService;
-import com.fekpal.tool.BaseReturnData;
+import com.fekpal.tool.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.*;
 import java.util.*;
-
-import static java.lang.System.out;
 
 /**
  * 注册审核的控制类
@@ -33,7 +29,7 @@ public class ClubAuditRegController {
     private ClubService clubService;
 
     @Autowired
-    private BaseReturnData returnData;
+    private JsonObject returnData;
 
     /**
      * 查看全部审核的信息的方法

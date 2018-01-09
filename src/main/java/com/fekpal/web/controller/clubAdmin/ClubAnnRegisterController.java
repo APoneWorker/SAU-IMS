@@ -3,7 +3,7 @@ package com.fekpal.web.controller.clubAdmin;
 import com.fekpal.cons.ResponseCode;
 import com.fekpal.domain.User;
 import com.fekpal.service.AnniversaryAuditService;
-import com.fekpal.tool.BaseReturnData;
+import com.fekpal.tool.JsonObject;
 import com.fekpal.tool.FileUploadTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,7 +30,7 @@ public class ClubAnnRegisterController {
     private AnniversaryAuditService auditService;
 
     @Autowired
-    private BaseReturnData returnData;
+    private JsonObject returnData;
 
     /**
      * 查看全部注册的信息的方法
@@ -197,7 +197,7 @@ public class ClubAnnRegisterController {
      */
     public static Map<String, Object> handleFile(MultipartFile[] files) {
 
-        BaseReturnData returnData = new BaseReturnData();
+        JsonObject returnData = new JsonObject();
 
         //判断文件格式和大小是否符合
         for (MultipartFile file : files) {

@@ -1,4 +1,4 @@
-package com.fekpal.domain.controller;
+package com.fekpal.domain.json;
 
 /**
  * 用来发送给前端的社团列表信息实体类

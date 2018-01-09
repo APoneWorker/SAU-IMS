@@ -5,9 +5,9 @@ import com.fekpal.cons.ResponseCode;
 import com.fekpal.domain.Message;
 import com.fekpal.domain.MessageRelease;
 import com.fekpal.domain.User;
-import com.fekpal.domain.controller.NewMsgListDomain;
+import com.fekpal.domain.json.NewMsgListDomain;
 import com.fekpal.service.MessageService;
-import com.fekpal.tool.BaseReturnData;
+import com.fekpal.tool.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -30,7 +30,7 @@ public class NewMsgController {
     private MessageService messageService;
 
     @Autowired
-    private BaseReturnData returnData;
+    private JsonObject returnData;
 
     /**
      * 根据用户id返回全部消息或者删除某些消息的方法
@@ -52,7 +52,7 @@ public class NewMsgController {
         //如果请求是get，获得全部消息
         if ("GET".equals(request.getMethod())) {
 
-            returnData = new BaseReturnData();
+            returnData = new JsonObject();
             //初始化用户id和返回的消息列表对象
             List<NewMsgListDomain> list = new ArrayList<>();
 

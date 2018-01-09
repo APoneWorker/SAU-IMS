@@ -27,7 +27,7 @@ public class MessageDaoTest extends BaseDaoTest {
 
     @Before
     public void init() {
-        userDao.addUser(user);
+        userDao.add(user);
         message.setUserId(user.getUserId());
         messageDao.addMessage(message);
     }

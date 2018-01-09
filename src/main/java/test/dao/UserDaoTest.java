@@ -19,7 +19,7 @@ public class UserDaoTest extends BaseDaoTest {
 
     @Before
     public void init() {
-        userDao.addUser(user);
+        userDao.add(user);
     }
 
     @Test
@@ -28,26 +28,26 @@ public class UserDaoTest extends BaseDaoTest {
         System.out.println(userDao.getUserByEmail("zjboy@163.com").toString());
         System.out.println(userDao.getUserByUserId(user.getUserId()).toString());
         System.out.println(userDao.getUserByUserName("zjboy").toString());
-        System.out.println(userDao.getUserByUserNameAndPassword("zjboy", "123456").toString());
+        System.out.println(userDao.getUserByIdentity("zjboy", "123456").toString());
 
         Assert.assertNull("error1", userDao.getUserByEmail("zj"));
         Assert.assertNull("error2", userDao.getUserByUserId(0));
         Assert.assertNull("error3", userDao.getUserByUserName("s"));
-        Assert.assertNull("error4", userDao.getUserByUserNameAndPassword("12", "43"));
-        Assert.assertNull("error5", userDao.getUserByUserNameAndPassword("12", "123456"));
-        Assert.assertNull("error6", userDao.getUserByUserNameAndPassword("zjboy", "43"));
+        Assert.assertNull("error4", userDao.getUserByIdentity("12", "43"));
+        Assert.assertNull("error5", userDao.getUserByIdentity("12", "123456"));
+        Assert.assertNull("error6", userDao.getUserByIdentity("zjboy", "43"));
 
-        Assert.assertTrue(userDao.hadAccount("zjboy"));
-        Assert.assertTrue(userDao.hadEmail("zjboy@163.com"));
-        Assert.assertFalse(userDao.hadAccount("zjbo"));
-        Assert.assertFalse(userDao.hadEmail("zjboy@163.co"));
+        Assert.assertTrue(userDao.isExit("zjboy"));
+        Assert.assertTrue(userDao.exitEmail("zjboy@163.com"));
+        Assert.assertFalse(userDao.isExit("zjbo"));
+        Assert.assertFalse(userDao.exitEmail("zjboy@163.co"));
 
         user.setPassword("12");
-        userDao.updateUser(user);
+        userDao.update(user);
         System.out.println(user.toString());
 
-        Assert.assertNull("密码错误", userDao.getUserByUserNameAndPassword("zjboy", "123456"));
-        Assert.assertNotNull("密码正确", userDao.getUserByUserNameAndPassword("zjboy", "12"));
-        System.out.println(userDao.getUserByUserNameAndPassword("zjboy", "12").toString());
+        Assert.assertNull("密码错误", userDao.getUserByIdentity("zjboy", "123456"));
+        Assert.assertNotNull("密码正确", userDao.getUserByIdentity("zjboy", "12"));
+        System.out.println(userDao.getUserByIdentity("zjboy", "12").toString());
     }
 }

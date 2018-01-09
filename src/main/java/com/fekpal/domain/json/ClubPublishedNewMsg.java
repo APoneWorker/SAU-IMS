@@ -1,4 +1,4 @@
-package com.fekpal.domain.controller;
+package com.fekpal.domain.json;
 
 import java.util.Date;
 import java.util.List;
@@ -8,12 +8,12 @@ import java.util.Map;
  * 校社联发布新消息的实体类
  * Created by hasee on 2017/8/26.
  */
-public class ClubPublishedNewMsgDomain {
+public class ClubPublishedNewMsg {
     private String messageTitle;
     private String messageContent;
     private Date sendTime;
     private List<Map<String,Integer>> publishedObject;
-    public ClubPublishedNewMsgDomain(){}
+    public ClubPublishedNewMsg(){}
 
     public String getMessageTitle() {
         return messageTitle;
@@ -49,7 +49,7 @@ public class ClubPublishedNewMsgDomain {
 
     @Override
     public String toString() {
-        return "SauPublishedNewMsgDomain{" +
+        return "SauPublishedNewMsg{" +
                 "messageTitle='" + messageTitle + '\'' +
                 ", messageContent='" + messageContent + '\'' +
                 ", sendTime=" + sendTime +

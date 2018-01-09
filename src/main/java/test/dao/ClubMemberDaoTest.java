@@ -33,8 +33,8 @@ public class ClubMemberDaoTest extends BaseDaoTest {
 
     @Before
     public void init() {
-        personDao.addPerson(person);
-        clubDao.addClub(club);
+        personDao.add(person);
+        clubDao.add(club);
         clubMember.setClub(club);
         clubMember.setPerson(person);
         clubMemberDao.addClubMember(clubMember);

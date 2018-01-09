@@ -28,7 +28,7 @@ public class ClubAuditDaoTest extends BaseDaoTest {
 
     @Before
     public void init() {
-        clubDao.addClub(club);
+        clubDao.add(club);
         clubAudit.setClub(club);
         clubAuditDao.addClubAudit(clubAudit);
     }

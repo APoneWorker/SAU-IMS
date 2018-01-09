@@ -16,7 +16,7 @@ public interface AnniversaryAuditDao {
     /**
      * 根据审核id获得审核
      *
-     * @param annId int
+     * @param annId int 审核id
      * @return AnniversaryAudit
      */
     AnniversaryAudit getAnnByAnnId(int annId);
@@ -24,26 +24,26 @@ public interface AnniversaryAuditDao {
     /**
      * 根据社团获得所有有关的审核
      *
-     * @param clubId int
-     * @param start  int
-     * @param count  int
+     * @param clubId int 社团id
+     * @param start  int 开始
+     * @param count  int 结束
      * @return List
      */
     List<AnniversaryAudit> getAnnByClubId(int clubId, int start, int count);
 
     /**
-     * 根据社团获得当前待审核的审核（或许没有）
+     * 根据社团获得当前待审核的审核
      *
-     * @param clubId int
+     * @param clubId int 社团id
      * @return AnniversaryAudit
      */
     AnniversaryAudit getAnnAuditingByClubId(int clubId);
 
     /**
      * 根据社团名称搜索所有审核，时间和未审核排列优先
-     * @param clubName String
-     * @param start int
-     * @param count int
+     * @param clubName String 社团名称
+     * @param start int 开始
+     * @param count int 结束
      * @return List
      */
     List<AnniversaryAudit> findAnnByClubName(String clubName, int start, int count);

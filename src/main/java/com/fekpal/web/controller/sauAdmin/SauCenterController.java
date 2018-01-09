@@ -22,11 +22,11 @@ import static java.lang.System.out;
  */
 @Controller
 public class SauCenterController {
-
+/*
     //spring的依赖注入发送邮件对象
     @Autowired
     private MailHtmlTool mailHtmlTool;
-
+*/
     /**
      * 上传校社联头像的方法
      * @param myfiles 文件对象，用from-data表单
@@ -74,7 +74,7 @@ public class SauCenterController {
     @ResponseBody
     @RequestMapping(value = "/sau/center/info",method = RequestMethod.GET)
     public Map<String,Object> getSauCenterMsg(HttpSession session){
-        BaseReturnData returnData = new BaseReturnData();
+        JsonObject returnData = new JsonObject();
         //要在拦截器中判断用户是否登录了然后判断是否有这个权限
         // TODO: 2017/8/19
 
@@ -128,7 +128,7 @@ public class SauCenterController {
     public Map<String,Object> subNewCenterMsg(@RequestParam Map<String,Object> sauCenterMsg,HttpServletRequest request,HttpSession session){
         out.println(sauCenterMsg);
         //初始化返回数据模板
-        BaseReturnData returnData = new BaseReturnData();
+        JsonObject returnData = new JsonObject();
 
         //初始化session内的邮箱，验证码和用户id
         String sessionEmail = null;

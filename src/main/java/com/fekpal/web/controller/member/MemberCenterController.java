@@ -5,7 +5,7 @@ import com.fekpal.domain.Person;
 import com.fekpal.domain.User;
 import com.fekpal.service.ClubMemberService;
 import com.fekpal.service.PersonService;
-import com.fekpal.tool.BaseReturnData;
+import com.fekpal.tool.JsonObject;
 import com.fekpal.tool.ImagesUploadTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,7 +43,7 @@ public class MemberCenterController {
     @RequestMapping(value = "/member/center/info", method = RequestMethod.GET)
     public Map<String, Object> getMemberCenterMsg(HttpSession session) {
 
-        BaseReturnData returnData = new BaseReturnData();
+        JsonObject returnData = new JsonObject();
         User user = (User) session.getAttribute("userCode");
 
         //创建链表map集合存放普通成员中心信息
@@ -143,7 +143,7 @@ public class MemberCenterController {
         person.setAddress(address);
 
         personService.updatePerson(person);
-        return new BaseReturnData().getMap();
+        return new JsonObject().getMap();
     }
 }
 

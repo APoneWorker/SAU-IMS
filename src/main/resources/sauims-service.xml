@@ -18,7 +18,7 @@
           p:dataSource-ref="dataSource"/>
 
     <!--响应数据对象-->
-    <bean id="returnData" class="com.fekpal.tool.BaseReturnData" scope="prototype"/>
+    <bean id="returnData" class="com.fekpal.tool.JsonObject" scope="prototype"/>
 
     <!--使用声明式事务-->
     <tx:annotation-driven transaction-manager="txManager"/>

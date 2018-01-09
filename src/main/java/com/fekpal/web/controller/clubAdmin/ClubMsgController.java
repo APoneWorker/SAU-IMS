@@ -1,9 +1,9 @@
 package com.fekpal.web.controller.clubAdmin;
 
 import com.fekpal.domain.Club;
-import com.fekpal.domain.controller.ClubDetail;
+import com.fekpal.domain.json.ClubDetail;
 import com.fekpal.service.ClubService;
-import com.fekpal.tool.BaseReturnData;
+import com.fekpal.tool.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +22,7 @@ public class ClubMsgController {
     private ClubService clubService;
 
     @Autowired
-    private BaseReturnData returnData;
+    private JsonObject returnData;
 
     /**
      * 返回社团信息列表的方法

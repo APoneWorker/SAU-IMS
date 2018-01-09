@@ -24,7 +24,7 @@ public class ImagesUploadTool {
      */
     public static Map<String, Object> uploadImage(MultipartFile[] files, HttpServletRequest request, String childrenPath) {
         //得到基本返回数据模板
-        BaseReturnData returnData = new BaseReturnData();
+        JsonObject returnData = new JsonObject();
         //判断图片格式和大小是否符合
         for (MultipartFile myfile : files) {
             if (!myfile.isEmpty()) {

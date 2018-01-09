@@ -26,9 +26,9 @@ public class SauDaoTest extends BaseDaoTest {
 
     @Before
     public void init() {
-        userDao.addUser(user);
+        userDao.add(user);
         sau.setUserId(user.getUserId());
-        sauDao.addSau(sau);
+        sauDao.add(sau);
     }
 
     @Test
@@ -46,20 +46,14 @@ public class SauDaoTest extends BaseDaoTest {
         sau = sauDao.getSauByUserId(0);
         Assert.assertNull(sau);
 
-        sau = sauDao.getSauAllInfoByUserId(user.getUserId());
-        Assert.assertNotNull(sau);
-        System.out.println(sau);
-        sau = sauDao.getSauAllInfoByUserId(0);
-        Assert.assertNull(sau);
-
-        List<Sau> sauList = sauDao.loadAllSau();
+        List<Sau> sauList = sauDao.loadAll(0,50);
         System.out.println(sauList.size());
         System.out.println(sauList);
 
         sau = sauDao.getSauByUserId(user.getUserId());
         sau.setMembers(sau.getMembers() + 1);
         sau.setAdminName("陈彦军");
-        sauDao.updateSau(sau);
+        sauDao.update(sau);
         sau = sauDao.getSauBySauId(sau.getSauId());
         System.out.println(sau);
     }

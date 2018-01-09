@@ -1,7 +1,6 @@
 package com.fekpal.dao;
 
 import com.fekpal.domain.Club;
-import com.fekpal.domain.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,15 +15,15 @@ public interface ClubDao {
     /**
      * 根据社团id获得社团
      *
-     * @param clubId int
+     * @param id int 社团用户id
      * @return Club
      */
-    Club getClubByClubId(int clubId);
+    Club getClubByClubId(int id);
 
     /**
      * 根据名称获得社团
      *
-     * @param clubName String
+     * @param clubName String 社团名称
      * @return Club
      */
     Club getClubByClubName(String clubName);
@@ -32,15 +31,15 @@ public interface ClubDao {
     /**
      * 根据社团用户id获得社团
      *
-     * @param userId int
+     * @param id int 用户id
      * @return Club
      */
-    Club getClubByUserId(int userId);
+    Club getClubByUserId(int id);
 
     /**
      * 根据社团名称模糊搜索
      *
-     * @param clubName String
+     * @param clubName String 社团名称
      * @return CLub
      */
     List<Club> findClubByClubName(String clubName, int start, int count);
@@ -48,46 +47,39 @@ public interface ClubDao {
     /**
      * 是否有相同的社团名称
      *
-     * @param clubName String
+     * @param clubName String 社团名称
      * @return boolean
      */
-    boolean hadClubName(String clubName);
+    boolean exitClubName(String clubName);
 
     /**
      * 添加社团
      *
-     * @param club Club
+     * @param club Club 社团对象
      */
-    void addClub(Club club);
+    void add(Club club);
 
     /**
      * 更新社团信息
      *
-     * @param club Club
+     * @param club Club 社团对象
      */
-    void updateClub(Club club);
+    void update(Club club);
 
 
     /**
-     * 喜爱人数加一
+     * 更新社团赞人数（目前为加1）
      *
-     * @param clubId int
+     * @param clubId int 社团用户id
      */
-    void updateLikeNumber(int clubId);
+    void update(int clubId);
 
     /**
      * 获得所有的社团
      *
-     * @param start int
-     * @param count int
+     * @param start int 开始
+     * @param count int 结束
      * @return List
      */
-    List<Club> loadAllClub(int start, int count);
-
-    /**
-     * 根据社团id获得社团所有信息（包括用户层）
-     * @param userId int
-     * @return CLub
-     */
-    Club getClubAllInfoByUserId(int userId);
+    List<Club> loadAll(int start, int count);
 }

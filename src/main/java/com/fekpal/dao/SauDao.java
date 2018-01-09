@@ -15,45 +15,40 @@ public interface SauDao {
     /**
      * 根据校社联用户id获取校社联信息
      *
-     * @param userId int
+     * @param id int 用户id
      * @return Sau
      */
-    Sau getSauByUserId(int userId);
+    Sau getSauByUserId(int id);
 
 
     /**
      * 根据校社联id获取校社联
      *
-     * @param sauId int
+     * @param id int 校社联id
      * @return Sau
      */
-    Sau getSauBySauId(int sauId);
+    Sau getSauBySauId(int id);
 
     /**
      * 添加校社联
      *
-     * @param sau Sau
+     * @param sau Sau 校社联对象
      */
-    void addSau(Sau sau);
+    void add(Sau sau);
 
     /**
      * 更新校社联信息
      *
-     * @param sau Sau
+     * @param sau Sau 校社联对象
      */
-    void updateSau(Sau sau);
+    void update(Sau sau);
 
     /**
      * 获得所有的校社联
      *
+     * @param start int 开始
+     * @param end   int 结束
      * @return List
      */
-    List<Sau> loadAllSau();
-
-    /**
-     * 根据社团id获得社团所有信息（包括用户层）
-     * @param userId int
-     * @return CLub
-     */
-    Sau getSauAllInfoByUserId(int userId);
+    List<Sau> loadAll(int start, int end);
 }

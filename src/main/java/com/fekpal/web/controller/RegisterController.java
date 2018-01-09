@@ -5,11 +5,13 @@ import com.fekpal.cons.SystemRole;
 import com.fekpal.domain.Club;
 import com.fekpal.domain.ClubAudit;
 import com.fekpal.domain.Person;
-import com.fekpal.domain.controller.PersonRegisterMsg;
+import com.fekpal.domain.json.PersonRegisterMsg;
 import com.fekpal.service.ClubAuditService;
 import com.fekpal.service.UserService;
 import com.fekpal.tool.*;
+import com.fekpal.tool.email.EmailTool;
 import com.fekpal.web.controller.clubAdmin.ClubAnnRegisterController;
+import org.apache.commons.mail.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -28,10 +30,10 @@ import java.util.*;
 @Controller
 public class RegisterController {
 
-
+/*
     @Autowired
     private MailHtmlTool mailHtmlTool;//邮箱发送工具
-
+*/
     @Autowired
     private UserService userService;
 
@@ -39,7 +41,7 @@ public class RegisterController {
     private ClubAuditService clubAuditService;
 
     @Autowired
-    private BaseReturnData returnData;
+    private JsonObject returnData;
 
     /**
      * 发送邮箱验证码
@@ -74,12 +76,14 @@ public class RegisterController {
         session.setAttribute("time", TimeTool.getTime());
 
         try {
+            /*
             mailHtmlTool.sendHtml(email, "校社联管理系统发给您的验证码", "您的邮箱验证码是：<br/>"
                     + captcha + "<br/><br/>" + "验证码十分钟内有效");
+                    */
+            EmailTool.sendSimpleTextEmail();
             returnData.setStateCode(1, "验证码发送成功!");
-            System.out.println(captcha);
 
-        } catch (MessagingException e) {
+        } catch (EmailException e) {
             returnData.setStateCode(1, "验证码发送失败，请重新点击或稍后再试。");
         }
         return returnData.getMap();

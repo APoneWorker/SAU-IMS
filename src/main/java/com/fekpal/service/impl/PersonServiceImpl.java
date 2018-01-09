@@ -39,12 +39,12 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public boolean checkSameNickName(String nickName) {
-        return personDao.hadNickName(nickName);
+        return personDao.exitNickName(nickName);
     }
 
     @Override
     public void updatePerson(Person person) {
-        personDao.updatePerson(person);
+        personDao.update(person);
     }
 
     @Override
@@ -59,11 +59,11 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public List<Person> loadAllPerson(int start, int count) {
-        return personDao.loadAllPerson(start, count);
+        return personDao.loadAll(start, count);
     }
 
     @Override
     public Person getPersonAllInfoByUserId(int userId) {
-        return personDao.getPersonAllInfoByUserId(userId);
+        return null;
     }
 }

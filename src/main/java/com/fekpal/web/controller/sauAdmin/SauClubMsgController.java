@@ -1,8 +1,8 @@
 package com.fekpal.web.controller.sauAdmin;
 
 import com.fekpal.cons.ResponseCode;
-import com.fekpal.domain.controller.ClubDetail;
-import com.fekpal.tool.BaseReturnData;
+import com.fekpal.domain.json.ClubDetail;
+import com.fekpal.tool.JsonObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +28,7 @@ public class SauClubMsgController {
     @ResponseBody
     @RequestMapping(value = "/sau/club",method = RequestMethod.GET)
     public Map<String,Object> getAllClubMsg(HttpSession session){
-        BaseReturnData returnData = new BaseReturnData();
+        JsonObject returnData = new JsonObject();
         //得到用户id
         int userId = 0;
         if(session.getAttribute("userCode")!= null){
@@ -73,7 +73,7 @@ public class SauClubMsgController {
     @ResponseBody
     @RequestMapping(value = "/sau/club/{clubId}",method = RequestMethod.GET)
     public Map<String,Object> getOneClubMsg(HttpSession session, @PathVariable int clubId){
-        BaseReturnData returnData = new BaseReturnData();
+        JsonObject returnData = new JsonObject();
         //如果要查询的社团id是小于或等于0的话，返回错误
         if(clubId<=0){
             returnData.setStateCode(ResponseCode.REQUEST_ERROR,"你所要查询的社团id是空的，请重新点击查询");
@@ -116,7 +116,7 @@ public class SauClubMsgController {
     @ResponseBody
     @RequestMapping(value = "/sau/club/search",method = RequestMethod.GET)
     public Map<String,Object> searchMsg(HttpServletRequest request, HttpSession session, @RequestParam String findContent){
-        BaseReturnData returnData = new BaseReturnData();
+        JsonObject returnData = new JsonObject();
 
         //得到用户的id
         int userId = 0;

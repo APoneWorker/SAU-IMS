@@ -37,10 +37,10 @@ public class PersonDaoTest extends BaseDaoTest {
 
     @Before
     public void init() {
-        userDao.addUser(user);
+        userDao.add(user);
         person.setUserId(user.getUserId());
-        personDao.addPerson(person);
-        clubDao.addClub(club);
+        personDao.add(person);
+        clubDao.add(club);
     }
 
     @Test
@@ -64,17 +64,12 @@ public class PersonDaoTest extends BaseDaoTest {
         p = personDao.getPersonByUserId(0);
         Assert.assertNull(p);
 
-        p = personDao.getPersonAllInfoByUserId(user.getUserId());
-        Assert.assertNotNull(p);
-        System.out.println(p);
-        p = personDao.getPersonAllInfoByUserId(0);
-        Assert.assertNull(p);
 
         likeClubDao.addLikeClub(user.getUserId(), club.getClubId());
         likeClubDao.addLikeClub(user.getUserId(), 2);//不存在的社团id
 
-        Assert.assertTrue(personDao.hadNickName("佳佳"));
-        Assert.assertFalse(personDao.hadNickName("1"));
+        Assert.assertTrue(personDao.exitNickName("佳佳"));
+        Assert.assertFalse(personDao.exitNickName("1"));
 
         List<Integer> integerList = likeClubDao.loadAllLikeByPersonId(user.getUserId());
         System.out.println(integerList.size());
@@ -82,13 +77,13 @@ public class PersonDaoTest extends BaseDaoTest {
         integerList = likeClubDao.loadAllLikeByPersonId(0);
         System.out.println(integerList.size());
 
-        List<Person> personList = personDao.loadAllPerson(0, 2);
+        List<Person> personList = personDao.loadAll(0, 2);
         System.out.println(personList.size());
         System.out.println(personList);
 
         p = personDao.getPersonByUserId(user.getUserId());
         p.setNickname("哈哈");
-        personDao.updatePerson(p);
+        personDao.update(p);
         p = personDao.getPersonByNickName("哈哈");
         System.out.println(p);
 

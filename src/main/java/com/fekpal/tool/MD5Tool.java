@@ -24,12 +24,10 @@ public class MD5Tool {
             MessageDigest md = MessageDigest.getInstance("md5");
             //2）进行加密
             byte[] byteArray = md.digest(password.getBytes());
-            //-127 -36 -101 -37 82 -48 77 -62 0    54  -37 -40 49 62 -48 85
-            //                                    "36"
+
             StringBuffer sb = new StringBuffer();
             for (byte b : byteArray) {
-                //System.out.print(b+" ");
-                //把每个10进制的字节数值    转换 为   2位字符的十六进制的字符串
+
                 sb.append(numToHex(b));
             }
             return sb.toString();

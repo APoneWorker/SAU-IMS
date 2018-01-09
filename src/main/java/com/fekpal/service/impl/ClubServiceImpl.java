@@ -40,26 +40,21 @@ public class ClubServiceImpl implements ClubService {
 
     @Override
     public boolean checkSameClubName(String clubName) {
-        return clubDao.hadClubName(clubName);
+        return clubDao.exitClubName(clubName);
     }
 
     @Override
     public void updateClubInfo(Club club) {
-        clubDao.updateClub(club);
+        clubDao.update(club);
     }
 
     @Override
     public void likeNumberPlus(int clubId) {
-        clubDao.updateLikeNumber(clubId);
+        clubDao.update(clubId);
     }
 
     @Override
     public List<Club> loadAllClub(int start, int count) {
-        return clubDao.loadAllClub(start, count);
-    }
-
-    @Override
-    public Club getClubAllInfoByUserId(int userId) {
-        return clubDao.getClubAllInfoByUserId(userId);
+        return clubDao.loadAll(start, count);
     }
 }
